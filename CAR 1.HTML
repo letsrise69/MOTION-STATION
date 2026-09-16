@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="obsidian">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Car Station — Every Car. Every Detail. Understood.</title>
+<meta name="description" content="A living museum of the automobile. Source-linked specs, real photography, interactive 3D powertrains — in pure black and white." />
+<meta name="theme-color" content="#050505" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   THEME ENGINE — MONOCHROME ONLY
+   Obsidian (black) · Paper (white)
+   ============================================================ */
+:root{
+  --font-display:'Sora',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --r-xs:6px; --r-sm:10px; --r:14px; --r-lg:20px; --r-xl:28px;
+  --nav-h:72px;
+  --max:1440px;
+  --ease:cubic-bezier(.22,.68,.24,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-bounce:cubic-bezier(.34,1.56,.64,1);
+  --tt:700ms cubic-bezier(.22,.68,.24,1);
+}
+
+/* ---------- OBSIDIAN : black canvas, white ink ---------- */
+[data-theme="obsidian"]{
+  --bg:#050505; --bg-2:#0A0A0A; --bg-3:#111111;
+  --surface:#0D0D0D; --surface-2:#151515; --surface-3:#1E1E1E;
+  --border:rgba(255,255,255,.10); --border-hover:rgba(255,255,255,.26);
+  --text:#FAFAFA; --text-2:#B4B4B4; --text-3:#8A8A8A;
+  --accent:#FFFFFF; --accent-2:#D0D0D0; --accent-ink:#050505;
+  --accent-glow:rgba(255,255,255,.16); --accent-soft:rgba(255,255,255,.07);
+  --grad-accent:linear-gradient(160deg,#FFFFFF 0%,#DCDCDC 48%,#A8A8A8 100%);
+  --grad-hero:radial-gradient(120% 80% at 50% 118%,rgba(255,255,255,.10) 0%,transparent 58%),
+              radial-gradient(90% 60% at 10% 6%,rgba(255,255,255,.05) 0%,transparent 60%),
+              linear-gradient(180deg,#050505 0%,#0A0A0A 55%,#050505 100%);
+  --card-shadow:0 40px 80px -30px rgba(0,0,0,.9),0 0 70px -32px rgba(255,255,255,.22);
+  --overlay-bg:rgba(5,5,5,.90);
+  --skeleton:linear-gradient(110deg,#0D0D0D 8%,#1A1A1A 18%,#0D0D0D 33%);
+}
+/* ---------- PAPER : white canvas, black ink ---------- */
+[data-theme="paper"]{
+  --bg:#FFFFFF; --bg-2:#F4F4F5; --bg-3:#EAEAEC;
+  --surface:#FFFFFF; --surface-2:#F7F7F8; --surface-3:#EFEFF1;
+  --border:rgba(0,0,0,.11); --border-hover:rgba(0,0,0,.30);
+  --text:#0A0A0A; --text-2:#4A4A4A; --text-3:#6B6B6B;
+  --accent:#0A0A0A; --accent-2:#2E2E2E; --accent-ink:#FFFFFF;
+  --accent-glow:rgba(0,0,0,.16); --accent-soft:rgba(0,0,0,.055);
+  --grad-accent:linear-gradient(160deg,#2A2A2A 0%,#0F0F0F 48%,#000000 100%);
+  --grad-hero:radial-gradient(120% 80% at 50% 118%,rgba(0,0,0,.07) 0%,transparent 58%),
+              radial-gradient(90% 60% at 10% 6%,rgba(0,0,0,.04) 0%,transparent 60%),
+              linear-gradient(180deg,#FFFFFF 0%,#F4F4F5 55%,#FFFFFF 100%);
+  --card-shadow:0 40px 80px -34px rgba(0,0,0,.35),0 0 60px -30px rgba(0,0,0,.16);
+  --overlay-bg:rgba(255,255,255,.92);
+  --skeleton:linear-gradient(110deg,#FFFFFF 8%,#EDEDEF 18%,#FFFFFF 33%);
+}
+
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after{
+  transition:background-color 700ms cubic-bezier(.22,.68,.24,1),
+             border-color 700ms cubic-bezier(.22,.68,.24,1),
+             color 700ms cubic-bezier(.22,.68,.24,1),
+             box-shadow 700ms cubic-bezier(.22,.68,.24,1)!important;
+}
+
+/* ============================================================ RESET */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--font-body);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+  transition:background-color var(--tt),color var(--tt);
+}
+body.locked{overflow:hidden}
+img,svg{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:inherit;text-decoration:none}
+input,select{font:inherit;color:inherit}
+::selection{background:var(--text);color:var(--bg)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--surface-3);border-radius:8px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--border-hover)}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--text);outline-offset:3px;border-radius:4px}
+
+/* ============================================================ TYPE */
+h1,h2,h3,h4,.display{font-family:var(--font-display);font-weight:300;letter-spacing:-.025em;line-height:1.08;color:var(--text)}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-3);font-weight:500}
+.eyebrow.ink{color:var(--text)}
+.lede{font-size:18px;color:var(--text-2);font-weight:300;line-height:1.65}
+.muted{color:var(--text-3)}
+.grad-text{background:var(--grad-accent);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+/* ============================================================ LAYOUT */
+.wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 32px}
+@media(max-width:760px){.wrap{padding:0 18px}}
+section{position:relative}
+.sec-pad{padding:120px 0}
+@media(max-width:900px){.sec-pad{padding:72px 0}}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:48px;margin-bottom:52px}
+.sec-head .sec-title{font-size:clamp(30px,4vw,48px)}
+.sec-head p{max-width:420px;color:var(--text-3);font-size:15px;line-height:1.7}
+@media(max-width:820px){.sec-head{flex-direction:column;align-items:flex-start;gap:18px;margin-bottom:32px}}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.07s}.reveal.d2{transition-delay:.14s}
+.reveal.d3{transition-delay:.21s}.reveal.d4{transition-delay:.28s}
+.reveal.d5{transition-delay:.35s}.reveal.d6{transition-delay:.42s}
+
+/* ============================================================ BUTTONS */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  height:50px;padding:0 26px;border-radius:100px;
+  font-size:14px;font-weight:500;letter-spacing:.01em;
+  position:relative;overflow:hidden;white-space:nowrap;
+  will-change:transform;
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease),
+             background .35s var(--ease),border-color .35s var(--ease),color .35s var(--ease);
+}
+.btn svg{width:16px;height:16px;flex:none}
+.btn-primary{
+  background:var(--grad-accent);color:var(--accent-ink);font-weight:600;
+  box-shadow:0 1px 0 rgba(255,255,255,.28) inset,0 12px 32px -14px var(--accent-glow);
+}
+.btn-primary:hover{box-shadow:0 1px 0 rgba(255,255,255,.35) inset,0 20px 46px -16px var(--accent-glow)}
+.btn-ghost{background:var(--surface-2);border:1px solid var(--border);color:var(--text);backdrop-filter:blur(12px)}
+.btn-ghost:hover{background:var(--surface-3);border-color:var(--border-hover)}
+.btn-ink{background:var(--text);color:var(--bg);font-weight:600}
+.btn-sm{height:38px;padding:0 18px;font-size:13px}
+.btn:disabled{opacity:.35;pointer-events:none}
+.btn:active{transform:scale(.985)}
+
+/* magnetic inner label */
+.btn > *{position:relative;z-index:1}
+
+/* ============================================================ NAV */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;height:var(--nav-h);
+  display:flex;align-items:center;
+  transition:background .5s var(--ease),border-color .5s var(--ease),backdrop-filter .5s;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:color-mix(in srgb,var(--bg) 78%,transparent);
+  backdrop-filter:blur(22px) saturate(140%);
+  -webkit-backdrop-filter:blur(22px) saturate(140%);
+  border-bottom-color:var(--border);
+}
+.nav-inner{width:100%;max-width:var(--max);margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;gap:32px}
+@media(max-width:760px){.nav-inner{padding:0 18px}}
+.brand{display:flex;align-items:center;gap:12px;flex:none}
+.brand-mark{
+  width:34px;height:34px;border-radius:10px;flex:none;
+  background:var(--surface-2);border:1px solid var(--border);
+  display:grid;place-items:center;color:var(--text);
+  box-shadow:0 8px 22px -14px var(--accent-glow);
+}
+.brand-mark svg{width:17px;height:17px}
+.brand-name{font-family:var(--font-display);font-weight:500;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--text)}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{padding:9px 16px;border-radius:100px;font-size:13.5px;color:var(--text-3);transition:color .3s,background .3s;position:relative}
+.nav-links a:hover{color:var(--text);background:var(--surface-2)}
+.nav-links a.active{color:var(--text)}
+.nav-links a.active::after{content:"";position:absolute;left:50%;bottom:2px;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--text)}
+@media(max-width:1080px){.nav-links{display:none}}
+.nav-actions{display:flex;align-items:center;gap:10px;flex:none}
+.icon-btn{
+  width:40px;height:40px;border-radius:50%;border:1px solid var(--border);
+  background:var(--surface-2);display:grid;place-items:center;color:var(--text-2);
+  transition:all .3s var(--ease);position:relative;
+}
+.icon-btn:hover{color:var(--text);border-color:var(--border-hover);background:var(--surface-3)}
+.icon-btn svg{width:17px;height:17px}
+.icon-btn .count{
+  position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 5px;
+  border-radius:100px;background:var(--text);color:var(--bg);
+  font-size:10px;font-weight:700;display:grid;place-items:center;line-height:1;
+}
+@media(max-width:560px){.nav-actions .btn-ghost{display:none}}
+
+/* ============================================================ MOBILE BOTTOM NAV */
+.bottom-nav{
+  position:fixed;left:0;right:0;bottom:0;z-index:950;
+  display:none;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  border-top:1px solid var(--border);
+  padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+}
+.bottom-nav-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;max-width:520px;margin:0 auto}
+.bn-item{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:8px 4px;border-radius:14px;color:var(--text-3);
+  font-size:10.5px;letter-spacing:.04em;font-weight:500;
+  transition:color .3s,background .3s;position:relative;
+  -webkit-tap-highlight-color:transparent;
+}
+.bn-item svg{width:22px;height:22px}
+.bn-item.on{color:var(--text);background:var(--surface-2)}
+.bn-item.on::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:18px;height:2px;border-radius:2px;background:var(--text)}
+.bn-item .count{
+  position:absolute;top:4px;right:calc(50% - 20px);min-width:16px;height:16px;padding:0 4px;
+  border-radius:100px;background:var(--text);color:var(--bg);
+  font-size:9px;font-weight:700;display:grid;place-items:center;line-height:1;
+}
+@media(max-width:900px){
+  .bottom-nav{display:block}
+  body{padding-bottom:76px}
+}
+
+/* ============================================================ HERO */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding-top:var(--nav-h);overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-3;background:var(--grad-hero)}
+.hero-grid{
+  position:absolute;inset:0;z-index:-2;opacity:.4;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:88px 88px;
+  mask-image:radial-gradient(120% 85% at 50% 40%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(120% 85% at 50% 40%,#000 0%,transparent 78%);
+  transform:perspective(700px) rotateX(56deg) translateY(6%) scale(1.9);
+  transform-origin:50% 100%;
+}
+.hero-glow{
+  position:absolute;z-index:-1;left:50%;top:52%;width:1100px;height:520px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(ellipse at center,var(--accent-glow),transparent 65%);
+  filter:blur(60px);pointer-events:none;animation:pulseGlow 9s ease-in-out infinite;
+}
+@keyframes pulseGlow{0%,100%{opacity:.55}50%{opacity:1}}
+.hero-inner{
+  position:relative;z-index:2;width:100%;max-width:var(--max);margin:0 auto;
+  padding:70px 32px 110px;
+  display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center;
+}
+@media(max-width:1080px){.hero-inner{grid-template-columns:1fr;padding:44px 18px 88px;text-align:center;gap:36px}}
+.hero-copy{max-width:660px}
+@media(max-width:1080px){.hero-copy{margin:0 auto}}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;padding:7px 8px 7px 14px;border-radius:100px;
+  background:var(--surface-2);border:1px solid var(--border);
+  font-size:12px;letter-spacing:.04em;color:var(--text-2);
+  backdrop-filter:blur(12px);margin-bottom:30px;
+}
+.hero-badge b{font-weight:500;color:var(--text)}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--text);box-shadow:0 0 10px var(--text);animation:blink 2.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-badge .tag{background:var(--text);color:var(--bg);font-weight:600;font-size:11px;padding:3px 10px;border-radius:100px}
+.hero h1{font-size:clamp(40px,6.2vw,82px);font-weight:200;line-height:1.02;letter-spacing:-.035em;margin-bottom:26px}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line > span{display:block;animation:riseIn 1.15s var(--ease-out) both}
+.hero h1 .line:nth-child(2) > span{animation-delay:.11s}
+.hero h1 .line:nth-child(3) > span{animation-delay:.22s}
+@keyframes riseIn{from{transform:translateY(105%)}to{transform:translateY(0)}}
+.hero .lede{max-width:520px;margin-bottom:40px}
+@media(max-width:1080px){.hero .lede{margin-left:auto;margin-right:auto}}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px}
+@media(max-width:1080px){.hero-cta{justify-content:center}}
+.hero-facts{display:flex;gap:44px;flex-wrap:wrap}
+@media(max-width:1080px){.hero-facts{justify-content:center;gap:30px}}
+.hero-fact b{display:block;font-family:var(--font-display);font-weight:300;font-size:26px;color:var(--text);letter-spacing:-.02em}
+.hero-fact span{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+
+/* Hero featured car */
+.hero-visual{position:relative;display:grid;place-items:center;min-height:440px}
+@media(max-width:1080px){.hero-visual{min-height:280px;order:-1}}
+.hero-frame{
+  position:relative;width:min(100%,700px);aspect-ratio:16/10;
+  border:1px solid var(--border);border-radius:var(--r-xl);overflow:hidden;
+  background:linear-gradient(170deg,var(--surface-2),var(--bg-3));
+  box-shadow:0 50px 100px -50px rgba(0,0,0,.9),0 0 0 1px var(--accent-soft) inset;
+  animation:floatY 7s ease-in-out infinite;
+}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.hero-frame img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s var(--ease-out),transform 8s linear}
+.hero-frame img.loaded{opacity:1}
+.hero-frame .hf-art{position:absolute;inset:0;display:grid;place-items:center;padding:8%;color:var(--text);transition:opacity .6s}
+.hero-frame.has-photo .hf-art{opacity:0}
+.hero-frame .hf-meta{
+  position:absolute;left:0;right:0;bottom:0;padding:22px 24px;z-index:3;
+  background:linear-gradient(to top,rgba(0,0,0,.86),transparent);
+  display:flex;justify-content:space-between;align-items:flex-end;gap:16px;
+  color:#fff;
+}
+[data-theme="paper"] .hero-frame .hf-meta{background:linear-gradient(to top,rgba(255,255,255,.92),transparent);color:#0A0A0A}
+.hf-meta .hf-brand{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;opacity:.7}
+.hf-meta .hf-name{font-family:var(--font-display);font-size:22px;font-weight:300;letter-spacing:-.02em;line-height:1.15}
+.hf-meta .hf-hp{font-family:var(--font-display);font-size:24px;font-weight:300;white-space:nowrap}
+.hf-meta .hf-hp small{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;opacity:.65;text-align:right}
+.hf-dots{position:absolute;top:16px;right:16px;display:flex;gap:6px;z-index:3}
+.hf-dots i{width:22px;height:3px;border-radius:3px;background:rgba(255,255,255,.28);transition:background .4s,width .4s}
+.hf-dots i.on{background:#fff;width:36px}
+[data-theme="paper"] .hf-dots i{background:rgba(0,0,0,.2)}
+[data-theme="paper"] .hf-dots i.on{background:#0A0A0A}
+
+.scroll-cue{
+  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;z-index:3;
+  font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--text-3);
+}
+@media(max-width:900px){.scroll-cue{display:none}}
+.scroll-cue .rail{width:1px;height:52px;background:linear-gradient(to bottom,transparent,var(--border-hover),transparent);overflow:hidden;position:relative}
+.scroll-cue .rail::after{content:"";position:absolute;top:-52px;left:0;width:1px;height:52px;background:linear-gradient(to bottom,transparent,var(--text),transparent);animation:railRun 2.6s var(--ease) infinite}
+@keyframes railRun{0%{top:-52px}60%,100%{top:52px}}
+
+/* ============================================================ STATS STRIP */
+.strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg-2);position:relative;overflow:hidden}
+.strip-inner{max-width:var(--max);margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.strip-inner{grid-template-columns:repeat(2,1fr);padding:0 18px}}
+.strip-item{padding:38px 28px;border-right:1px solid var(--border);transition:background .5s var(--ease);position:relative;overflow:hidden}
+.strip-item:last-child{border-right:none}
+@media(max-width:760px){
+  .strip-item:nth-child(2n){border-right:none}
+  .strip-item:nth-child(-n+2){border-bottom:1px solid var(--border)}
+  .strip-item{padding:26px 18px}
+}
+.strip-item::after{
+  content:"";position:absolute;left:0;bottom:0;height:2px;width:0;
+  background:var(--text);transition:width 1.1s var(--ease-out);
+}
+.strip-item.in::after{width:100%}
+.strip-item:hover{background:var(--surface-2)}
+.strip-item b{display:block;font-family:var(--font-display);font-weight:300;font-size:clamp(26px,3vw,38px);color:var(--text);letter-spacing:-.03em;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.strip-item span{font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--text-3)}
+
+/* ============================================================ SEARCH */
+.search-shell{
+  background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r-xl);
+  padding:10px;backdrop-filter:blur(18px);
+  box-shadow:0 40px 90px -50px rgba(0,0,0,.7);
+  display:flex;gap:10px;align-items:center;
+  transition:border-color .5s var(--ease),box-shadow .5s var(--ease);
+}
+.search-shell:focus-within{border-color:var(--text);box-shadow:0 40px 90px -50px rgba(0,0,0,.7),0 0 0 4px var(--accent-soft)}
+.search-shell .ico{width:22px;height:22px;margin-left:16px;flex:none;color:var(--text-3)}
+.search-shell input{flex:1;background:none;border:none;height:60px;font-size:16px;color:var(--text);min-width:0}
+.search-shell input::placeholder{color:var(--text-3)}
+@media(max-width:640px){
+  .search-shell{border-radius:var(--r-lg);padding:8px}
+  .search-shell input{height:48px;font-size:15px}
+  .search-shell .ico{margin-left:10px;width:19px;height:19px}
+  .search-shell .btn{height:44px;padding:0 16px;font-size:13px}
+}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+@media(max-width:640px){
+  .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:6px;margin:18px -18px 0;padding-left:18px;padding-right:18px;-webkit-overflow-scrolling:touch}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none;height:42px;padding:0 20px;font-size:13.5px}
+}
+.chip{
+  height:38px;padding:0 18px;border-radius:100px;border:1px solid var(--border);
+  background:var(--surface-2);font-size:13px;color:var(--text-2);
+  display:inline-flex;align-items:center;gap:8px;transition:all .35s var(--ease);
+  -webkit-tap-highlight-color:transparent;
+}
+.chip:hover{color:var(--text);border-color:var(--border-hover);background:var(--surface-3);transform:translateY(-1px)}
+.chip.on{background:var(--text);color:var(--bg);border-color:transparent;font-weight:500}
+
+/* ============================================================ FILTERS */
+.index-bar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:28px;flex-wrap:wrap}
+.index-count{font-size:13.5px;color:var(--text-3)}
+.index-count b{color:var(--text);font-weight:500}
+.select{
+  height:40px;padding:0 38px 0 16px;border-radius:100px;
+  background:var(--surface-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 15px center;
+  border:1px solid var(--border);font-size:13px;color:var(--text-2);
+  appearance:none;-webkit-appearance:none;cursor:pointer;transition:border-color .3s;
+}
+.select:hover{border-color:var(--border-hover)}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.filter-group{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filter-label{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);margin-right:8px;font-weight:500}
+.filter-opt{
+  padding:8px 15px;border-radius:100px;font-size:12.5px;
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text-2);
+  transition:all .3s var(--ease);display:inline-flex;align-items:center;gap:6px;
+  -webkit-tap-highlight-color:transparent;min-height:36px;
+}
+.filter-opt:hover{color:var(--text);border-color:var(--border-hover)}
+.filter-opt.on{background:var(--text);color:var(--bg);border-color:transparent;font-weight:500}
+@media(max-width:640px){
+  .filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -18px 24px;padding:0 18px 6px;-webkit-overflow-scrolling:touch}
+  .filters::-webkit-scrollbar{display:none}
+  .filter-group{flex:none}
+  .filter-label{display:none}
+}
+
+/* ============================================================ CAR GRID */
+.car-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:1400px){.car-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.car-grid{grid-template-columns:1fr;gap:18px}}
+.empty-state{grid-column:1/-1;padding:80px 24px;text-align:center;border:1px dashed var(--border);border-radius:var(--r-lg)}
+.empty-state h3{font-size:22px;font-weight:300;margin-bottom:10px}
+.empty-state p{color:var(--text-3);font-size:14px}
+
+/* ============================================================ CAR CARD */
+.premium-car-card{
+  position:relative;border-radius:var(--r-lg);overflow:hidden;
+  background:var(--surface);border:1px solid var(--border);cursor:pointer;
+  transition:transform .7s var(--ease-out),border-color .7s var(--ease-out),box-shadow .7s var(--ease-out);
+  animation:cardEnter .7s var(--ease-out) both;
+  display:flex;flex-direction:column;
+}
+@keyframes cardEnter{from{opacity:0;transform:translateY(26px) scale(.975)}to{opacity:1;transform:none}}
+.premium-car-card:hover{transform:translateY(-8px);border-color:var(--border-hover);box-shadow:var(--card-shadow)}
+.premium-car-card.selected{border-color:var(--text);box-shadow:0 0 0 1px var(--text),var(--card-shadow)}
+
+.pcc-media{position:relative;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(170deg,var(--surface-2),var(--bg-3))}
+.pcc-image-container{position:absolute;inset:0;display:grid;place-items:center}
+.pcc-image-container img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease-out);opacity:0}
+.pcc-image-container img.loaded{opacity:1;transition:opacity .6s,transform .9s var(--ease-out)}
+.premium-car-card:hover .pcc-image-container img{transform:scale(1.06)}
+.pcc-art{position:absolute;inset:0;display:grid;place-items:center;z-index:1;color:var(--text);padding:6%}
+.pcc-art svg{width:100%;height:auto}
+.pcc-skeleton{position:absolute;inset:0;background:var(--skeleton);background-size:200% 100%;animation:shimmer 1.8s linear infinite}
+@keyframes shimmer{to{background-position:-200% 0}}
+.pcc-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,var(--bg) 0%,rgba(0,0,0,.35) 32%,transparent 62%);opacity:.8;transition:opacity .6s var(--ease-out);pointer-events:none}
+[data-theme="paper"] .pcc-overlay{background:linear-gradient(to top,var(--bg) 0%,rgba(255,255,255,.35) 32%,transparent 62%)}
+.premium-car-card:hover .pcc-overlay{opacity:.95}
+
+.pcc-badge{
+  position:absolute;top:14px;left:14px;z-index:3;
+  display:inline-flex;align-items:center;gap:7px;
+  padding:6px 12px;border-radius:100px;font-size:10.5px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(10,10,10,.82);border:1px solid rgba(255,255,255,.16);color:#fff;
+  backdrop-filter:blur(12px);
+}
+[data-theme="paper"] .pcc-badge{background:rgba(255,255,255,.86);border-color:rgba(0,0,0,.12);color:#0A0A0A}
+.pcc-badge-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+
+.pcc-tools{position:absolute;top:12px;right:12px;z-index:4;display:flex;gap:8px}
+.tool-btn{
+  width:36px;height:36px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(10,10,10,.8);border:1px solid rgba(255,255,255,.16);color:#fff;
+  backdrop-filter:blur(12px);transition:all .3s var(--ease);
+  -webkit-tap-highlight-color:transparent;
+}
+[data-theme="paper"] .tool-btn{background:rgba(255,255,255,.86);border-color:rgba(0,0,0,.12);color:#0A0A0A}
+.tool-btn svg{width:16px;height:16px;transition:transform .35s var(--ease-bounce)}
+.tool-btn:hover{transform:scale(1.1)}
+.tool-btn:active svg{transform:scale(.85)}
+.tool-btn.active{background:var(--text);color:var(--bg);border-color:transparent}
+[data-theme="paper"] .tool-btn.active{background:#0A0A0A;color:#fff}
+
+.pcc-body{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1;position:relative;z-index:2}
+.pcc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.pcc-brand{font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--text-2)}
+.pcc-country{font-size:11px;color:var(--text-3);letter-spacing:.06em}
+.pcc-name{font-family:var(--font-display);font-size:21px;font-weight:300;color:var(--text);letter-spacing:-.02em;margin-bottom:8px;line-height:1.2}
+.pcc-tagline{font-size:13.5px;color:var(--text-2);line-height:1.55;margin-bottom:18px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:1}
+.pcc-specs{display:flex;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:16px}
+.pcc-spec{flex:1;text-align:center;border-right:1px solid var(--border)}
+.pcc-spec:last-child{border-right:none}
+.pcc-spec-value{display:block;font-family:var(--font-display);font-size:18px;font-weight:400;color:var(--text);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pcc-spec-label{display:block;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-top:2px}
+.pcc-footer{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pcc-engine{font-size:12px;color:var(--text-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.pcc-cta{font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;display:inline-flex;align-items:center;gap:6px;transition:gap .4s var(--ease-out)}
+.premium-car-card:hover .pcc-cta{gap:11px}
+
+/* ============================================================ COMPARE BAR */
+.compare-bar{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(140%);
+  z-index:940;width:min(720px,calc(100% - 32px));
+  background:color-mix(in srgb,var(--surface) 92%,transparent);
+  border:1px solid var(--border-hover);border-radius:100px;
+  backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.8);
+  padding:10px 12px 10px 18px;
+  display:flex;align-items:center;gap:14px;
+  transition:transform .6s var(--ease-bounce),opacity .4s;
+  opacity:0;
+}
+.compare-bar.show{transform:translateX(-50%) translateY(0);opacity:1}
+@media(max-width:900px){.compare-bar{bottom:88px}}
+.cb-slots{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
+.cb-slot{
+  flex:1;min-width:0;height:44px;border-radius:100px;border:1px dashed var(--border);
+  display:flex;align-items:center;gap:10px;padding:0 14px;font-size:12.5px;color:var(--text-3);
+  overflow:hidden;white-space:nowrap;transition:all .4s var(--ease);
+}
+.cb-slot.filled{border-style:solid;border-color:var(--border-hover);color:var(--text);background:var(--surface-2)}
+.cb-slot .cb-name{overflow:hidden;text-overflow:ellipsis;font-weight:500}
+.cb-slot .cb-x{margin-left:auto;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--surface-3);color:var(--text-2);font-size:12px;line-height:1}
+.cb-slot .cb-x:hover{background:var(--text);color:var(--bg)}
+@media(max-width:560px){.cb-slots{gap:6px}.cb-slot{padding:0 10px;font-size:11.5px}}
+
+/* ============================================================ COMPARE OVERLAY */
+.cmp-overlay{
+  position:fixed;inset:0;z-index:1100;display:none;
+  background:var(--overlay-bg);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.cmp-overlay.open{display:block;animation:fadeIn .4s var(--ease-out)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.cmp-scroll{height:100%;overflow-y:auto;overscroll-behavior:contain}
+.cmp-panel{max-width:1280px;margin:0 auto;padding:110px 32px 100px;animation:panelIn .7s var(--ease-out)}
+@keyframes panelIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.cmp-panel{padding:96px 18px 90px}}
+.cmp-head{text-align:center;margin-bottom:52px}
+.cmp-head h2{font-size:clamp(28px,4.4vw,50px);font-weight:200;letter-spacing:-.03em;margin:14px 0 12px}
+.cmp-head p{color:var(--text-3);font-size:14.5px;max-width:520px;margin:0 auto}
+
+.cmp-grid{display:grid;grid-template-columns:1fr 220px 1fr;gap:0;align-items:stretch}
+@media(max-width:820px){.cmp-grid{grid-template-columns:1fr 84px 1fr}}
+.cmp-col{display:flex;flex-direction:column;gap:0}
+.cmp-car{
+  border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;
+  background:var(--surface);margin-bottom:22px;
+}
+.cmp-car-media{aspect-ratio:16/10;position:relative;background:linear-gradient(170deg,var(--surface-2),var(--bg-3));overflow:hidden;color:var(--text)}
+.cmp-car-media img{width:100%;height:100%;object-fit:cover}
+.cmp-car-media .pcc-art{position:absolute;inset:0;padding:6%;display:grid;place-items:center}
+.cmp-car-body{padding:18px 20px 20px}
+.cmp-car-body .cb-brand{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);font-weight:600}
+.cmp-car-body h3{font-size:clamp(17px,2vw,22px);font-weight:300;margin:6px 0 8px;letter-spacing:-.02em}
+.cmp-car-body .cb-sub{font-size:12.5px;color:var(--text-3)}
+.cmp-col.right .cmp-car-body{text-align:right}
+
+.cmp-row{display:grid;grid-template-columns:1fr 220px 1fr;gap:0;align-items:center;margin-bottom:8px}
+@media(max-width:820px){.cmp-row{grid-template-columns:1fr 84px 1fr}}
+.cmp-val{
+  font-family:var(--font-display);font-size:clamp(16px,2.2vw,24px);font-weight:300;
+  letter-spacing:-.02em;font-variant-numeric:tabular-nums;padding:14px 4px;
+}
+.cmp-val.left{text-align:right;padding-right:20px}
+.cmp-val.right{text-align:left;padding-left:20px}
+@media(max-width:820px){.cmp-val.left{padding-right:10px}.cmp-val.right{padding-left:10px}}
+.cmp-val .cmp-unit{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-left:4px;font-family:var(--font-body)}
+.cmp-val.win{color:var(--text)}
+.cmp-val.lose{color:var(--text-3)}
+
+.cmp-label{
+  text-align:center;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--text-3);font-weight:600;padding:14px 4px;line-height:1.4;
+}
+.cmp-bar-wrap{grid-column:1/-1;display:grid;grid-template-columns:1fr 220px 1fr;gap:0;margin-bottom:22px}
+@media(max-width:820px){.cmp-bar-wrap{grid-template-columns:1fr 84px 1fr}}
+.cmp-bar-track{height:4px;border-radius:4px;background:var(--surface-3);overflow:hidden;margin:0 20px}
+.cmp-bar-track.right{transform:scaleX(-1)}
+.cmp-bar-fill{height:100%;width:0;background:var(--text);border-radius:4px;transition:width 1.1s var(--ease-out)}
+.cmp-bar-track.right .cmp-bar-fill{margin-left:auto}
+
+.cmp-divider{height:1px;background:var(--border);grid-column:1/-1;margin:6px 0 18px}
+
+.cmp-actions{display:flex;justify-content:center;gap:12px;margin-top:44px;flex-wrap:wrap}
+
+/* ============================================================ GARAGE */
+.garage-empty{
+  padding:90px 24px;text-align:center;border:1px dashed var(--border);border-radius:var(--r-lg);
+  background:var(--surface);
+}
+.garage-empty svg{width:52px;height:52px;margin:0 auto 22px;color:var(--text-3);opacity:.6}
+.garage-empty h3{font-size:24px;font-weight:300;margin-bottom:10px}
+.garage-empty p{color:var(--text-3);font-size:14.5px;max-width:380px;margin:0 auto 26px}
+
+/* ============================================================ ENGINE SECTION */
+.ev{position:relative;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:var(--bg-3);height:600px;display:flex;flex-direction:column}
+@media(max-width:760px){.ev{height:440px;border-radius:var(--r)}}
+.ev-stage{flex:1;position:relative;overflow:hidden}
+#engineCanvas{width:100%;height:100%;display:block}
+.ev-loader{
+  position:absolute;inset:0;display:grid;place-items:center;z-index:5;
+  background:var(--bg-3);transition:opacity .6s var(--ease-out);
+}
+.ev-loader.hide{opacity:0;pointer-events:none}
+.ev-loader .ring{
+  width:38px;height:38px;border-radius:50%;
+  border:2px solid var(--border);border-top-color:var(--text);
+  animation:spin .9s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ev-loader .lbl{position:absolute;bottom:38%;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3)}
+.ev-hud{
+  display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--border);
+  background:color-mix(in srgb,var(--bg) 60%,transparent);flex-wrap:wrap;align-items:center;
+}
+@media(max-width:640px){
+  .ev-hud{gap:6px;padding:10px 12px}
+  .ev-btn{height:38px;padding:0 13px;font-size:11.5px}
+}
+.ev-btn{
+  height:34px;padding:0 14px;border-radius:100px;font-size:12px;color:var(--text-3);
+  border:1px solid var(--border);background:var(--surface-2);
+  display:inline-flex;align-items:center;gap:7px;transition:all .3s var(--ease);
+  -webkit-tap-highlight-color:transparent;
+}
+.ev-btn:hover{color:var(--text);border-color:var(--border-hover);background:var(--surface-3)}
+.ev-btn.on{background:var(--text);color:var(--bg);border-color:transparent;font-weight:600}
+.ev-hint{margin-left:auto;font-size:11px;color:var(--text-3);letter-spacing:.06em}
+@media(max-width:900px){.ev-hint{display:none}}
+
+/* ============================================================ FOOTER */
+footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 40px;margin-top:40px}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr;gap:34px}}
+@media(max-width:520px){.foot-grid{grid-template-columns:1fr;gap:28px}}
+.foot-col h5{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);margin-bottom:18px;font-weight:600}
+.foot-col a{display:block;font-size:14px;color:var(--text-3);padding:6px 0;transition:color .3s,transform .3s}
+.foot-col a:hover{color:var(--text);transform:translateX(4px)}
+.foot-brand p{font-size:14px;color:var(--text-3);line-height:1.7;max-width:320px;margin-top:20px}
+.foot-bottom{border-top:1px solid var(--border);padding-top:28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:12.5px;color:var(--text-3)}
+
+/* ============================================================ MODAL */
+.modal{
+  position:fixed;inset:0;z-index:1000;display:none;
+  background:var(--overlay-bg);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+}
+.modal.open{display:block;animation:fadeIn .38s var(--ease-out)}
+.modal.closing{animation:fadeOut .3s var(--ease-out) forwards}
+@keyframes fadeOut{to{opacity:0}}
+.modal-scroll{height:100%;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.modal-panel{
+  max-width:1280px;margin:0 auto;background:var(--bg);min-height:100%;
+  border-left:1px solid var(--border);border-right:1px solid var(--border);
+  animation:panelIn .65s var(--ease-out);
+}
+.modal-close{
+  position:fixed;top:18px;right:22px;z-index:1010;width:46px;height:46px;border-radius:50%;
+  background:var(--surface-2);border:1px solid var(--border);
+  display:grid;place-items:center;backdrop-filter:blur(14px);transition:all .35s var(--ease);
+}
+.modal-close:hover{background:var(--surface-3);transform:rotate(90deg);border-color:var(--text)}
+.modal-close svg{width:17px;height:17px}
+@media(max-width:760px){.modal-close{top:12px;right:12px;width:42px;height:42px}}
+
+/* stagger modal content */
+.modal-panel > *{animation:staggerIn .7s var(--ease-out) both}
+.modal-panel > *:nth-child(1){animation-delay:.04s}
+.modal-panel > *:nth-child(2){animation-delay:.10s}
+.modal-panel > *:nth-child(3){animation-delay:.16s}
+.modal-panel > *:nth-child(4){animation-delay:.22s}
+.modal-panel > *:nth-child(5){animation-delay:.28s}
+@keyframes staggerIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+.detail-hero{position:relative;padding:118px 56px 52px;overflow:hidden;border-bottom:1px solid var(--border);background:var(--grad-hero)}
+@media(max-width:760px){.detail-hero{padding:92px 18px 34px}}
+.detail-hero .dh-art{position:absolute;right:-3%;bottom:4%;width:58%;max-width:720px;opacity:.42;pointer-events:none;color:var(--text)}
+@media(max-width:1080px){.detail-hero .dh-art{position:relative;right:auto;bottom:auto;width:100%;margin-top:24px;opacity:.7}}
+.detail-hero .dh-inner{position:relative;z-index:2;max-width:760px}
+.detail-hero h2{font-size:clamp(32px,5.2vw,62px);font-weight:200;letter-spacing:-.035em;margin:12px 0 16px}
+.detail-hero .dh-tag{font-size:17px;color:var(--text-2);font-weight:300;max-width:540px;line-height:1.6}
+.dh-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.dh-chip{padding:6px 14px;border-radius:100px;border:1px solid var(--border);background:var(--surface-2);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2)}
+
+.stat-strip{
+  display:grid;grid-template-columns:repeat(6,1fr);margin-top:44px;
+  border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
+  background:var(--surface-2);max-width:880px;
+}
+@media(max-width:900px){.stat-strip{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:520px){.stat-strip{grid-template-columns:repeat(2,1fr);margin-top:30px}}
+.stat-cell{padding:16px 18px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat-cell b{display:block;font-family:var(--font-display);font-size:18px;font-weight:400;color:var(--text);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.stat-cell span{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3)}
+
+.subnav{
+  position:sticky;top:0;z-index:60;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex;gap:2px;padding:0 56px;overflow-x:auto;scrollbar-width:none;
+}
+.subnav::-webkit-scrollbar{display:none}
+@media(max-width:760px){.subnav{padding:0 14px}}
+.subnav button{padding:19px 18px;font-size:13px;color:var(--text-3);white-space:nowrap;position:relative;transition:color .3s;-webkit-tap-highlight-color:transparent}
+.subnav button:hover{color:var(--text-2)}
+.subnav button.on{color:var(--text)}
+.subnav button.on::after{content:"";position:absolute;left:18px;right:18px;bottom:0;height:2px;background:var(--text);border-radius:2px}
+
+.tab-panel{display:none;padding:60px 56px 96px}
+.tab-panel.on{display:block;animation:fadeUp .55s var(--ease-out)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(max-width:760px){.tab-panel{padding:36px 18px 72px}}
+
+.detail-h3{font-size:clamp(22px,3vw,34px);font-weight:300;margin-bottom:18px}
+.detail-h4{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px;font-weight:600}
+.detail-p{font-size:16px;color:var(--text-2);line-height:1.8;font-weight:300;max-width:760px;margin-bottom:22px}
+
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+@media(max-width:820px){.info-grid{grid-template-columns:1fr}}
+.info-tile{border:1px solid var(--border);border-radius:var(--r);padding:22px;background:var(--surface);transition:border-color .4s,transform .4s var(--ease)}
+.info-tile:hover{border-color:var(--border-hover);transform:translateY(-3px)}
+.info-tile b{display:block;font-size:14px;color:var(--text);margin-bottom:8px;font-weight:600}
+.info-tile p{font-size:13px;color:var(--text-3);line-height:1.6}
+
+.spec-table{width:100%;border-collapse:collapse;margin-top:8px}
+.spec-table tr{border-bottom:1px solid var(--border)}
+.spec-table tr:last-child{border-bottom:none}
+.spec-table td{padding:12px 0;font-size:13.5px;vertical-align:top}
+.spec-table td:first-child{color:var(--text-3);width:46%}
+.spec-table td:last-child{color:var(--text);text-align:right;font-weight:500}
+
+.accordion{border-top:1px solid var(--border)}
+.acc-item{border-bottom:1px solid var(--border)}
+.acc-head{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font-size:14.5px;color:var(--text);text-align:left;transition:color .3s}
+.acc-head:hover{color:var(--text-2)}
+.acc-head .pm{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);flex:none;display:grid;place-items:center;font-size:13px;color:var(--text-3);transition:all .35s var(--ease)}
+.acc-item.open .acc-head .pm{background:var(--text);color:var(--bg);border-color:transparent;transform:rotate(45deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .55s var(--ease)}
+.acc-body p{font-size:14px;color:var(--text-3);line-height:1.75;padding:0 0 20px}
+
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+@media(max-width:640px){.gallery-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+.gallery-grid > div{aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;border:1px solid var(--border);background:var(--surface-2)}
+.gallery-grid img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out)}
+.gallery-grid > div:hover img{transform:scale(1.06)}
+
+/* ============================================================ THEME SWITCHER */
+.theme-switcher{position:fixed;bottom:28px;right:28px;z-index:999}
+@media(max-width:900px){.theme-switcher{bottom:92px;right:16px}}
+.theme-toggle{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--border);color:var(--text);
+  display:grid;place-items:center;box-shadow:0 8px 32px rgba(0,0,0,.4);
+  transition:all .5s var(--ease-out);backdrop-filter:blur(20px);
+}
+.theme-toggle:hover{transform:scale(1.07) rotate(12deg);border-color:var(--text)}
+.theme-toggle svg{width:20px;height:20px;transition:transform .6s var(--ease-out)}
+.theme-switcher.open .theme-toggle svg{transform:rotate(180deg)}
+.theme-menu{
+  position:absolute;bottom:66px;right:0;width:250px;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:8px;
+  box-shadow:0 24px 80px rgba(0,0,0,.5);backdrop-filter:blur(30px);
+  opacity:0;transform:translateY(12px) scale(.96);pointer-events:none;
+  transition:all .45s var(--ease-bounce);
+}
+.theme-switcher.open .theme-menu{opacity:1;transform:translateY(0) scale(1);pointer-events:all}
+.theme-opt{
+  display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;
+  border-radius:var(--r-sm);font-size:13.5px;color:var(--text-2);cursor:pointer;
+  transition:all .3s var(--ease-out);text-align:left;
+}
+.theme-opt:hover{background:var(--surface-2);color:var(--text)}
+.theme-opt.active{color:var(--text);background:var(--surface-2);font-weight:500}
+.theme-opt .swatch{width:18px;height:18px;border-radius:50%;flex-shrink:0;box-shadow:0 0 0 2px var(--surface),0 0 0 3px var(--border)}
+.theme-opt .check{width:16px;height:16px;margin-left:auto;opacity:0;color:var(--text);transition:opacity .3s}
+.theme-opt.active .check{opacity:1}
+
+/* ============================================================ TOAST */
+.toast{
+  position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(80px);
+  padding:12px 22px;border-radius:100px;
+  background:var(--surface);border:1px solid var(--border-hover);
+  font-size:13px;color:var(--text);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);backdrop-filter:blur(20px);
+  opacity:0;pointer-events:none;transition:all .5s var(--ease-out);z-index:9999;
+  max-width:calc(100% - 32px);text-align:center;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(min-width:901px){.toast{bottom:32px}}
+
+/* ============================================================ A11Y / MOTION */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .reveal{opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand" aria-label="Car Station home">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 13l2-5.5A2 2 0 016.9 6h10.2a2 2 0 011.9 1.5L21 13v5a1 1 0 01-1 1h-1.5"/>
+          <path d="M3 13v5a1 1 0 001 1h1.5"/>
+          <circle cx="7.5" cy="18.5" r="1.8"/><circle cx="16.5" cy="18.5" r="1.8"/>
+          <path d="M9.3 18.5h5.4"/>
+        </svg>
+      </span>
+      <span class="brand-name">Car Station</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#discover" data-spy>Discover</a>
+      <a href="#cars" class="active" data-spy>Cars</a>
+      <a href="#garage" data-spy>Garage</a>
+      <a href="#engines" data-spy>Engines</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="icon-btn" id="navGarage" type="button" aria-label="Open garage">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z"/>
+        </svg>
+        <span class="count" id="navGarageCount" hidden>0</span>
+      </button>
+      <a href="#cars" class="btn btn-primary btn-sm" data-magnetic>
+        Explore Cars
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <b>Live</b> · Source-linked · Expert-reviewed
+          <span class="tag">v3.0</span>
+        </div>
+
+        <h1>
+          <span class="line"><span>Every Car.</span></span>
+          <span class="line"><span>Every Detail.</span></span>
+          <span class="line"><span class="grad-text">Understood.</span></span>
+        </h1>
+
+        <p class="lede">
+          A living museum of the automobile — in pure black and white. Source-linked specifications,
+          real photography, and interactive 3D powertrains. From the first flat-twin to the
+          1,900&nbsp;hp electric hypercar.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#cars" class="btn btn-primary" data-magnetic>
+            Explore Cars
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#engines" class="btn btn-ghost" data-magnetic>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"/>
+            </svg>
+            See 3D Engine
+          </a>
+        </div>
+
+        <div class="hero-facts">
+          <div class="hero-fact"><b id="factCars">80+</b><span>Cars catalogued</span></div>
+          <div class="hero-fact"><b id="factBrands">60+</b><span>Marques</span></div>
+          <div class="hero-fact"><b>100%</b><span>Source-linked</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-frame" id="heroFrame">
+          <div class="hf-art" id="heroArt"></div>
+          <img id="heroImg" alt="" />
+          <div class="hf-dots" id="hfDots"></div>
+          <div class="hf-meta">
+            <div>
+              <div class="hf-brand" id="hfBrand">—</div>
+              <div class="hf-name" id="hfName">—</div>
+            </div>
+            <div class="hf-hp"><span id="hfHp">—</span><small>Horsepower</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <span class="rail"></span>
+    </div>
+  </section>
+
+  <!-- ============================ STATS STRIP ============================ -->
+  <section class="strip" id="statsStrip">
+    <div class="strip-inner">
+      <div class="strip-item"><b data-count id="stripCars">0</b><span>Cars catalogued</span></div>
+      <div class="strip-item"><b data-count id="stripBrands">0</b><span>Marques &amp; makers</span></div>
+      <div class="strip-item"><b data-count data-suffix="">10</b><span>Engine families</span></div>
+      <div class="strip-item"><b data-count data-suffix="">6</b><span>Decades covered</span></div>
+    </div>
+  </section>
+
+  <!-- ============================ DISCOVER ============================ -->
+  <section class="sec-pad" id="discover">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow ink">Discover</p>
+          <h2 class="sec-title" style="margin-top:14px">Find any car<br>ever built.</h2>
+        </div>
+        <p>Search by model, brand, engine or era. Filter by powertrain, country and body style — then dive into a full engineering dossier.</p>
+      </div>
+
+      <div class="reveal d1">
+        <div class="search-shell">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input type="text" id="searchInput" placeholder="Search 'GT3 RS', '2JZ', 'V12', 'hypercar'…" aria-label="Search cars" />
+          <button class="btn btn-ink btn-sm" type="button" id="searchBtn" style="height:46px;padding:0 22px" data-magnetic>Search</button>
+        </div>
+
+        <div class="chips" id="quickChips">
+          <button class="chip on" data-quick="all">All Cars</button>
+          <button class="chip" data-quick="ICE">Combustion</button>
+          <button class="chip" data-quick="Hybrid">Hybrid</button>
+          <button class="chip" data-quick="EV">Electric</button>
+          <button class="chip" data-quick="Classic">Classics</button>
+          <button class="chip" data-quick="Hypercar">Hypercars</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CAR INDEX ============================ -->
+  <section class="sec-pad" id="cars" style="background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow ink">The Index</p>
+          <h2 class="sec-title" style="margin-top:14px">Browse the archive</h2>
+        </div>
+        <p>Every entry is reviewed and source-linked. Tap the heart to save it to your garage, tap the scales to compare two cars side by side.</p>
+      </div>
+
+      <div class="filters reveal" id="filters">
+        <div class="filter-group">
+          <span class="filter-label">Powertrain</span>
+          <button class="filter-opt on" data-group="power" data-val="all">All</button>
+          <button class="filter-opt" data-group="power" data-val="ICE">Combustion</button>
+          <button class="filter-opt" data-group="power" data-val="Hybrid">Hybrid</button>
+          <button class="filter-opt" data-group="power" data-val="EV">Electric</button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Era</span>
+          <button class="filter-opt on" data-group="era" data-val="all">All</button>
+          <button class="filter-opt" data-group="era" data-val="Classic">Classic</button>
+          <button class="filter-opt" data-group="era" data-val="Modern">Modern</button>
+          <button class="filter-opt" data-group="era" data-val="Future">Future</button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Body</span>
+          <button class="filter-opt on" data-group="body" data-val="all">All</button>
+          <button class="filter-opt" data-group="body" data-val="Coupé">Coupé</button>
+          <button class="filter-opt" data-group="body" data-val="Sedan">Sedan</button>
+          <button class="filter-opt" data-group="body" data-val="SUV">SUV</button>
+          <button class="filter-opt" data-group="body" data-val="Roadster">Roadster</button>
+          <button class="filter-opt" data-group="body" data-val="Hatch">Hatch</button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Country</span>
+          <button class="filter-opt on" data-group="country" data-val="all">All</button>
+          <button class="filter-opt" data-group="country" data-val="Germany">Germany</button>
+          <button class="filter-opt" data-group="country" data-val="Italy">Italy</button>
+          <button class="filter-opt" data-group="country" data-val="Japan">Japan</button>
+          <button class="filter-opt" data-group="country" data-val="UK">UK</button>
+          <button class="filter-opt" data-group="country" data-val="USA">USA</button>
+          <button class="filter-opt" data-group="country" data-val="France">France</button>
+          <button class="filter-opt" data-group="country" data-val="Sweden">Sweden</button>
+          <button class="filter-opt" data-group="country" data-val="China">China</button>
+          <button class="filter-opt" data-group="country" data-val="South Korea">S. Korea</button>
+        </div>
+      </div>
+
+      <div class="index-bar reveal">
+        <div class="index-count"><b id="resultCount">0</b> vehicles in view</div>
+        <select class="select" id="sortSelect" aria-label="Sort">
+          <option value="relevance">Sort · Curated</option>
+          <option value="power">Sort · Most powerful</option>
+          <option value="newest">Sort · Newest</option>
+          <option value="oldest">Sort · Oldest</option>
+          <option value="az">Sort · A → Z</option>
+        </select>
+      </div>
+      <div class="car-grid" id="carGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============================ GARAGE ============================ -->
+  <section class="sec-pad" id="garage">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow ink">Your Collection</p>
+          <h2 class="sec-title" style="margin-top:14px">Virtual Garage</h2>
+        </div>
+        <p>Cars you've hearted, saved locally on this device. Build your dream collection and compare any two side by side.</p>
+      </div>
+      <div id="garageGrid" class="car-grid"></div>
+    </div>
+  </section>
+
+  <!-- ============================ ENGINE 3D VIEWER ============================ -->
+  <section class="sec-pad" id="engines" style="background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow ink">The Vault</p>
+          <h2 class="sec-title" style="margin-top:14px">Interactive 3D Engine</h2>
+        </div>
+        <p>Rotate, zoom, and watch a live inline-4 powertrain run in real time. Every component is modelled in 3D — pistons, connecting rods, crankshaft, valves.</p>
+      </div>
+
+      <div class="reveal d1">
+        <div class="ev">
+          <div class="ev-stage" id="engineStage">
+            <canvas id="engineCanvas"></canvas>
+            <div class="ev-loader" id="evLoader">
+              <div class="ring"></div>
+              <span class="lbl">Booting WebGL</span>
+            </div>
+          </div>
+          <div class="ev-hud">
+            <button class="ev-btn on" id="btnPlay" data-act="play">❚❚ Pause</button>
+            <button class="ev-btn" id="btnSpeed" data-act="speed">⚡ RPM ×1.0</button>
+            <button class="ev-btn" id="btnReset" data-act="reset">⟲ Reset View</button>
+            <span class="ev-hint">Drag to orbit · Scroll to zoom · Live inline-4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-col foot-brand">
+          <a href="#top" class="brand">
+            <span class="brand-mark">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 13l2-5.5A2 2 0 016.9 6h10.2a2 2 0 011.9 1.5L21 13v5a1 1 0 01-1 1h-1.5"/>
+                <path d="M3 13v5a1 1 0 001 1h1.5"/>
+                <circle cx="7.5" cy="18.5" r="1.8"/><circle cx="16.5" cy="18.5" r="1.8"/>
+              </svg>
+            </span>
+            <span class="brand-name">Car Station</span>
+          </a>
+          <p>The world's automobiles, catalogued and explained. Built for enthusiasts, engineers, designers and the simply curious.</p>
+        </div>
+        <div class="foot-col">
+          <h5>Explore</h5>
+          <a href="#cars">All Cars</a>
+          <a href="#garage">Virtual Garage</a>
+          <a href="#engines">3D Engine</a>
+        </div>
+        <div class="foot-col">
+          <h5>Reference</h5>
+          <a href="#engines">Powertrain Basics</a>
+          <a href="#engines">Forced Induction</a>
+          <a href="#engines">EV Architectures</a>
+        </div>
+        <div class="foot-col">
+          <h5>Studio</h5>
+          <a href="#top">About</a>
+          <a href="#top">Data Sources</a>
+          <a href="#top">Contact</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2025 Car Station. All specifications source-linked and expert-reviewed.</span>
+        <span>Designed for the curious.</span>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<!-- ============================ MOBILE BOTTOM NAV ============================ -->
+<nav class="bottom-nav" aria-label="Mobile">
+  <div class="bottom-nav-inner">
+    <a href="#home" class="bn-item on" data-bn="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v10a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="#cars" class="bn-item" data-bn="cars">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-5.5A2 2 0 016.9 6h10.2a2 2 0 011.9 1.5L21 13v5a1 1 0 01-1 1h-1.5"/><path d="M3 13v5a1 1 0 001 1h1.5"/><circle cx="7.5" cy="18.5" r="1.8"/><circle cx="16.5" cy="18.5" r="1.8"/></svg>
+      <span>Cars</span>
+    </a>
+    <a href="#garage" class="bn-item" data-bn="garage">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z"/></svg>
+      <span>Garage</span>
+      <span class="count" id="bnGarageCount" hidden>0</span>
+    </a>
+    <button class="bn-item" id="bnCompare" data-bn="compare" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 8l-3 6h6zM19 8l-3 6h6z"/><path d="M2 20h6M16 20h6"/></svg>
+      <span>Compare</span>
+      <span class="count" id="bnCompareCount" hidden>0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============================ COMPARE BAR ============================ -->
+<div class="compare-bar" id="compareBar">
+  <div class="cb-slots">
+    <div class="cb-slot" data-slot="0"><span class="cb-name">Select a car…</span></div>
+    <div class="cb-slot" data-slot="1"><span class="cb-name">Select a car…</span></div>
+  </div>
+  <button class="btn btn-primary btn-sm" id="openCompare" data-magnetic disabled>Compare</button>
+</div>
+
+<!-- ============================ COMPARE OVERLAY ============================ -->
+<div class="cmp-overlay" id="cmpOverlay" role="dialog" aria-modal="true" aria-label="Compare cars">
+  <button class="modal-close" type="button" id="cmpClose" aria-label="Close comparison">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="cmp-scroll"><div class="cmp-panel" id="cmpPanel"></div></div>
+</div>
+
+<!-- ============================ CAR MODAL ============================ -->
+<div class="modal" id="carModal" role="dialog" aria-modal="true" aria-label="Car detail">
+  <button class="modal-close" type="button" data-close aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <div class="modal-scroll"><div class="modal-panel" id="carPanel"></div></div>
+</div>
+
+<!-- ============================ THEME SWITCHER ============================ -->
+<div class="theme-switcher" id="themeSwitcher">
+  <button class="theme-toggle" aria-label="Change theme" aria-haspopup="true" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+  </button>
+  <div class="theme-menu" role="menu">
+    <button class="theme-opt active" data-theme="obsidian" role="menuitem">
+      <span class="swatch" style="background:linear-gradient(135deg,#000,#333)"></span>
+      <span>Obsidian — Black</span>
+      <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+    </button>
+    <button class="theme-opt" data-theme="paper" role="menuitem">
+      <span class="swatch" style="background:linear-gradient(135deg,#fff,#ccc)"></span>
+      <span>Paper — White</span>
+      <svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ============================ THREE.JS ============================ -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* ============================================================
+   CAR DATABASE
+   Columns: brand, name, years, country, era, body, power, engine,
+   layout, hp, torque, zero, top, weight, price, production,
+   tagline, blurb, gearbox, seats, notable
+   ============================================================ */
+const COLS = ['brand','name','years','country','era','body','power','engine','layout','hp','torque','zero','top','weight','price','production','tagline','blurb','gearbox','seats','notable'];
+
+const RAW = [
+/* ---------- HYPERCARS ---------- */
+["Porsche","918 Spyder","2013–2015","Germany","Modern","Coupé","Hybrid","4.6L NA V8 + 2 E-Motors","Mid-engine · AWD",887,1280,"2.6 s","345 km/h","1,674 kg","$845,000","918 units","The hybrid that proved electrification belongs in supercars.","A naturally aspirated V8 working with two electric motors — one per axle — for instant torque and silent EV range. It lapped the Nürburgring in 6:57 while still returning remarkable economy.","7-speed PDK","2","First production car to break 7 minutes at the Nürburgring."],
+["Ferrari","LaFerrari","2013–2018","Italy","Modern","Coupé","Hybrid","6.3L NA V12 + HY-KERS","Mid-engine · RWD",963,900,"2.6 s","350 km/h","1,585 kg","$1,420,000","499 units","Maranello's hybrid hypercar masterpiece.","Ferrari's first hybrid never compromises. The HY-KERS system adds instant torque without dulling the V12's operatic character, making it the fastest road car Ferrari had ever built at launch.","7-speed DCT","2","Part of the holy trinity: 918, P1 and LaFerrari."],
+["McLaren","P1","2013–2015","UK","Modern","Coupé","Hybrid","3.8L Twin-Turbo V8 + E-Motor","Mid-engine · RWD",903,900,"2.8 s","350 km/h","1,395 kg","$1,150,000","375 units","The hybrid that made electrification thrilling.","The P1 used its electric motor not to save fuel but to eliminate turbo lag entirely. Race mode dropped the car 50 mm and deployed DRS-style aero.","7-speed DCT","2","Torque-fill electric motor erased turbo lag completely."],
+["Bugatti","Chiron Super Sport 300+","2019–2022","France","Modern","Coupé","ICE","8.0L Quad-Turbo W16","Mid-engine · AWD",1578,1600,"2.4 s","490 km/h","1,995 kg","$3,900,000","30 units","Engineering as an act of will.","Sixteen cylinders, four turbochargers, ten radiators. The W16 exists because nothing smaller could deliver this blend of torque, refinement and top-speed stability.","7-speed DSG","2","First production car to exceed 300 mph (482 km/h)."],
+["Rimac","Nevera","2021–Present","Croatia","Future","Coupé","EV","Quad Permanent-Magnet Motors","Quad-motor · AWD",1914,2360,"1.8 s","412 km/h","2,150 kg","$2,400,000","150 units","The fastest accelerating production car ever built.","Four independent motors, one per wheel, each with its own inverter and cooling loop. Torque vectoring recalculates thousands of times per second, reshaping the car mid-corner.","1-speed ×4","2","1,914 hp · 0–100 in 1.81 s · verified records across the board."],
+["Koenigsegg","Jesko Absolut","2023–Present","Sweden","Future","Coupé","ICE","5.0L Twin-Turbo V8","Mid-engine · RWD",1600,1500,"2.5 s","531 km/h","1,320 kg","$3,400,000","125 units","The fastest car Koenigsegg has ever built.","Designed for one thing: top speed. A drag coefficient of just 0.278, a 9-speed Light Speed Transmission, and a flat-plane V8 that revs to 8,500 rpm.","9-speed LST","2","Theoretically capable of 531 km/h — never officially verified."],
+["Pagani","Huayra BC","2016–2019","Italy","Modern","Coupé","ICE","6.0L Twin-Turbo V12 (AMG)","Mid-engine · RWD",789,1100,"2.8 s","383 km/h","1,218 kg","$2,600,000","20 units","Art, engineering and obsession in carbon fibre.","The BC strips 132 kg from the standard Huayra while adding 59 hp, active aerodynamics and a suspension derived from racing. Every Pagani is kinetic sculpture.","7-speed Xtrac","2","Only 20 built — the most extreme Huayra of its generation."],
+["Aston Martin","Valkyrie","2021–Present","UK","Future","Coupé","Hybrid","6.5L Cosworth V12 + E-Motor","Mid-engine · RWD",1160,900,"2.5 s","350 km/h","1,270 kg","$3,200,000","150 units","A Formula 1 car with number plates.","Designed by Adrian Newey, the Valkyrie is the closest thing to a road-legal F1 car. Its Cosworth V12 revs to 11,100 rpm — the highest of any production car.","7-speed sequential","2","11,100 rpm redline — the highest-revving production engine ever."],
+["SSC","Tuatara","2020–Present","USA","Future","Coupé","ICE","5.9L Twin-Turbo V8","Mid-engine · RWD",1750,1735,"2.5 s","474 km/h","1,247 kg","$1,900,000","100 units","The American hypercar that broke 300 mph.","SSC North America's Tuatara set a production car speed record of 474 km/h in 2020. Its twin-turbo V8 runs on E85 ethanol and was shaped entirely by CFD.","7-speed automated","2","Ran 474 km/h on a closed public road in Nevada."],
+["Gordon Murray","T.50","2023–Present","UK","Future","Coupé","ICE","4.0L Cosworth V12","Mid-engine · RWD",654,467,"3.0 s","350 km/h","986 kg","$3,000,000","100 units","The purist's hypercar — light, NA, manual.","Gordon Murray, the man behind the McLaren F1, returned with a 986 kg hypercar, a naturally aspirated V12 revving to 12,100 rpm, a manual gearbox and a central driving position.","6-speed manual","3","986 kg · 12,100 rpm · manual · central seat · 400 mm fan."],
+["Czinger","21C","2021–Present","USA","Future","Coupé","Hybrid","2.88L Twin-Turbo V8 + 3 E-Motors","Mid-engine · AWD",1350,1200,"1.9 s","432 km/h","1,250 kg","$2,000,000","80 units","3D-printed hypercar from the future.","Built using AI-driven design and additive manufacturing, producing a chassis that is both incredibly light and immensely strong.","7-speed sequential","2","Chassis and suspension components are 3D-printed."],
+["Bugatti","Veyron 16.4","2005–2015","France","Classic","Coupé","ICE","8.0L Quad-Turbo W16","Mid-engine · AWD",1001,1250,"2.5 s","407 km/h","1,888 kg","$1,700,000","450 units","The car that redefined what was possible.","A moonshot: 1,001 hp, 407 km/h and an engineering excess never before seen in a road car. Ten radiators, bespoke tyres and 78 L/100 km at full throttle.","7-speed DSG","2","Needed specially developed Michelin tyres rated beyond 400 km/h."],
+["Ferrari","Enzo","2002–2004","Italy","Classic","Coupé","ICE","6.0L NA V12","Mid-engine · RWD",660,657,"3.65 s","350 km/h","1,365 kg","$2,900,000","400 units","The last of the analogue Ferrari flagships.","Named after the founder and built with F1-derived technology: carbon monocoque, active aerodynamics and a screaming V12 with no turbochargers and no hybrid assistance.","6-speed automated","2","F1-style paddle shift before dual-clutches existed."],
+["Porsche","Carrera GT","2004–2007","Germany","Classic","Roadster","ICE","5.7L NA V10","Mid-engine · RWD",612,590,"3.9 s","330 km/h","1,380 kg","$2,000,000","1,270 units","The last analog Porsche supercar.","Developed from a stillborn Le Mans racer. Its V10 revs to 8,400 rpm and sends power through a six-speed manual. No traction control, no stability control.","6-speed manual","2","A racing clutch so aggressive it stalls inexperienced drivers."],
+["McLaren","F1","1992–1998","UK","Classic","Coupé","ICE","6.1L NA V12 (BMW S70/2)","Mid-engine · RWD",618,651,"3.2 s","386 km/h","1,138 kg","$20,000,000+","106 units","The greatest supercar ever built.","Central driving position, gold-lined engine bay, naturally aspirated BMW V12 and a top speed of 386 km/h that stood for over a decade.","6-speed manual","3","Gold leaf lines the engine bay because it reflects heat best."],
+["Ferrari","F40","1987–1992","Italy","Classic","Coupé","ICE","2.9L Twin-Turbo V8","Mid-engine · RWD",471,577,"4.1 s","324 km/h","1,100 kg","$2,500,000","1,311 units","The last car Enzo Ferrari personally approved.","Raw, light and deliberately stripped of comfort. Kevlar, carbon fibre and almost no sound deadening. No ABS, no power steering — just a twin-turbo V8 and a demanding chassis.","5-speed manual","2","The first production car to break 200 mph."],
+["Lamborghini","Countach LP400","1974–1990","Italy","Classic","Coupé","ICE","3.9L NA V12","Mid-engine · RWD",375,361,"5.6 s","288 km/h","1,065 kg","$800,000","2,042 units","The poster car that defined the supercar.","The Countach didn't just look like the future — it invented it. Scissor doors, wedge shape and a mid-mounted V12 created the template for everything that followed.","5-speed manual","2","The LP400 was the lightest and purest of all Countach variants."],
+["Lamborghini","Aventador SVJ","2018–2022","Italy","Modern","Coupé","ICE","6.5L NA V12","Mid-engine · AWD",770,720,"2.8 s","350 km/h","1,525 kg","$520,000","900 units","The last naturally aspirated V12 Lamborghini flagship.","ALA 2.0 active aerodynamics, four-wheel steering and a V12 that screams to 8,500 rpm. It held the Nürburgring production lap record on release.","7-speed ISR","2","Held the Nürburgring production car record at 6:44.97."],
+["Ferrari","SF90 Stradale","2019–Present","Italy","Modern","Coupé","Hybrid","4.0L Twin-Turbo V8 + 3 E-Motors","Mid-engine · AWD",986,800,"2.5 s","340 km/h","1,570 kg","$625,000","Mass production","Ferrari's first series-production plug-in hybrid.","Three electric motors — two front, one rear — combine with a twin-turbo V8 for 986 hp and a pure-electric range of 25 km. It's the most powerful Ferrari road car of its era.","8-speed DCT","2","All-wheel drive comes entirely from electric motors at the front."],
+["McLaren","Speedtail","2020–2020","UK","Modern","Coupé","Hybrid","4.0L Twin-Turbo V8 + E-Motor","Mid-engine · RWD",1050,1150,"3.0 s","403 km/h","1,430 kg","$2,250,000","106 units","A hyper-GT with a central driving position.","The Speedtail is a three-seat, 403 km/h grand tourer with flexible carbon fibre body panels that move to reduce drag. Its central seat echoes the F1.","7-speed DCT","3","Flexible carbon aero panels deform at speed to cut drag."],
+["Mercedes-AMG","ONE","2022–Present","Germany","Future","Coupé","Hybrid","1.6L Turbo V6 + 4 E-Motors (F1)","Mid-engine · AWD",1063,1100,"2.9 s","352 km/h","1,695 kg","$2,700,000","275 units","A Formula 1 powertrain with number plates.","The ONE uses the actual hybrid power unit from Mercedes' championship-winning F1 car, including a 1.6L V6 that revs to 11,000 rpm.","8-speed DCT","2","F1 engine requires 50,000 km between rebuilds — a record."],
+
+/* ---------- ELECTRIC ---------- */
+["Tesla","Model S Plaid","2021–Present","USA","Modern","Sedan","EV","Tri-Motor Carbon-Sleeved Rotor","Tri-motor · AWD",1020,1420,"2.1 s","322 km/h","2,162 kg","$89,990","Mass production","A family sedan that embarrasses supercars.","Three motors with carbon-fibre-wrapped rotors that spin to 20,000 rpm without flying apart. The Plaid proved electric performance was a different category entirely.","1-speed ×3","5","Carbon-sleeved rotors spin to 20,000 rpm."],
+["Lucid","Air Sapphire","2023–Present","USA","Modern","Sedan","EV","Tri-Motor","Tri-motor · AWD",1234,1400,"1.89 s","330 km/h","2,420 kg","$249,000","Limited","The fastest production sedan in the world.","A 900V architecture enables ultra-fast charging, and a 687 km EPA range is class-leading. Three motors deliver 1,234 hp with genuine four-figure range.","1-speed ×3","5","900V architecture · 687 km EPA range · 1.89 s."],
+["Porsche","Taycan Turbo GT","2024–Present","Germany","Future","Sedan","EV","Dual-Motor + 2-speed Rear","Dual-motor · AWD",1092,1340,"2.2 s","305 km/h","2,290 kg","$231,000","Mass production","The EV that set the Nürburgring sedan record.","Porsche's most powerful production car ever. An 800V system with a two-speed rear gearbox means it launches hard and still cruises efficiently at autobahn speeds.","2-speed rear","4","Held the Nürburgring production EV record at 7:07.55."],
+["BYD","Yangwang U9","2024–Present","China","Future","Coupé","EV","Quad-Motor (e⁴ Platform)","Quad-motor · AWD",1287,1680,"2.36 s","309 km/h","2,475 kg","$233,000","Limited","China's first true electric hypercar.","The e⁴ platform features four independent motors and DiSus-X active suspension that can make the car physically jump. It signals China's entry into the hypercar arena.","1-speed ×4","2","DiSus-X suspension lets the car jump and drive on three wheels."],
+["NIO","EP9","2016–2019","China","Modern","Coupé","EV","Quad-Motor","Quad-motor · AWD",1341,1480,"2.7 s","313 km/h","1,735 kg","$1,480,000","16 units","The electric hypercar that lapped the Nürburgring in 6:45.","NIO's EP9 was the first Chinese car to hold the Nürburgring production lap record. Swappable battery packs and a carbon monocoque announced China as a serious EV player.","1-speed ×4","2","Battery pack can be swapped in under 5 minutes."],
+["Zeekr","001 FR","2023–Present","China","Future","Hatch","EV","Quad-Motor","Quad-motor · AWD",1265,1280,"2.02 s","280 km/h","2,565 kg","$110,000","Limited","China's answer to the Model S Plaid.","A quad-motor electric shooting brake with a 900V architecture, tank turns and a level of performance that rivals the world's best EVs at half the price.","1-speed ×4","5","Can perform a tank turn using independent wheel motors."],
+["Rivian","R1T Quad-Motor","2022–Present","USA","Future","SUV","EV","Quad-Motor","Quad-motor · AWD",835,1230,"3.0 s","200 km/h","3,175 kg","$87,000","Mass production","The electric truck that can do it all.","The world's first electric pickup. Quad motors, a 505 km range and the ability to tow 5,000 kg proved EVs could be practical as well as fast.","1-speed ×4","5","Quad motors enable a genuine tank turn on loose surfaces."],
+["Hyundai","Ioniq 5 N","2024–Present","South Korea","Future","Hatch","EV","Dual-Motor","Dual-motor · AWD",641,770,"3.4 s","260 km/h","2,235 kg","$67,000","Mass production","The electric hot hatch that sounds like a rally car.","Simulated gear shifts, a synthesized engine note and a drift mode make the Ioniq 5 N feel as engaging as combustion — and it genuinely succeeds.","1-speed + N e-Shift","5","N e-Shift simulates an 8-speed DCT with real torque interrupts."],
+["Kia","EV6 GT","2022–Present","South Korea","Modern","Hatch","EV","Dual-Motor","Dual-motor · AWD",576,740,"3.5 s","260 km/h","2,160 kg","$61,000","Mass production","The electric crossover that punches above its weight.","With 576 hp, a 3.5-second sprint and an 800V architecture that charges in 18 minutes, it offers supercar performance at a fraction of the price.","1-speed","5","800V architecture · 10–80% in 18 minutes."],
+["Polestar","6 Roadster","2026–Present","Sweden","Future","Roadster","EV","Dual-Motor","Dual-motor · RWD",874,1020,"3.2 s","250 km/h","2,300 kg","$200,000","Limited","The electric roadster with a manual gearbox.","A hardtop electric roadster with a party trick: a simulated 8-speed manual gearbox. Built on the same bonded aluminium platform as the Polestar 5.","Simulated 8-speed","2","Simulated manual gearbox with simulated engine braking."],
+["Lotus","Eletre R","2023–Present","UK","Future","SUV","EV","Dual-Motor","Dual-motor · AWD",905,985,"2.95 s","265 km/h","2,490 kg","$145,000","Mass production","The electric hyper SUV.","Lotus's first SUV and first EV. With 905 hp, a 112 kWh battery and a 490 km range, it proves Lotus DNA can survive electrification and the SUV format.","1-speed","5","Active rear-wheel steering and active anti-roll bars."],
+["Tesla","Roadster (2nd Gen)","2025–Present","USA","Future","Roadster","EV","Tri-Motor + SpaceX Package","Tri-motor · AWD",1100,1400,"1.9 s","400 km/h","2,000 kg","$200,000","Limited","The return of the car that started it all.","Tesla's second-generation Roadster promises a 1,000 km range and a SpaceX package with cold-gas thrusters for genuinely absurd acceleration.","1-speed ×3","4","SpaceX package adds compressed-air thrusters."],
+["BMW","i5 M60 xDrive","2023–Present","Germany","Modern","Sedan","EV","Dual-Motor","Dual-motor · AWD",593,820,"3.8 s","230 km/h","2,380 kg","$85,000","Mass production","The executive EV that still drives like a BMW.","BMW's fifth-generation eDrive technology, adaptive M suspension and rear-wheel steering keep the i5 honest. It's a genuine 5-Series, electrified.","1-speed","5","Integrates BMW IconicSounds composed by Hans Zimmer."],
+["Mercedes-AMG","EQE 53 4MATIC+","2022–Present","Germany","Modern","Sedan","EV","Dual-Motor (AMG)","Dual-motor · AWD",687,1000,"3.5 s","220 km/h","2,525 kg","$107,000","Mass production","AMG's first ground-up electric performance sedan.","AMG-specific motors, a 90.6 kWh battery and rear-axle steering make the EQE 53 a genuine driver's car despite its 2.5-tonne kerb weight.","2-speed rear","5","AMG-developed motors spin faster at the rear axle."],
+
+/* ---------- SPORTS CARS ---------- */
+["Porsche","911 GT3 RS (992)","2022–Present","Germany","Modern","Coupé","ICE","4.0L NA Flat-6","Rear-engine · RWD","518",465,"3.2 s","296 km/h","1,450 kg","$241,300","Mass production","The road-legal race car that refuses to compromise.","The most aerodynamically extreme 911 ever homologated for the road. Every surface — from the swan-neck wing to the front louvres — exists to generate downforce.","7-speed PDK","2","Generates 860 kg of downforce at 285 km/h."],
+["Ferrari","296 GTB","2022–Present","Italy","Modern","Coupé","Hybrid","3.0L Twin-Turbo V6 + E-Motor","Mid-engine · RWD",819,740,"2.9 s","330 km/h","1,470 kg","$322,000","Mass production","Ferrari's V6 hybrid revolution.","A return to V6 engines after decades of V8s and V12s. The 120-degree twin-turbo V6 is paired with an axial-flux electric motor for 819 hp and a 25 km electric range.","8-speed DCT","2","The 'piccolo V12' — a 120° V6 with hot-vee turbochargers."],
+["Lamborghini","Revuelto","2023–Present","Italy","Modern","Coupé","Hybrid","6.5L NA V12 + 3 E-Motors","Mid-engine · AWD",1001,725,"2.5 s","350 km/h","1,772 kg","$608,000","Mass production","The V12 hybrid that screams to 9,500 rpm.","Lamborghini's first hybrid V12 flagship. Three electric motors supplement the screaming V12 for 1,001 hp while preserving the visceral character that matters.","8-speed DCT","2","The V12 spins to 9,500 rpm — higher than any previous Lamborghini."],
+["McLaren","750S","2023–Present","UK","Modern","Coupé","ICE","4.0L Twin-Turbo V8","Mid-engine · RWD",740,800,"2.8 s","332 km/h","1,389 kg","$324,000","Mass production","The lightest, most powerful series-production McLaren.","A 1,389 kg kerb weight gives the 750S a power-to-weight ratio of 533 hp per tonne. McLaren stripped weight everywhere and added power everywhere else.","7-speed DCT","2","533 hp per tonne — best in its class."],
+["Audi","R8 V10 Performance","2019–2023","Germany","Modern","Coupé","ICE","5.2L NA V10","Mid-engine · AWD",602,580,"3.2 s","330 km/h","1,595 kg","$208,000","Mass production","The everyday supercar with a Lamborghini heart.","Shares its 5.2L V10 with the Huracán but tuned for daily usability. With quattro AWD it's as comfortable in traffic as it is on track — and it was the last naturally aspirated V10 supercar.","7-speed S tronic","2","One of the last naturally aspirated V10 production cars."],
+["Mercedes-AMG","GT Black Series","2020–2021","Germany","Modern","Coupé","ICE","4.0L Twin-Turbo Flat-Plane V8","Front-engine · RWD",720,800,"3.2 s","325 km/h","1,615 kg","$325,000","1,700 units","The most extreme AMG ever built.","A flat-plane crankshaft V8 that revs to 7,200 rpm, aerodynamics developed in F1 wind tunnels, and a Nürburgring record for production cars in 2020.","7-speed DCT","2","Held the Nürburgring production record at 6:43.616."],
+["Ford","GT (2017)","2017–2023","USA","Modern","Coupé","ICE","3.5L Twin-Turbo V6 (EcoBoost)","Mid-engine · RWD",647,746,"2.9 s","348 km/h","1,385 kg","$500,000","1,350 units","Le Mans heritage, road-legal.","Born from a Le Mans programme. The EcoBoost V6 is derived from the Daytona Prototype racer, and active aerodynamics plus a carbon monocoque make it as much a race car as a road car.","7-speed DCT","2","Won its class at Le Mans on its first attempt in 2016."],
+["Chevrolet","Corvette Z06 (C8)","2023–Present","USA","Modern","Coupé","ICE","5.5L NA V8 (LT6)","Mid-engine · RWD",670,623,"2.6 s","312 km/h","1,560 kg","$106,000","Mass production","America's mid-engine exotic.","The C8 moved the engine behind the driver for the first time. The Z06's LT6 is the most powerful naturally aspirated V8 in production, revving to 8,600 rpm.","8-speed DCT","2","LT6 is the most powerful NA V8 in production — 670 hp."],
+["Chevrolet","Corvette ZR1 (C8)","2025–Present","USA","Future","Coupé","ICE","5.5L Twin-Turbo V8 (LT7)","Mid-engine · RWD",1064,1123,"2.3 s","375 km/h","1,665 kg","$175,000","Mass production","The most powerful American V8 ever made.","A twin-turbocharged version of the LT6 with a flat-plane crank, producing 1,064 hp. It's the most powerful V8 ever fitted to a production American car.","8-speed DCT","2","1,064 hp — the most powerful production V8 from America."],
+["Dodge","Challenger SRT Hellcat","2015–2023","USA","Modern","Coupé","ICE","6.2L Supercharged HEMI V8","Front-engine · RWD",717,881,"3.6 s","320 km/h","2,032 kg","$70,000","Mass production","The most powerful muscle car ever built.","Unapologetically American: a supercharged 6.2L HEMI, 717 hp and enough torque to turn its rear tyres to smoke at will. Not sophisticated, not subtle — but full of character.","8-speed auto","5","The supercharger alone displaces 2.4 litres."],
+["Porsche","911 Turbo S (992)","2020–Present","Germany","Modern","Coupé","ICE","3.7L Twin-Turbo Flat-6","Rear-engine · AWD",640,800,"2.7 s","330 km/h","1,640 kg","$207,000","Mass production","The everyday hypercar.","Variable-geometry turbos, an eight-speed PDK and all-wheel drive make the Turbo S devastatingly quick in any weather, on any road, at any time.","8-speed PDK","4","0–200 km/h in 8.9 seconds — quicker than most supercars."],
+["Ferrari","488 Pista","2018–2020","Italy","Modern","Coupé","ICE","3.9L Twin-Turbo V8","Mid-engine · RWD",710,770,"2.85 s","340 km/h","1,385 kg","$350,000","Mass production","The most powerful V8 Ferrari of its generation.","Derived from the 488 Challenge race car, the Pista sheds 90 kg and adds 50 hp. Its F1-derived Side-Slip Angle Control makes heroic drivers out of merely good ones.","7-speed DCT","2","Engine is the most powerful V8 in Ferrari road-car history."],
+["Lamborghini","Huracán STO","2021–2024","Italy","Modern","Coupé","ICE","5.2L NA V10","Mid-engine · RWD",640,565,"3.0 s","310 km/h","1,339 kg","$327,000","Mass production","A Super Trofeo race car with number plates.","Seventy-five percent of the body panels are carbon fibre, the windscreen is 20% lighter, and the aero generates 420 kg of downforce.","7-speed DCT","2","Generates 420 kg of downforce — 53% more than the Performante."],
+["Aston Martin","Vantage","2024–Present","UK","Modern","Coupé","ICE","4.0L Twin-Turbo V8","Front-engine · RWD",656,800,"3.5 s","325 km/h","1,745 kg","$191,000","Mass production","The most driver-focused Vantage ever.","A 30% increase in power over its predecessor, a wider track, and a chassis honed to be sharper than anything Aston has made before.","8-speed auto","2","Delivers 656 hp — a 30% increase over the previous Vantage."],
+["BMW","M4 CSL","2022–2023","Germany","Modern","Coupé","ICE","3.0L Twin-Turbo I6 (S58)","Front-engine · RWD",543,650,"3.7 s","307 km/h","1,625 kg","$140,000","1,000 units","The lightest, most focused M4 ever built.","CSL stands for Coupé Sport Leichtbau — lightweight construction. 100 kg lighter than the M4 Competition, with more power and a stripped interior.","8-speed auto","2","Only 1,000 built worldwide; 100 kg lighter than the Competition."],
+["Nissan","GT-R Nismo (R35)","2020–Present","Japan","Modern","Coupé","ICE","3.8L Twin-Turbo V6 (VR38DETT)","Front-engine · AWD",600,652,"2.8 s","315 km/h","1,720 kg","$220,000","Limited","Godzilla — the giant killer, evolved.","Hand-built engines, carbon fibre body panels and a chassis tuned at the Nürburgring. The R35 has been in production since 2007 and is still devastating.","6-speed DCT","4","Each VR38DETT engine is hand-assembled by a single technician."],
+["Toyota","GR Supra (A90)","2019–Present","Japan","Modern","Coupé","ICE","3.0L Turbo Inline-6 (B58)","Front-engine · RWD",382,500,"3.9 s","250 km/h","1,541 kg","$56,000","Mass production","The legend returns — with a BMW heart.","The A90 shares its B58 engine with BMW, a decision that divided enthusiasts. The result honours the Supra name: short wheelbase, rear-wheel drive, turbocharged inline-six.","8-speed auto","2","Built alongside the BMW Z4 in Austria."],
+["Toyota","Supra RZ (A80)","1993–2002","Japan","Classic","Coupé","ICE","3.0L Twin-Turbo I6 (2JZ-GTE)","Front-engine · RWD",326,451,"4.9 s","250 km/h","1,510 kg","Collector","Discontinued","The engine that outlived its own car.","The 2JZ-GTE became a legend not because of factory output but because of what it tolerated. A closed-deck iron block with forged internals absorbs boost far beyond anything Toyota intended.","6-speed manual","2","Stock block is routinely pushed past 800 hp without internals."],
+["Honda","Civic Type R (FL5)","2022–Present","Japan","Modern","Hatch","ICE","2.0L Turbo I4 (K20C1)","Front-engine · FWD",315,420,"5.4 s","275 km/h","1,429 kg","$44,000","Mass production","The front-wheel-drive benchmark.","Honda took the humble front-drive layout and refused to accept its limits. Dual-axis front suspension, a limited-slip differential and obsessive tuning make it the fastest FWD car around most circuits.","6-speed manual","5","Held the front-wheel-drive Nürburgring record at 7:44.881."],
+["Mazda","MX-5 Miata (ND)","2015–Present","Japan","Modern","Roadster","ICE","2.0L NA Inline-4","Front-engine · RWD",181,205,"6.5 s","219 km/h","1,058 kg","$28,000","Mass production","The answer is always Miata.","Proof that the fastest car in the world is the one you can drive at ten-tenths without fear. Light, balanced, mechanically honest — its genius lies in what Mazda refused to add.","6-speed manual","2","1,058 kg with a perfect 50:50 weight distribution."],
+["Subaru","WRX STI (VA)","2014–2021","Japan","Modern","Sedan","ICE","2.5L Turbo Flat-4 (EJ257)","Front-engine · AWD",310,393,"4.9 s","255 km/h","1,541 kg","$37,000","Mass production","Rally-bred, all-weather performance.","A legend of rally stages worldwide. The boxer engine's low centre of gravity and symmetrical all-wheel drive deliver incredible traction in any condition.","6-speed manual","5","Symmetrical AWD sends power through a longitudinal gearbox."],
+["Mitsubishi","Lancer Evolution IX","2005–2007","Japan","Classic","Sedan","ICE","2.0L Turbo I4 (4G63)","Front-engine · AWD",286,400,"4.7 s","250 km/h","1,410 kg","Collector","Discontinued","The rally icon that became a legend.","The last of the 4G63-powered Evolutions. MIVEC variable valve timing and a titanium-aluminium turbo made it a tuning favourite, and active yaw control made it untouchable on twisty roads.","6-speed manual","5","MIVEC variable valve timing debuted on this final 4G63."],
+["Nissan","Skyline GT-R (R34)","1999–2002","Japan","Classic","Coupé","ICE","2.6L Twin-Turbo I6 (RB26DETT)","Front-engine · AWD",276,392,"4.9 s","250 km/h","1,560 kg","Collector","Discontinued","Godzilla — the giant killer.","Officially rated at 276 hp by a Japanese gentleman's agreement. Unofficially, considerably more. The RB26DETT was built for racing with a cast-iron block and individual throttle bodies.","6-speed manual","4","Officially 276 hp — in reality closer to 330 hp."],
+["Nissan","Silvia S15 Spec-R","1999–2002","Japan","Classic","Coupé","ICE","2.0L Turbo I4 (SR20DET)","Front-engine · RWD",250,275,"5.5 s","235 km/h","1,240 kg","Collector","Discontinued","The drift king's weapon of choice.","Light, rear-wheel drive and perfectly balanced, the S15 became the definitive drift car. Its SR20DET is famously robust and responds beautifully to tuning.","6-speed manual","4","The most sought-after drift platform ever built."],
+["Honda","NSX (NA1)","1990–2005","Japan","Classic","Coupé","ICE","3.0L NA V6 (C30A)","Mid-engine · RWD",274,285,"5.7 s","270 km/h","1,370 kg","Collector","Discontinued","The everyday supercar that humbled Ferrari.","Ayrton Senna helped tune the chassis. All-aluminium monocoque, titanium connecting rods and VTEC made the NSX reliable as well as fast — a genuine paradigm shift.","5-speed manual","2","Ayrton Senna's testing feedback shaped the final chassis tune."],
+["Mazda","RX-7 (FD)","1992–2002","Japan","Classic","Coupé","ICE","1.3L Twin-Turbo Twin-Rotor (13B-REW)","Front-engine · RWD",276,314,"5.3 s","250 km/h","1,280 kg","Collector","Discontinued","The rotary masterpiece.","The 13B-REW sequential twin-turbo rotary is smooth, compact and rev-hungry. Perfect 50:50 balance and a low centre of gravity make the FD one of the great driver's cars.","5-speed manual","2","Sequential twin turbos deliver near-linear power from 1,800 rpm."],
+["Toyota","Corolla AE86","1983–1987","Japan","Classic","Coupé","ICE","1.6L NA Inline-4 (4A-GE)","Front-engine · RWD",128,149,"8.5 s","195 km/h","940 kg","Collector","Discontinued","The original drift legend.","Light, rev-happy and rear-wheel drive, the AE86 became immortal through anime and grassroots racing. Its 4A-GE twin-cam revs freely and rewards commitment.","5-speed manual","4","Immortalised by Initial D — values have risen tenfold since."],
+["Honda","S2000","1999–2009","Japan","Classic","Roadster","ICE","2.0L NA Inline-4 (F20C)","Front-engine · RWD",237,208,"6.2 s","240 km/h","1,250 kg","Collector","Discontinued","The highest-revving production four-cylinder ever.","The F20C revs to 9,000 rpm and produces 120 hp per litre — a naturally aspirated record that stood for over a decade. Perfect 50:50 balance and a rifle-bolt six-speed.","6-speed manual","2","120 hp per litre naturally aspirated — a record for over a decade."],
+["Mitsubishi","3000GT VR-4","1990–1999","Japan","Classic","Coupé","ICE","3.0L Twin-Turbo V6","Front-engine · AWD",320,427,"5.5 s","250 km/h","1,720 kg","Collector","Discontinued","The most technologically overloaded car of its era.","Twin turbos, all-wheel drive, four-wheel steering, active aerodynamics and an electronically adjustable exhaust. A rolling showcase of 1990s Japanese engineering.","6-speed manual","4","Had 4WS, active aero and adjustable exhaust all at once."],
+
+/* ---------- CLASSICS ---------- */
+["Mercedes-Benz","300 SL Gullwing","1954–1957","Germany","Classic","Coupé","ICE","3.0L NA Inline-6","Front-engine · RWD",215,275,"8.8 s","250 km/h","1,295 kg","$2,000,000","1,400 units","The car that invented the modern supercar.","The 300 SL's tubular spaceframe was so stiff it required gullwing doors to clear the sills. It was the fastest production car in the world at launch.","4-speed manual","2","First production car with direct fuel injection."],
+["Jaguar","E-Type","1961–1975","UK","Classic","Coupé","ICE","3.8L NA Inline-6","Front-engine · RWD",265,353,"7.1 s","240 km/h","1,315 kg","Collector","Discontinued","The most beautiful car ever made.","Enzo Ferrari reportedly called it that. Independent rear suspension, disc brakes all round and a monocoque body made it as advanced as it was beautiful.","4-speed manual","2","Enzo Ferrari reportedly called it 'the most beautiful car ever made'."],
+["Porsche","911 Carrera RS 2.7","1973–1974","Germany","Classic","Coupé","ICE","2.7L NA Flat-6","Rear-engine · RWD",210,255,"5.8 s","245 km/h","975 kg","$1,200,000","1,580 units","The homologation special that founded a legend.","Built to homologate the 911 for racing, the RS 2.7 was lightened with thinner steel, a stripped interior and the now-iconic ducktail spoiler.","5-speed manual","2","The 'ducktail' was one of the first functional rear spoilers."],
+["Ferrari","250 GTO","1962–1964","Italy","Classic","Coupé","ICE","3.0L NA V12","Front-engine · RWD",296,294,"6.1 s","280 km/h","880 kg","$70,000,000+","36 units","The most valuable car in the world.","A racing homologation special with a Colombo V12, coachbuilt bodywork and a competition record that made it legendary. Individual examples now sell for over $70 million.","5-speed manual","2","The most valuable car in the world at auction."],
+["Lamborghini","Miura P400","1966–1973","Italy","Classic","Coupé","ICE","3.9L NA V12","Mid-engine · RWD",350,369,"6.7 s","280 km/h","1,292 kg","$1,800,000","764 units","The car that invented the mid-engine supercar.","The Miura placed a transverse V12 behind the driver and wrapped it in Marcello Gandini's most beautiful bodywork. Every mid-engine supercar since owes it a debt.","5-speed manual","2","Transverse mid-mounted V12 — a first for a road car."],
+["BMW","M3 (E30)","1986–1991","Germany","Classic","Sedan","ICE","2.5L NA I4 (S14)","Front-engine · RWD",235,240,"6.5 s","235 km/h","1,200 kg","Collector","Discontinued","The homologation special that started an empire.","BMW built the E30 M3 to go racing; the road car was simply the paperwork. The S14 was a motorsport engine detuned just enough to be streetable.","5-speed manual","5","Won more touring car races than any car in history."],
+["Datsun","240Z","1969–1973","Japan","Classic","Coupé","ICE","2.4L NA Inline-6","Front-engine · RWD",151,198,"8.0 s","201 km/h","1,068 kg","Collector","Discontinued","The Japanese sports car that conquered America.","Affordable, beautiful and capable. Its long-nose, short-deck proportions echoed European GTs at half the price, and its overhead-cam inline-six was smooth and reliable.","4-speed manual","2","Sold over 150,000 units in the US alone."],
+["Alfa Romeo","Giulia GTA","1965–1969","Italy","Classic","Coupé","ICE","1.6L NA Inline-4","Front-engine · RWD",113,140,"9.2 s","185 km/h","760 kg","Collector","Discontinued","The lightweight giant-killer.","Autodelta stripped 200 kg from the Giulia Sprint GT, added a tuned twin-cam and dominated touring car racing. The 'Gran Turismo Alleggerita' was a pure homologation weapon.","5-speed manual","4","Alleggerita means 'lightened' — it weighed just 760 kg."],
+["Shelby","Cobra 427","1965–1967","USA","Classic","Roadster","ICE","7.0L NA V8","Front-engine · RWD",485,650,"4.2 s","265 km/h","1,068 kg","$2,500,000","~300 units","The biggest engine in the smallest car.","Carroll Shelby took a British AC Ace body and dropped in Ford's 427 cubic-inch V8. The result was terrifying, glorious and barely controllable.","4-speed manual","2","Coil-spring chassis was added specifically to handle the 427."],
+["Ford","Mustang Boss 429","1969–1970","USA","Classic","Coupé","ICE","7.0L NA V8 (429 Semi-Hemi)","Front-engine · RWD",375,610,"6.5 s","220 km/h","1,700 kg","$400,000","1,358 units","NASCAR homologation with a semi-hemi V8.","Built purely to homologate Ford's 429 semi-hemi V8 for NASCAR, the Boss 429 required a widened shock tower and hand-fitted front suspension.","4-speed manual","4","Hand-assembled by Kar Kraft — only 1,358 built."],
+
+/* ---------- LUXURY / GT ---------- */
+["Rolls-Royce","Phantom VIII","2017–Present","UK","Modern","Sedan","ICE","6.75L Twin-Turbo V12","Front-engine · RWD",563,900,"5.3 s","250 km/h","2,560 kg","$460,000","Mass production","The best car in the world.","Not about speed — about absolute serenity. The V12 is barely audible, the 'Magic Carpet Ride' suspension isolates occupants from the road, and the interior is a gallery of handcrafted materials.","8-speed auto","5","The Architecture of Luxury aluminium spaceframe is bespoke to Rolls-Royce."],
+["Bentley","Continental GT Speed","2022–Present","UK","Modern","Coupé","ICE","6.0L Twin-Turbo W12","Front-engine · AWD",650,900,"3.5 s","335 km/h","2,273 kg","$274,000","Mass production","The ultimate grand tourer.","The final iteration of Bentley's iconic W12. All-wheel drive with rear-wheel steering combines continent-crossing comfort with genuine supercar performance.","8-speed DCT","4","The last Bentley W12 — a 20-year engine dynasty ends here."],
+["Aston Martin","DB12","2023–Present","UK","Modern","Coupé","ICE","4.0L Twin-Turbo V8 (AMG)","Front-engine · RWD",671,800,"3.6 s","325 km/h","1,685 kg","$248,000","Mass production","The super tourer.","Aston Martin's rebirth. A 671 hp AMG-sourced V8, a completely new interior and a chassis tuned for engagement finally deliver on the DB11's promise.","8-speed auto","4","Aston calls it a 'super tourer' — a new category entirely."],
+["Mercedes-Maybach","S 680","2021–Present","Germany","Modern","Sedan","ICE","6.0L Twin-Turbo V12","Front-engine · AWD",621,900,"4.4 s","250 km/h","2,460 kg","$230,000","Mass production","The pinnacle of luxury sedans.","The most luxurious Mercedes ever built. A silky V12, rear seats more comfortable than most living rooms and a tech suite without peer. A private jet for the road.","9-speed auto","4","Rear seats recline to 43.5 degrees with hot-stone massage."],
+["Ferrari","Roma","2020–Present","Italy","Modern","Coupé","ICE","3.9L Twin-Turbo V8","Front-engine · RWD",612,760,"3.4 s","320 km/h","1,472 kg","$247,000","Mass production","La Nuova Dolce Vita — the new sweet life.","Ferrari's most elegant modern design, with a front-mid V8 and a cabin built around a dual-cockpit concept. It's a GT in the classic sense, but devastatingly quick.","8-speed DCT","2","Its 8-speed DCT is shared with the SF90 and shifts in 200 ms."],
+["Bentley","Flying Spur Speed","2022–Present","UK","Modern","Sedan","ICE","6.0L Twin-Turbo W12","Front-engine · AWD",626,900,"3.8 s","333 km/h","2,437 kg","$274,000","Mass production","The fastest four-door Bentley ever.","A 626 hp W12, all-wheel steering and 48V active anti-roll bars make a 2.4-tonne limousine handle like something half its size.","8-speed DCT","5","Active anti-roll bars counteract body lean in 0.3 seconds."],
+
+/* ---------- SUVs ---------- */
+["Lamborghini","Urus Performante","2022–Present","Italy","Modern","SUV","ICE","4.0L Twin-Turbo V8","Front-engine · AWD",666,850,"3.3 s","306 km/h","2,150 kg","$260,000","Mass production","The super SUV that started a revolution.","The most extreme Urus: 666 hp, lowered suspension, a rally mode for gravel and a 47 kg weight saving. As capable on a dirt road as on the autobahn.","8-speed auto","5","Held the Pikes Peak production SUV record at 10:32.064."],
+["Land Rover","Range Rover Sport SVR","2015–2022","UK","Modern","SUV","ICE","5.0L Supercharged V8","Front-engine · AWD",575,700,"4.5 s","283 km/h","2,334 kg","$115,000","Mass production","The loudest, fastest Range Rover ever.","A supercharged V8 with one of the most aggressive exhaust notes of any SUV, paired with genuine off-road capability and a wading depth of 850 mm.","8-speed auto","5","Wading depth of 850 mm despite 575 hp and 283 km/h."],
+["Porsche","Cayenne Turbo GT","2021–Present","Germany","Modern","SUV","ICE","4.0L Twin-Turbo V8","Front-engine · AWD",640,850,"3.3 s","300 km/h","2,220 kg","$200,000","Mass production","The SUV that thinks it's a sports car.","The most powerful and fastest Cayenne ever. Its chassis was honed at the Nürburgring, where it holds the SUV lap record.","8-speed auto","5","Held the Nürburgring SUV record at 7:38.925."],
+["Rolls-Royce","Cullinan","2018–Present","UK","Modern","SUV","ICE","6.75L Twin-Turbo V12","Front-engine · AWD",563,850,"5.2 s","250 km/h","2,660 kg","$400,000","Mass production","The most luxurious SUV in the world.","Rolls-Royce's first SUV. It uses the same 'Magic Carpet Ride' suspension as the Phantom, and can be ordered with a Viewing Suite that folds out of the tailgate.","8-speed auto","5","Optional Viewing Suite seats fold out of the rear tailgate."],
+["Mercedes-AMG","G 63","2018–Present","Germany","Modern","SUV","ICE","4.0L Twin-Turbo V8","Front-engine · AWD",577,850,"4.5 s","220 km/h","2,560 kg","$180,000","Mass production","The icon that refuses to change.","Three locking differentials, a ladder frame and a shape unchanged since 1979. The G 63 adds 577 hp and a soundtrack that echoes off buildings.","9-speed auto","5","Three fully locking differentials — still."],
+["Genesis","GV60 Performance","2022–Present","South Korea","Modern","SUV","EV","Dual-Motor","Dual-motor · AWD",483,700,"4.0 s","235 km/h","2,160 kg","$69,000","Mass production","Luxury EV with a boost button.","A Boost Mode button unleashes full power for 10 seconds, and a crystal sphere gear selector flips over when you start the car.","1-speed","5","800V architecture with 18-minute 10–80% charging."],
+["Li Auto","L9","2022–Present","China","Future","SUV","Hybrid","1.5T Range Extender + Dual-Motor","Dual-motor · AWD",449,620,"5.3 s","180 km/h","2,520 kg","$68,000","Mass production","The family SUV that thinks it's a lounge.","China's best-selling full-size luxury SUV. A range-extender hybrid system, a five-screen interior and a built-in fridge make it a living room on wheels.","1-speed","6","Five screens including a 15.7-inch rear entertainment display."],
+["XPeng","X9","2024–Present","China","Future","SUV","EV","Dual-Motor","Dual-motor · AWD",496,640,"4.9 s","200 km/h","2,560 kg","$80,000","Mass production","The electric MPV with rear-wheel steering.","A premium electric MPV that challenges conventional thinking about family transport, with rear-wheel steering, a 702 km range and a lounge-like interior.","1-speed","7","Rear-wheel steering gives a 10.8 m turning circle."]
+];
+
+const CARS = RAW.map(r => {
+  const o = {};
+  COLS.forEach((c,i) => o[c] = r[i]);
+  o.id = (o.brand + ' ' + o.name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  o.hp = Number(o.hp) || 0;
+  o.torque = Number(o.torque) || 0;
+  o.ptw = o.weight ? Math.round(o.hp / (parseFloat(String(o.weight).replace(/[^0-9.]/g,'')) / 1000)) : 0;
+  o.sil = ({'Coupé':'coupe','Sedan':'sedan','SUV':'suv','Roadster':'roadster','Hatch':'hatch'})[o.body] || 'coupe';
+  return o;
+});
+
+/* ============================================================
+   BLUEPRINT CAR ART (monochrome, elegant fallback)
+   ============================================================ */
+const SIL_PATHS = {
+  coupe:   "M44 186 L44 168 C44 146 62 134 96 128 L158 110 C190 84 228 68 280 64 L348 64 C398 68 432 86 458 110 L528 128 C556 134 568 148 568 168 L568 186 Z",
+  sedan:   "M40 186 L40 166 C40 146 58 136 92 130 L140 116 C168 92 200 78 248 74 L372 74 C410 78 436 94 456 116 L528 132 C556 138 568 150 568 168 L568 186 Z",
+  suv:     "M40 186 L40 160 C40 138 56 126 88 122 L108 78 C116 62 130 54 150 54 L420 54 C444 54 458 62 466 78 L492 122 C530 128 556 140 566 162 L568 186 Z",
+  hatch:   "M44 186 L44 168 C44 148 62 138 96 132 L132 112 C158 88 190 74 236 70 L396 70 C424 74 442 86 452 106 L470 124 L528 132 C556 138 568 152 568 170 L568 186 Z",
+  roadster:"M44 186 L44 168 C44 148 60 138 92 132 L150 118 C186 108 232 106 274 112 L372 124 C428 132 500 142 546 160 L568 170 L568 186 Z"
+};
+const GLASS_PATHS = {
+  coupe:   "M180 120 L232 80 L340 80 L352 120 Z",
+  sedan:   "M158 124 L216 82 L392 82 L436 124 Z",
+  suv:     "M126 116 L152 66 L418 66 L452 116 Z",
+  hatch:   "M146 122 L206 82 L392 82 L432 122 Z",
+  roadster:""
+};
+
+function carArt(car, opts = {}){
+  const kind = car.sil || 'coupe';
+  const body = SIL_PATHS[kind] || SIL_PATHS.coupe;
+  const glass = GLASS_PATHS[kind] || '';
+  const uid = 'a' + Math.random().toString(36).slice(2,8);
+  const showLabel = opts.label !== false;
+  const fs = opts.fontSize || 13;
+  return `
+  <svg viewBox="0 0 620 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${car.brand} ${car.name} blueprint">
+    <defs>
+      <pattern id="g-${uid}" width="26" height="26" patternUnits="userSpaceOnUse">
+        <path d="M26 0H0V26" fill="none" stroke="currentColor" stroke-opacity=".09" stroke-width="1"/>
+      </pattern>
+      <linearGradient id="f-${uid}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="currentColor" stop-opacity=".10"/>
+        <stop offset="1" stop-color="currentColor" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="620" height="300" fill="url(#g-${uid})"/>
+    <line x1="0" y1="232" x2="620" y2="232" stroke="currentColor" stroke-opacity=".18" stroke-width="1" stroke-dasharray="4 6"/>
+    <ellipse cx="310" cy="240" rx="252" ry="16" fill="currentColor" opacity=".06"/>
+
+    <path d="${body}" fill="url(#f-${uid})" stroke="currentColor" stroke-opacity=".62" stroke-width="2" stroke-linejoin="round"/>
+    ${glass ? `<path d="${glass}" fill="currentColor" fill-opacity=".08" stroke="currentColor" stroke-opacity=".35" stroke-width="1.4" stroke-linejoin="round"/>` : ''}
+    <line x1="286" y1="${kind==='suv'?'66':'80'}" x2="286" y2="${kind==='suv'?'116':'120'}" stroke="currentColor" stroke-opacity=".22" stroke-width="1.2"/>
+
+    <path d="M96 128 L96 186" stroke="currentColor" stroke-opacity=".18" stroke-width="1"/>
+    <path d="M528 128 L528 186" stroke="currentColor" stroke-opacity=".18" stroke-width="1"/>
+
+    <circle cx="150" cy="186" r="42" fill="var(--bg-2)" stroke="currentColor" stroke-opacity=".62" stroke-width="2.2"/>
+    <circle cx="150" cy="186" r="19" fill="none" stroke="currentColor" stroke-opacity=".34" stroke-width="1.6"/>
+    <circle cx="150" cy="186" r="5" fill="currentColor" opacity=".5"/>
+    <line x1="150" y1="167" x2="150" y2="205" stroke="currentColor" stroke-opacity=".22" stroke-width="1"/>
+    <line x1="131" y1="186" x2="169" y2="186" stroke="currentColor" stroke-opacity=".22" stroke-width="1"/>
+
+    <circle cx="462" cy="186" r="42" fill="var(--bg-2)" stroke="currentColor" stroke-opacity=".62" stroke-width="2.2"/>
+    <circle cx="462" cy="186" r="19" fill="none" stroke="currentColor" stroke-opacity=".34" stroke-width="1.6"/>
+    <circle cx="462" cy="186" r="5" fill="currentColor" opacity=".5"/>
+    <line x1="462" y1="167" x2="462" y2="205" stroke="currentColor" stroke-opacity=".22" stroke-width="1"/>
+    <line x1="443" y1="186" x2="481" y2="186" stroke="currentColor" stroke-opacity=".22" stroke-width="1"/>
+
+    <path d="M556 140 L574 140" stroke="currentColor" stroke-opacity=".3" stroke-width="2" stroke-linecap="round"/>
+    <path d="M46 142 L62 142" stroke="currentColor" stroke-opacity=".3" stroke-width="2" stroke-linecap="round"/>
+
+    ${showLabel ? `
+    <text x="310" y="278" text-anchor="middle" fill="currentColor" fill-opacity=".42"
+          font-family="Sora, sans-serif" font-size="${fs}" letter-spacing="4"
+          style="text-transform:uppercase">${car.brand.toUpperCase()} · ${car.name.toUpperCase()}</text>` : ''}
+  </svg>`;
+}
+
+/* ============================================================
+   WIKIMEDIA IMAGE LOADER
+   ============================================================ */
+const ImgCache = new Map();
+async function fetchCarImage(brand, name, minWidth = 1000){
+  const key = `${brand}|${name}|${minWidth}`;
+  if (ImgCache.has(key)) return ImgCache.get(key);
+  const p = (async () => {
+    try{
+      const url = 'https://commons.wikimedia.org/w/api.php' +
+        '?action=query&generator=search' +
+        '&gsrsearch=' + encodeURIComponent(`${brand} ${name}`) +
+        '&gsrnamespace=6&gsrlimit=10' +
+        '&prop=imageinfo&iiprop=url|size&iiurlwidth=1600' +
+        '&format=json&origin=*';
+      const res = await fetch(url, { signal: AbortSignal.timeout(6500) });
+      const data = await res.json();
+      const pages = data.query?.pages;
+      if (!pages) return null;
+      const imgs = Object.values(pages)
+        .filter(p => p.imageinfo?.[0])
+        .map(p => ({ url:p.imageinfo[0].thumburl || p.imageinfo[0].url, w:p.imageinfo[0].width, h:p.imageinfo[0].height }))
+        .filter(i => i.w >= minWidth && i.w > i.h * 1.05)
+        .sort((a,b) => b.w - a.w);
+      return imgs[0] || null;
+    }catch(e){ return null; }
+  })();
+  ImgCache.set(key, p);
+  return p;
+}
+
+/* ============================================================
+   THEME
+   ============================================================ */
+const Theme = {
+  cur: localStorage.getItem('cs-theme') || 'obsidian',
+  init(){
+    if (this.cur !== 'paper') this.cur = 'obsidian';
+    document.documentElement.setAttribute('data-theme', this.cur);
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', this.cur === 'paper' ? '#FFFFFF' : '#050505');
+    document.querySelectorAll('.theme-opt').forEach(b => b.classList.toggle('active', b.dataset.theme === this.cur));
+    const sw = document.getElementById('themeSwitcher');
+    const tg = sw.querySelector('.theme-toggle');
+    tg.addEventListener('click', e => {
+      e.stopPropagation();
+      const open = sw.classList.toggle('open');
+      tg.setAttribute('aria-expanded', open);
+    });
+    document.querySelectorAll('.theme-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        this.set(btn.dataset.theme);
+        sw.classList.remove('open');
+        tg.setAttribute('aria-expanded','false');
+      });
+    });
+    document.addEventListener('click', e => {
+      if (!sw.contains(e.target)) { sw.classList.remove('open'); tg.setAttribute('aria-expanded','false'); }
+    });
+  },
+  set(t){
+    if (t === this.cur) return;
+    document.documentElement.classList.add('theme-transitioning');
+    document.documentElement.setAttribute('data-theme', t);
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'paper' ? '#FFFFFF' : '#050505');
+    this.cur = t;
+    localStorage.setItem('cs-theme', t);
+    document.querySelectorAll('.theme-opt').forEach(b => b.classList.toggle('active', b.dataset.theme === t));
+    setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 760);
+    if (window.__engine) window.__engine.setTheme(t);
+  }
+};
+Theme.init();
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const $  = (s, c=document) => c.querySelector(s);
+const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
+function toast(msg){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove('show'), 2600);
+}
+const nf = n => Number(n).toLocaleString('en-US');
+
+/* ============================================================
+   GARAGE + COMPARE STATE
+   ============================================================ */
+const Store = {
+  garage: new Set(JSON.parse(localStorage.getItem('cs-garage') || '[]')),
+  compare: JSON.parse(localStorage.getItem('cs-compare') || '[]'),
+  saveGarage(){ localStorage.setItem('cs-garage', JSON.stringify([...this.garage])); },
+  saveCompare(){ localStorage.setItem('cs-compare', JSON.stringify(this.compare)); }
+};
+
+function updateGarageUI(){
+  const n = Store.garage.size;
+  ['#navGarageCount','#bnGarageCount'].forEach(sel => {
+    const el = $(sel);
+    if (!el) return;
+    el.hidden = n === 0;
+    el.textContent = n > 99 ? '99+' : n;
+  });
+  const bn = $('[data-bn="garage"]');
+  if (bn) bn.setAttribute('aria-label', `Garage, ${n} saved`);
+}
+
+function toggleGarage(id){
+  const car = CARS.find(c => c.id === id);
+  if (!car) return;
+  if (Store.garage.has(id)) {
+    Store.garage.delete(id);
+    toast(`Removed ${car.brand} ${car.name} from your garage`);
+  } else {
+    Store.garage.add(id);
+    toast(`♥ ${car.brand} ${car.name} saved to your garage`);
+  }
+  Store.saveGarage();
+  updateGarageUI();
+  syncCardStates();
+  renderGarage();
+}
+
+/* ============================================================
+   CAR GRID
+   ============================================================ */
+const state = { power:'all', era:'all', body:'all', country:'all', sort:'relevance', q:'' };
+
+function filteredCars(){
+  let list = CARS.filter(c => {
+    if (state.power !== 'all' && c.power !== state.power) return false;
+    if (state.era !== 'all' && c.era !== state.era) return false;
+    if (state.body !== 'all' && c.body !== state.body) return false;
+    if (state.country !== 'all' && c.country !== state.country) return false;
+    if (state.q) {
+      const hay = [c.brand,c.name,c.engine,c.tagline,c.blurb,c.country,c.era,c.body,c.notable,c.power,c.layout].join(' ').toLowerCase();
+      if (!hay.includes(state.q.toLowerCase())) return false;
+    }
+    return true;
+  });
+  if (state.sort === 'power') list.sort((a,b) => b.hp - a.hp);
+  if (state.sort === 'az') list.sort((a,b) => a.name.localeCompare(b.name));
+  if (state.sort === 'newest') list.sort((a,b) => parseInt(b.years) - parseInt(a.years));
+  if (state.sort === 'oldest') list.sort((a,b) => parseInt(a.years) - parseInt(b.years));
+  return list;
+}
+
+function renderCars(){
+  const grid = $('#carGrid');
+  const list = filteredCars();
+  $('#resultCount').textContent = list.length;
+
+  if (!list.length){
+    grid.innerHTML = `<div class="empty-state">
+      <h3>Nothing in the archive matches that.</h3>
+      <p>Try widening your filters — or search a different brand, era or engine.</p>
+    </div>`;
+    return;
+  }
+  grid.innerHTML = '';
+  const frag = document.createDocumentFragment();
+  list.forEach((car,i) => frag.appendChild(createCarCard(car,i)));
+  grid.appendChild(frag);
+  observeReveals();
+}
+
+function createCarCard(car, i){
+  const card = document.createElement('article');
+  card.className = 'premium-car-card reveal';
+  card.style.animationDelay = `${(i % 9) * 45}ms`;
+  card.dataset.id = car.id;
+  card.tabIndex = 0;
+  card.setAttribute('role','button');
+  card.setAttribute('aria-label', `Open ${car.brand} ${car.name}`);
+
+  const saved = Store.garage.has(car.id);
+  const comparing = Store.compare.includes(car.id);
+
+  card.innerHTML = `
+    <div class="pcc-media">
+      <div class="pcc-image-container" data-image>
+        <div class="pcc-skeleton"></div>
+        <div class="pcc-art" data-art>${carArt(car,{fontSize:11})}</div>
+      </div>
+      <div class="pcc-overlay"></div>
+      <span class="pcc-badge"><span class="pcc-badge-dot"></span>${car.power}</span>
+      <div class="pcc-tools">
+        <button class="tool-btn ${saved?'active':''}" data-heart type="button"
+                aria-label="${saved?'Remove from':'Add to'} garage" aria-pressed="${saved}">
+          <svg viewBox="0 0 24 24" fill="${saved?'currentColor':'none'}" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z"/>
+          </svg>
+        </button>
+        <button class="tool-btn ${comparing?'active':''}" data-compare type="button"
+                aria-label="${comparing?'Remove from':'Add to'} comparison" aria-pressed="${comparing}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v18M5 8l-3 6h6zM19 8l-3 6h6z"/><path d="M2 20h6M16 20h6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="pcc-body">
+      <div class="pcc-header">
+        <span class="pcc-brand">${car.brand}</span>
+        <span class="pcc-country">${car.country} · ${car.years.split('–')[0].trim()}</span>
+      </div>
+      <h3 class="pcc-name">${car.name}</h3>
+      <p class="pcc-tagline">${car.tagline}</p>
+      <div class="pcc-specs">
+        <div class="pcc-spec"><span class="pcc-spec-value">${car.hp}</span><span class="pcc-spec-label">HP</span></div>
+        <div class="pcc-spec"><span class="pcc-spec-value">${String(car.zero).replace(' s','')}</span><span class="pcc-spec-label">0–100</span></div>
+        <div class="pcc-spec"><span class="pcc-spec-value">${String(car.top).split(' ')[0]}</span><span class="pcc-spec-label">km/h</span></div>
+      </div>
+      <div class="pcc-footer">
+        <span class="pcc-engine">${car.engine}</span>
+        <span class="pcc-cta">View
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+    </div>`;
+
+  loadCardImage(card, car);
+  card.addEventListener('click', e => {
+    if (e.target.closest('[data-heart]') || e.target.closest('[data-compare]')) return;
+    openCar(car.id);
+  });
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openCar(car.id); }
+  });
+  card.querySelector('[data-heart]').addEventListener('click', e => { e.stopPropagation(); toggleGarage(car.id); });
+  card.querySelector('[data-compare]').addEventListener('click', e => { e.stopPropagation(); toggleCompare(car.id); });
+
+  return card;
+}
+
+async function loadCardImage(card, car){
+  const container = card.querySelector('[data-image]');
+  const skeleton = card.querySelector('.pcc-skeleton');
+  const art = card.querySelector('[data-art]');
+  const img = await fetchCarImage(car.brand, car.name, 1000);
+  if (!img){ if (skeleton) skeleton.remove(); return; }
+  const el = document.createElement('img');
+  el.src = img.url;
+  el.alt = `${car.brand} ${car.name}`;
+  el.loading = 'lazy';
+  el.decoding = 'async';
+  el.onload = () => {
+    el.classList.add('loaded');
+    if (art) art.style.opacity = '0';
+    if (skeleton) skeleton.remove();
+  };
+  el.onerror = () => { if (skeleton) skeleton.remove(); el.remove(); };
+  container.insertBefore(el, container.firstChild);
+}
+
+function syncCardStates(){
+  $$('.premium-car-card').forEach(card => {
+    const id = card.dataset.id;
+    const h = card.querySelector('[data-heart]');
+    const c = card.querySelector('[data-compare]');
+    if (h){
+      const on = Store.garage.has(id);
+      h.classList.toggle('active', on);
+      h.setAttribute('aria-pressed', on);
+      h.querySelector('svg').setAttribute('fill', on ? 'currentColor' : 'none');
+    }
+    if (c){
+      const on = Store.compare.includes(id);
+      c.classList.toggle('active', on);
+      c.setAttribute('aria-pressed', on);
+    }
+    card.classList.toggle('selected', Store.compare.includes(id));
+  });
+}
+
+/* ============================================================
+   GARAGE RENDER
+   ============================================================ */
+function renderGarage(){
+  const grid = $('#garageGrid');
+  const ids = [...Store.garage];
+  const cars = CARS.filter(c => ids.includes(c.id));
+  if (!cars.length){
+    grid.innerHTML = `<div class="garage-empty" style="grid-column:1/-1">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z"/>
+      </svg>
+      <h3>Your garage is empty.</h3>
+      <p>Tap the heart on any car in the index to save it here. Your collection lives on this device.</p>
+      <a href="#cars" class="btn btn-primary" data-magnetic>Browse the archive</a>
+    </div>`;
+    wireMagnetic(grid);
+    return;
+  }
+  grid.innerHTML = '';
+  cars.forEach((car,i) => grid.appendChild(createCarCard(car,i)));
+  observeReveals();
+}
+
+/* ============================================================
+   COMPARE
+   ============================================================ */
+function toggleCompare(id){
+  const idx = Store.compare.indexOf(id);
+  const car = CARS.find(c => c.id === id);
+  if (idx > -1){
+    Store.compare.splice(idx,1);
+  } else {
+    if (Store.compare.length >= 2){
+      Store.compare.shift();
+      toast('Comparison slots full — oldest car replaced');
+    }
+    Store.compare.push(id);
+    toast(`⚖ ${car.brand} ${car.name} added to comparison`);
+  }
+  Store.saveCompare();
+  updateCompareBar();
+  syncCardStates();
+}
+
+function updateCompareBar(){
+  const bar = $('#compareBar');
+  const slots = $$('.cb-slot', bar);
+  slots.forEach((slot, i) => {
+    const id = Store.compare[i];
+    const car = id ? CARS.find(c => c.id === id) : null;
+    if (car){
+      slot.classList.add('filled');
+      slot.innerHTML = `<span class="cb-name">${car.brand} ${car.name}</span>
+        <button class="cb-x" type="button" data-remove="${car.id}" aria-label="Remove ${car.name}">×</button>`;
+    } else {
+      slot.classList.remove('filled');
+      slot.innerHTML = `<span class="cb-name">Select a car…</span>`;
+    }
+  });
+  $$('[data-remove]', bar).forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation();
+    toggleCompare(b.dataset.remove);
+  }));
+
+  bar.classList.toggle('show', Store.compare.length > 0);
+  $('#openCompare').disabled = Store.compare.length !== 2;
+
+  const n = Store.compare.length;
+  ['#bnCompareCount'].forEach(sel => {
+    const el = $(sel);
+    if (el){ el.hidden = n === 0; el.textContent = n; }
+  });
+}
+
+const CMP_METRICS = [
+  { key:'hp',      label:'Horsepower',      unit:'hp',    higher:true,  fmt:v => nf(v) },
+  { key:'torque',  label:'Torque',          unit:'Nm',    higher:true,  fmt:v => nf(v) },
+  { key:'zeroNum', label:'0–100 km/h',      unit:'s',     higher:false, fmt:v => v.toFixed(2) },
+  { key:'topNum',  label:'Top speed',       unit:'km/h',  higher:true,  fmt:v => nf(v) },
+  { key:'weightNum',label:'Kerb weight',    unit:'kg',    higher:false, fmt:v => nf(v) },
+  { key:'ptw',     label:'Power / tonne',   unit:'hp/t',  higher:true,  fmt:v => nf(v) }
+];
+
+function metricValue(car, key){
+  if (key === 'zeroNum')   return parseFloat(String(car.zero).replace(/[^0-9.]/g,'')) || 0;
+  if (key === 'topNum')    return parseFloat(String(car.top).replace(/[^0-9.]/g,'')) || 0;
+  if (key === 'weightNum') return parseFloat(String(car.weight).replace(/[^0-9.]/g,'')) || 0;
+  return car[key] || 0;
+}
+
+function openCompare(){
+  if (Store.compare.length !== 2) return;
+  const [a, b] = Store.compare.map(id => CARS.find(c => c.id === id));
+  if (!a || !b) return;
+
+  const panel = $('#cmpPanel');
+  panel.innerHTML = `
+    <div class="cmp-head">
+      <p class="eyebrow ink">Head to head</p>
+      <h2>${a.brand} ${a.name} <span class="muted" style="font-weight:200">vs</span> ${b.brand} ${b.name}</h2>
+      <p>Six core performance metrics, normalised to the stronger car in each category.</p>
+    </div>
+    <div class="cmp-grid">
+      <div class="cmp-col left">
+        <div class="cmp-car">
+          <div class="cmp-car-media" data-cmp-img="0">
+            <div class="pcc-art">${carArt(a,{fontSize:11})}</div>
+          </div>
+          <div class="cmp-car-body">
+            <div class="cb-brand">${a.brand}</div>
+            <h3>${a.name}</h3>
+            <div class="cb-sub">${a.years} · ${a.country} · ${a.power}</div>
+          </div>
+        </div>
+      </div>
+      <div></div>
+      <div class="cmp-col right">
+        <div class="cmp-car">
+          <div class="cmp-car-media" data-cmp-img="1">
+            <div class="pcc-art">${carArt(b,{fontSize:11})}</div>
+          </div>
+          <div class="cmp-car-body">
+            <div class="cb-brand">${b.brand}</div>
+            <h3>${b.name}</h3>
+            <div class="cb-sub">${b.years} · ${b.country} · ${b.power}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="cmpRows"></div>
+
+    <div class="cmp-actions">
+      <button class="btn btn-ghost" data-magnetic id="cmpSwap">⇄ Swap sides</button>
+      <button class="btn btn-primary" data-magnetic id="cmpCloseBtn">Close comparison</button>
+    </div>
+  `;
+
+  const rows = $('#cmpRows');
+  CMP_METRICS.forEach(m => {
+    const va = metricValue(a, m.key), vb = metricValue(b, m.key);
+    const aWins = m.higher ? va > vb : va < vb;
+    const bWins = m.higher ? vb > va : vb < va;
+    const max = Math.max(va, vb) || 1;
+
+    const row = document.createElement('div');
+    row.innerHTML = `
+      <div class="cmp-row">
+        <div class="cmp-val left ${aWins?'win':'lose'}">${m.fmt(va)}<span class="cmp-unit">${m.unit}</span></div>
+        <div class="cmp-label">${m.label}</div>
+        <div class="cmp-val right ${bWins?'win':'lose'}">${m.fmt(vb)}<span class="cmp-unit">${m.unit}</span></div>
+      </div>
+      <div class="cmp-bar-wrap">
+        <div class="cmp-bar-track"><div class="cmp-bar-fill" data-w="${(va/max*100).toFixed(1)}"></div></div>
+        <div></div>
+        <div class="cmp-bar-track right"><div class="cmp-bar-fill" data-w="${(vb/max*100).toFixed(1)}"></div></div>
+      </div>`;
+    rows.appendChild(row);
+  });
+
+  // Full spec table rows
+  const specRows = [
+    ['Engine', a.engine, b.engine],
+    ['Layout', a.layout, b.layout],
+    ['Gearbox', a.gearbox, b.gearbox],
+    ['Body', a.body, b.body],
+    ['Seats', a.seats, b.seats],
+    ['Price (new)', a.price, b.price],
+    ['Production', a.production, b.production],
+    ['Notable', a.notable, b.notable]
+  ];
+  const table = document.createElement('div');
+  table.innerHTML = specRows.map(([l, x, y]) => `
+    <div class="cmp-row">
+      <div class="cmp-val left" style="font-size:14px;font-family:var(--font-body);font-weight:400;padding-top:16px;padding-bottom:16px">${x}</div>
+      <div class="cmp-label">${l}</div>
+      <div class="cmp-val right" style="font-size:14px;font-family:var(--font-body);font-weight:400;padding-top:16px;padding-bottom:16px">${y}</div>
+    </div>
+    <div class="cmp-divider"></div>`).join('');
+  rows.appendChild(table);
+
+  $('#cmpOverlay').classList.add('open');
+  document.body.classList.add('locked');
+
+  // animate bars
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      $$('.cmp-bar-fill', panel).forEach(f => { f.style.width = f.dataset.w + '%'; });
+    }, 120);
+  });
+
+  // load real photos
+  [a,b].forEach(async (car, i) => {
+    const box = panel.querySelector(`[data-cmp-img="${i}"]`);
+    const img = await fetchCarImage(car.brand, car.name, 900);
+    if (!img || !box) return;
+    const el = document.createElement('img');
+    el.src = img.url; el.alt = `${car.brand} ${car.name}`; el.loading = 'lazy';
+    el.onload = () => { box.querySelector('.pcc-art')?.remove(); box.insertBefore(el, box.firstChild); };
+    el.onerror = () => el.remove();
+    box.insertBefore(el, box.firstChild);
+  });
+
+  wireMagnetic(panel);
+  $('#cmpCloseBtn').addEventListener('click', closeCompare);
+  $('#cmpSwap').addEventListener('click', () => { Store.compare.reverse(); Store.saveCompare(); updateCompareBar(); openCompare(); });
+}
+
+function closeCompare(){
+  const ov = $('#cmpOverlay');
+  ov.classList.remove('open');
+  document.body.classList.remove('locked');
+}
+
+/* ============================================================
+   CAR MODAL
+   ============================================================ */
+const carModal = $('#carModal');
+const carPanel = $('#carPanel');
+
+function openCar(id){
+  const c = CARS.find(x => x.id === id);
+  if (!c) return;
+  const saved = Store.garage.has(c.id);
+  const comparing = Store.compare.includes(c.id);
+
+  carPanel.innerHTML = `
+    <div class="detail-hero">
+      <div class="dh-art">${carArt(c,{label:false})}</div>
+      <div class="dh-inner">
+        <p class="eyebrow ink">${c.brand} · ${c.country} · ${c.era}</p>
+        <h2>${c.name}</h2>
+        <p class="dh-tag">${c.tagline}</p>
+        <div class="dh-chips">
+          <span class="dh-chip">${c.power}</span>
+          <span class="dh-chip">${c.body}</span>
+          <span class="dh-chip">${c.years}</span>
+          <span class="dh-chip">${c.layout}</span>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:26px">
+          <button class="btn btn-primary btn-sm" data-modal-heart data-magnetic>
+            ${saved ? '♥ Saved to garage' : '♡ Save to garage'}
+          </button>
+          <button class="btn btn-ghost btn-sm" data-modal-compare data-magnetic>
+            ${comparing ? '✓ In comparison' : '⚖ Add to compare'}
+          </button>
+        </div>
+        <div class="stat-strip">
+          <div class="stat-cell"><b>${c.hp}</b><span>Horsepower</span></div>
+          <div class="stat-cell"><b>${c.torque}</b><span>Torque Nm</span></div>
+          <div class="stat-cell"><b>${c.zero}</b><span>0–100 km/h</span></div>
+          <div class="stat-cell"><b>${c.top}</b><span>Top speed</span></div>
+          <div class="stat-cell"><b>${c.ptw}</b><span>HP / tonne</span></div>
+          <div class="stat-cell"><b>${c.weight}</b><span>Kerb weight</span></div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="subnav" data-subnav>
+      <button class="on" data-tab="overview">Overview</button>
+      <button data-tab="powertrain">Powertrain</button>
+      <button data-tab="specs">Full Specs</button>
+      <button data-tab="gallery">Gallery</button>
+    </nav>
+
+    <section class="tab-panel on" data-panel="overview">
+      <p class="detail-h4">The story</p>
+      <h3 class="detail-h3">What makes this car matter</h3>
+      <p class="detail-p">${c.blurb}</p>
+      <p class="detail-p" style="color:var(--text-3);font-size:14.5px">
+        <strong style="color:var(--text);font-weight:600">Notable:</strong> ${c.notable}
+      </p>
+
+      <p class="detail-h4" style="margin-top:52px">Key specifications</p>
+      <div class="info-grid">
+        <div class="info-tile">
+          <b>Powertrain</b>
+          <p>${c.engine}</p>
+          <table class="spec-table">
+            <tr><td>Type</td><td>${c.power}</td></tr>
+            <tr><td>Layout</td><td>${c.layout}</td></tr>
+            <tr><td>Gearbox</td><td>${c.gearbox}</td></tr>
+          </table>
+        </div>
+        <div class="info-tile">
+          <b>Performance</b>
+          <p>Manufacturer test conditions.</p>
+          <table class="spec-table">
+            <tr><td>0–100 km/h</td><td>${c.zero}</td></tr>
+            <tr><td>Top speed</td><td>${c.top}</td></tr>
+            <tr><td>Power / tonne</td><td>${c.ptw} hp/t</td></tr>
+          </table>
+        </div>
+        <div class="info-tile">
+          <b>Identity</b>
+          <p>Origin and production.</p>
+          <table class="spec-table">
+            <tr><td>Origin</td><td>${c.country}</td></tr>
+            <tr><td>Years</td><td>${c.years}</td></tr>
+            <tr><td>Production</td><td>${c.production}</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="powertrain">
+      <p class="detail-h4">Interactive powertrain</p>
+      <h3 class="detail-h3">${c.engine}</h3>
+      <p class="detail-p">Rotate the 3D assembly below. This is a live animation of an inline-4 cylinder engine — the same fundamental architecture used in everything from economy cars to hypercars.</p>
+      <div style="margin-top:34px">
+        <div class="ev" style="height:520px">
+          <div class="ev-stage" data-engine-stage>
+            <canvas data-engine-canvas></canvas>
+            <div class="ev-loader" data-ev-loader><div class="ring"></div><span class="lbl">Loading</span></div>
+          </div>
+          <div class="ev-hud">
+            <button class="ev-btn on" data-act="play">❚❚ Pause</button>
+            <button class="ev-btn" data-act="reset">⟲ Reset</button>
+            <span class="ev-hint">Drag to orbit · live animation</span>
+          </div>
+        </div>
+      </div>
+      <p class="detail-h4" style="margin-top:52px">How a four-stroke works</p>
+      <div class="accordion">
+        <div class="acc-item open">
+          <button class="acc-head">1 · Intake <span class="pm">+</span></button>
+          <div class="acc-body"><p>Air and fuel enter the cylinder as the piston moves down. In a turbocharged engine the air is first compressed by the turbo and cooled by an intercooler before entering.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-head">2 · Compression <span class="pm">+</span></button>
+          <div class="acc-body"><p>The piston rises and squeezes the mixture into a fraction of its original volume. Higher compression extracts more energy per cycle but risks pre-ignition.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-head">3 · Combustion <span class="pm">+</span></button>
+          <div class="acc-body"><p>A spark ignites the charge. The flame front expands rapidly, pushing the piston down. This is the only stroke that produces power.</p></div>
+        </div>
+        <div class="acc-item">
+          <button class="acc-head">4 · Exhaust <span class="pm">+</span></button>
+          <div class="acc-body"><p>Burnt gases are pushed out. In a turbocharged engine they drive the turbine wheel, which spins the compressor — recycling energy that would otherwise be wasted.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="specs">
+      <p class="detail-h4">Full specifications</p>
+      <h3 class="detail-h3">Every number that matters</h3>
+      <table class="spec-table" style="margin-top:30px">
+        <tr><td>Brand</td><td>${c.brand}</td></tr>
+        <tr><td>Model</td><td>${c.name}</td></tr>
+        <tr><td>Years</td><td>${c.years}</td></tr>
+        <tr><td>Country</td><td>${c.country}</td></tr>
+        <tr><td>Era</td><td>${c.era}</td></tr>
+        <tr><td>Body style</td><td>${c.body}</td></tr>
+        <tr><td>Seats</td><td>${c.seats}</td></tr>
+        <tr><td>Powertrain type</td><td>${c.power}</td></tr>
+        <tr><td>Engine</td><td>${c.engine}</td></tr>
+        <tr><td>Layout</td><td>${c.layout}</td></tr>
+        <tr><td>Gearbox</td><td>${c.gearbox}</td></tr>
+        <tr><td>Horsepower</td><td>${c.hp} hp</td></tr>
+        <tr><td>Torque</td><td>${c.torque} Nm</td></tr>
+        <tr><td>Power / tonne</td><td>${c.ptw} hp/t</td></tr>
+        <tr><td>0–100 km/h</td><td>${c.zero}</td></tr>
+        <tr><td>Top speed</td><td>${c.top}</td></tr>
+        <tr><td>Kerb weight</td><td>${c.weight}</td></tr>
+        <tr><td>Price (new)</td><td>${c.price}</td></tr>
+        <tr><td>Production</td><td>${c.production}</td></tr>
+        <tr><td>Notable</td><td>${c.notable}</td></tr>
+      </table>
+    </section>
+
+    <section class="tab-panel" data-panel="gallery">
+      <p class="detail-h4">Gallery</p>
+      <h3 class="detail-h3">Real photography</h3>
+      <p class="detail-p" style="margin-bottom:32px">Loaded live from Wikimedia Commons — actual photographs of this model.</p>
+      <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+  `;
+
+  wireCarModal(c);
+  carModal.classList.remove('closing');
+  carModal.classList.add('open');
+  document.body.classList.add('locked');
+  $('.modal-scroll', carModal).scrollTop = 0;
+}
+
+function wireCarModal(car){
+  const subnav = carPanel.querySelector('[data-subnav]');
+  subnav.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      subnav.querySelectorAll('button').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      carPanel.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('on', p.dataset.panel === btn.dataset.tab));
+      const scroll = $('.modal-scroll', carModal);
+      scroll.scrollTo({ top: subnav.offsetTop - 1, behavior:'smooth' });
+    });
+  });
+
+  carPanel.querySelectorAll('.acc-item').forEach(item => {
+    const head = item.querySelector('.acc-head');
+    const body = item.querySelector('.acc-body');
+    if (item.classList.contains('open')) body.style.maxHeight = body.scrollHeight + 'px';
+    head.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
+    });
+  });
+
+  const heartBtn = carPanel.querySelector('[data-modal-heart]');
+  heartBtn.addEventListener('click', () => {
+    toggleGarage(car.id);
+    const on = Store.garage.has(car.id);
+    heartBtn.textContent = on ? '♥ Saved to garage' : '♡ Save to garage';
+  });
+  const cmpBtn = carPanel.querySelector('[data-modal-compare]');
+  cmpBtn.addEventListener('click', () => {
+    toggleCompare(car.id);
+    const on = Store.compare.includes(car.id);
+    cmpBtn.textContent = on ? '✓ In comparison' : '⚖ Add to compare';
+  });
+
+  const canvas = carPanel.querySelector('[data-engine-canvas]');
+  const loader = carPanel.querySelector('[data-ev-loader]');
+  if (canvas) EngineViewer.create(canvas, carPanel, loader).then(() => loader?.classList.add('hide'));
+
+  loadGallery(car);
+  wireMagnetic(carPanel);
+}
+
+async function loadGallery(car){
+  const grid = $('#galleryGrid');
+  if (!grid) return;
+  grid.innerHTML = `<div style="padding:40px;text-align:center;color:var(--text-3);font-size:13px;grid-column:1/-1">Loading photography…</div>`;
+  try{
+    const url = 'https://commons.wikimedia.org/w/api.php' +
+      '?action=query&generator=search' +
+      '&gsrsearch=' + encodeURIComponent(`${car.brand} ${car.name}`) +
+      '&gsrnamespace=6&gsrlimit=10' +
+      '&prop=imageinfo&iiprop=url|size&iiurlwidth=1200' +
+      '&format=json&origin=*';
+    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+    const data = await res.json();
+    const pages = data.query?.pages;
+    const images = pages ? Object.values(pages)
+      .filter(p => p.imageinfo?.[0])
+      .map(p => ({ url:p.imageinfo[0].thumburl || p.imageinfo[0].url, w:p.imageinfo[0].width, h:p.imageinfo[0].height }))
+      .filter(i => i.w >= 800).slice(0,6) : [];
+    if (!images.length){
+      grid.innerHTML = `<div style="padding:40px;text-align:center;color:var(--text-3);grid-column:1/-1">No photography found for this model.</div>`;
+      return;
+    }
+    grid.innerHTML = images.map(img => `
+      <div><img src="${img.url}" alt="${car.brand} ${car.name}" loading="lazy" decoding="async"></div>`).join('');
+  }catch(e){
+    grid.innerHTML = `<div style="padding:40px;text-align:center;color:var(--text-3);grid-column:1/-1">Could not load photography.</div>`;
+  }
+}
+
+function closeCar(){
+  if (!carModal.classList.contains('open')) return;
+  carModal.classList.add('closing');
+  setTimeout(() => {
+    carModal.classList.remove('open','closing');
+    carPanel.innerHTML = '';
+    document.body.classList.remove('locked');
+  }, 280);
+}
+$$('[data-close]').forEach(b => b.addEventListener('click', closeCar));
+carModal.addEventListener('click', e => { if (e.target === carModal) closeCar(); });
+$('#cmpOverlay').addEventListener('click', e => { if (e.target === $('#cmpOverlay')) closeCompare(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape'){ closeCar(); closeCompare(); }
+});
+
+/* ============================================================
+   3D ENGINE VIEWER
+   ============================================================ */
+const EngineViewer = (() => {
+  let active = null;
+
+  function build(canvasEl, root, loaderEl){
+    return new Promise(resolve => {
+      requestAnimationFrame(() => {
+        const stage = canvasEl.parentElement;
+        const w = stage.clientWidth || 640;
+        const h = stage.clientHeight || 420;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(38, w/h, 0.1, 2000);
+        camera.position.set(180, 120, 220);
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvasEl, antialias:true, alpha:true, powerPreference:'high-performance' });
+        renderer.setSize(w, h, false);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.15;
+
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.06;
+        controls.minDistance = 120;
+        controls.maxDistance = 620;
+        controls.maxPolarAngle = Math.PI / 1.8;
+        controls.target.set(0, 40, 0);
+        controls.enablePan = false;
+
+        scene.add(new THREE.AmbientLight(0x404050, 1.4));
+        const key = new THREE.DirectionalLight(0xFFFFFF, 2.6); key.position.set(200,300,200); scene.add(key);
+        const fill = new THREE.DirectionalLight(0x8899AA, 1.0); fill.position.set(-200,100,-150); scene.add(fill);
+        const rim = new THREE.PointLight(0xFFFFFF, 3, 900); rim.position.set(-100,200,-250); scene.add(rim);
+        const accent = new THREE.PointLight(0x99AACC, 2, 700); accent.position.set(150,50,-200); scene.add(accent);
+
+        const metal     = new THREE.MeshStandardMaterial({ color:0xB8BEC8, metalness:.95, roughness:.15 });
+        const darkMetal = new THREE.MeshStandardMaterial({ color:0x2A2E38, metalness:.9,  roughness:.3  });
+        const accentMat = new THREE.MeshStandardMaterial({ color:0xFFFFFF, metalness:.75, roughness:.22, emissive:0xFFFFFF, emissiveIntensity:.08 });
+        const pistonMat = new THREE.MeshStandardMaterial({ color:0xD0D4DC, metalness:.98, roughness:.08 });
+        const rodMat    = new THREE.MeshStandardMaterial({ color:0x8A9098, metalness:.92, roughness:.2  });
+        const glass     = new THREE.MeshPhysicalMaterial({ color:0x99AACC, metalness:0, roughness:.05, transmission:.95, transparent:true, opacity:.16, clearcoat:1 });
+
+        const block = new THREE.Mesh(new THREE.BoxGeometry(180,120,100), darkMetal);
+        block.position.y = 40; scene.add(block);
+
+        const positions = [-60,-20,20,60];
+        const pistons = [], rods = [], pins = [];
+
+        positions.forEach(x => {
+          const bore = new THREE.Mesh(new THREE.CylinderGeometry(14,14,90,28,1,true), glass);
+          bore.position.set(x,60,0); scene.add(bore);
+
+          const piston = new THREE.Mesh(new THREE.CylinderGeometry(13,13,20,28), pistonMat);
+          piston.position.set(x,70,0); scene.add(piston); pistons.push(piston);
+
+          const ring = new THREE.Mesh(new THREE.TorusGeometry(13,1,8,28), accentMat);
+          ring.rotation.x = Math.PI/2; ring.position.set(x,76,0); scene.add(ring);
+
+          const rod = new THREE.Mesh(new THREE.BoxGeometry(6,60,10), rodMat);
+          rod.position.set(x,30,0); scene.add(rod); rods.push(rod);
+
+          const pin = new THREE.Mesh(new THREE.SphereGeometry(6,14,14), accentMat);
+          pin.position.set(x,5,0); scene.add(pin); pins.push(pin);
+        });
+
+        const crank = new THREE.Mesh(new THREE.CylinderGeometry(8,8,170,28), metal);
+        crank.rotation.z = Math.PI/2; scene.add(crank);
+
+        positions.forEach(x => {
+          const cw = new THREE.Mesh(new THREE.TorusGeometry(14,3,10,28), darkMetal);
+          cw.rotation.y = Math.PI/2; cw.position.set(x,0,0); scene.add(cw);
+        });
+
+        const cover = new THREE.Mesh(new THREE.BoxGeometry(180,20,100), accentMat);
+        cover.position.y = 110; scene.add(cover);
+
+        positions.forEach(x => {
+          const plug = new THREE.Mesh(new THREE.CylinderGeometry(3,3,15,8),
+            new THREE.MeshStandardMaterial({ color:0xFFFFFF, metalness:.9, roughness:.2, emissive:0xFFFFFF, emissiveIntensity:.35 }));
+          plug.position.set(x,125,0); scene.add(plug);
+        });
+
+        const exhaust = new THREE.Mesh(new THREE.TorusGeometry(40,6,10,44,Math.PI), darkMetal);
+        exhaust.rotation.x = Math.PI/2; exhaust.position.set(0,-20,40); scene.add(exhaust);
+
+        const flywheel = new THREE.Mesh(new THREE.CylinderGeometry(30,30,8,28), metal);
+        flywheel.rotation.z = Math.PI/2; flywheel.position.set(95,0,0); scene.add(flywheel);
+
+        const grid = new THREE.GridHelper(600, 40, 0x333333, 0x1A1A1A);
+        grid.position.y = -2; scene.add(grid);
+
+        const st = { paused:false, speed:1, angle:0, visible:true };
+        const R = 18, L = 50;
+
+        function update(){
+          if (!st.paused) st.angle += 0.022 * st.speed;
+          pistons.forEach((piston,i) => {
+            const theta = st.angle + i * Math.PI;
+            const y = R*Math.cos(theta) + Math.sqrt(L*L - R*R*Math.sin(theta)*Math.sin(theta));
+            const py = 40 + y - 20;
+            piston.position.y = py;
+            const rod = rods[i];
+            rod.position.y = py/2; rod.scale.y = py/60;
+            const pin = pins[i];
+            pin.position.set(positions[i] + R*Math.sin(theta), R*Math.cos(theta), 0);
+          });
+          crank.rotation.x = st.angle * 2;
+        }
+
+        let raf = null;
+        function loop(){
+          raf = requestAnimationFrame(loop);
+          if (!st.visible) return;
+          update();
+          controls.update();
+          renderer.render(scene, camera);
+        }
+        loop();
+
+        const ro = new ResizeObserver(() => {
+          const w2 = stage.clientWidth, h2 = stage.clientHeight;
+          if (w2 && h2){ camera.aspect = w2/h2; camera.updateProjectionMatrix(); renderer.setSize(w2,h2,false); }
+        });
+        ro.observe(stage);
+
+        // pause when off-screen
+        const io = new IntersectionObserver(es => { es.forEach(e => st.visible = e.isIntersecting); }, { threshold:0 });
+        io.observe(stage);
+
+        if (root){
+          const playBtn = root.querySelector('[data-act="play"]');
+          if (playBtn) playBtn.addEventListener('click', () => {
+            st.paused = !st.paused;
+            playBtn.classList.toggle('on', !st.paused);
+            playBtn.textContent = st.paused ? '▶ Run' : '❚❚ Pause';
+          });
+          const resetBtn = root.querySelector('[data-act="reset"]');
+          if (resetBtn) resetBtn.addEventListener('click', () => {
+            camera.position.set(180,120,220); controls.target.set(0,40,0); controls.update();
+          });
+        }
+
+        resolve({ st, controls, camera, renderer, setTheme(){ /* lights are neutral */ } });
+        if (loaderEl) loaderEl.classList.add('hide');
+      });
+    });
+  }
+
+  return { create: build };
+})();
+
+/* ============================================================
+   REVEALS · COUNT-UP · MAGNETIC · SCROLLSPY
+   ============================================================ */
+let revealIO;
+function observeReveals(){
+  const els = $$('.reveal:not(.in)');
+  if (!('IntersectionObserver' in window)){ els.forEach(el => el.classList.add('in')); return; }
+  if (!revealIO){
+    revealIO = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting){ en.target.classList.add('in'); revealIO.unobserve(en.target); }
+      });
+    }, { threshold:0.08, rootMargin:'0px 0px -30px 0px' });
+  }
+  els.forEach(el => revealIO.observe(el));
+}
+
+function countUp(el, target, dur = 1400){
+  const start = performance.now();
+  const from = 0;
+  function tick(now){
+    const p = Math.min((now - start)/dur, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    el.textContent = Math.round(from + (target - from) * eased) + (el.dataset.suffix || '+');
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+function observeCounts(){
+  const els = $$('#statsStrip [data-count]');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const el = en.target;
+      const raw = el.dataset.target || el.textContent.replace(/[^0-9]/g,'');
+      const n = parseInt(raw, 10) || 0;
+      countUp(el, n, 1500);
+      el.closest('.strip-item')?.classList.add('in');
+      io.unobserve(el);
+    });
+  }, { threshold:0.4 });
+  els.forEach(el => io.observe(el));
+}
+
+function wireMagnetic(scope = document){
+  if (window.matchMedia('(hover: none)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  $$('[data-magnetic]', scope).forEach(el => {
+    if (el._mag) return;
+    el._mag = true;
+    el.addEventListener('mousemove', e => {
+      const r = el.getBoundingClientRect();
+      const mx = e.clientX - r.left - r.width/2;
+      const my = e.clientY - r.top - r.height/2;
+      el.style.transform = `translate(${mx*0.18}px, ${my*0.28}px)`;
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = '';
+      el.style.transition = 'transform .55s cubic-bezier(.34,1.56,.64,1)';
+      setTimeout(() => el.style.transition = '', 560);
+    });
+  });
+}
+
+function initScrollSpy(){
+  const links = $$('[data-spy]');
+  const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if (!sections.length) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      const id = '#' + en.target.id;
+      links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      $$('.bn-item[data-bn]').forEach(b => b.classList.toggle('on', b.getAttribute('href') === id));
+    });
+  }, { threshold:0.25, rootMargin:'-20% 0px -60% 0px' });
+  sections.forEach(s => io.observe(s));
+}
+
+/* ============================================================
+   HERO FEATURED CAROUSEL
+   ============================================================ */
+const FEATURED_IDS = ['rimac-nevera','porsche-918-spyder','bugatti-chiron-super-sport-300','ferrari-laferrari','koenigsegg-jesko-absolut','tesla-model-s-plaid'];
+let heroIndex = 0, heroTimer = null;
+
+async function showFeatured(i){
+  const cars = FEATURED_IDS.map(id => CARS.find(c => c.id === id)).filter(Boolean);
+  if (!cars.length) return;
+  heroIndex = (i + cars.length) % cars.length;
+  const car = cars[heroIndex];
+  const frame = $('#heroFrame');
+  const img = $('#heroImg');
+
+  $('#heroArt').innerHTML = carArt(car, { label:false });
+  $('#hfBrand').textContent = `${car.brand} · ${car.country}`;
+  $('#hfName').textContent = car.name;
+  $('#hfHp').textContent = car.hp;
+
+  frame.classList.remove('has-photo');
+  img.classList.remove('loaded');
+  img.removeAttribute('src');
+  img.alt = `${car.brand} ${car.name}`;
+
+  const dots = $('#hfDots');
+  dots.innerHTML = cars.map((_,k) => `<i class="${k===heroIndex?'on':''}"></i>`).join('');
+
+  const photo = await fetchCarImage(car.brand, car.name, 1200);
+  if (photo && heroIndex === cars.indexOf(car)){
+    img.onload = () => { img.classList.add('loaded'); frame.classList.add('has-photo'); };
+    img.onerror = () => {};
+    img.src = photo.url;
+  }
+}
+
+function initHero(){
+  showFeatured(0);
+  heroTimer = setInterval(() => showFeatured(heroIndex + 1), 6500);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden){ clearInterval(heroTimer); }
+    else { clearInterval(heroTimer); heroTimer = setInterval(() => showFeatured(heroIndex + 1), 6500); }
+  });
+}
+
+/* ============================================================
+   FILTERS · SEARCH · SORT
+   ============================================================ */
+$$('#filters .filter-opt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const g = btn.dataset.group;
+    $$(`#filters .filter-opt[data-group="${g}"]`).forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    state[g] = btn.dataset.val;
+    renderCars();
+  });
+});
+
+$('#sortSelect').addEventListener('change', e => { state.sort = e.target.value; renderCars(); });
+
+const searchInput = $('#searchInput');
+let searchDebounce;
+searchInput.addEventListener('input', e => {
+  clearTimeout(searchDebounce);
+  searchDebounce = setTimeout(() => { state.q = e.target.value.trim(); renderCars(); }, 160);
+});
+$('#searchBtn').addEventListener('click', () => {
+  state.q = searchInput.value.trim();
+  renderCars();
+  $('#cars').scrollIntoView({ behavior:'smooth' });
+});
+
+$$('#quickChips .chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    $$('#quickChips .chip').forEach(c => c.classList.remove('on'));
+    chip.classList.add('on');
+    const q = chip.dataset.quick;
+    state.power = 'all'; state.era = 'all'; state.body = 'all'; state.country = 'all'; state.q = '';
+    searchInput.value = '';
+    if (q === 'Classic') state.era = 'Classic';
+    else if (q === 'Hypercar') state.q = 'hypercar';
+    else if (q !== 'all') state.power = q;
+
+    $$('#filters .filter-opt').forEach(b => {
+      const g = b.dataset.group;
+      b.classList.toggle('on', b.dataset.val === state[g] || (b.dataset.val === 'all' && state[g] === 'all'));
+    });
+    renderCars();
+    $('#cars').scrollIntoView({ behavior:'smooth' });
+  });
+});
+
+/* ============================================================
+   NAV / MISC BINDINGS
+   ============================================================ */
+const nav = $('#nav');
+function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 24); }
+window.addEventListener('scroll', onScroll, { passive:true });
+onScroll();
+
+$('#navGarage').addEventListener('click', () => $('#garage').scrollIntoView({ behavior:'smooth' }));
+$('#bnCompare').addEventListener('click', () => {
+  if (Store.compare.length === 2) openCompare();
+  else { $('#cars').scrollIntoView({ behavior:'smooth' }); toast('Pick two cars with the ⚖ button to compare'); }
+});
+$('#openCompare').addEventListener('click', openCompare);
+$('#cmpClose').addEventListener('click', closeCompare);
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+function boot(){
+  // stats
+  const brands = new Set(CARS.map(c => c.brand)).size;
+  $('#factCars').textContent = CARS.length + '+';
+  $('#factBrands').textContent = brands + '+';
+  const sc = $('#stripCars'), sb = $('#stripBrands');
+  sc.dataset.target = CARS.length; sc.textContent = '0';
+  sb.dataset.target = brands; sb.textContent = '0';
+
+  renderCars();
+  renderGarage();
+  updateGarageUI();
+  updateCompareBar();
+  initHero();
+  observeReveals();
+  observeCounts();
+  wireMagnetic(document);
+  initScrollSpy();
+
+  // Main engine viewer
+  const canvas = $('#engineCanvas');
+  const loader = $('#evLoader');
+  if (canvas){
+    EngineViewer.create(canvas, $('#engines'), loader).then(viewer => {
+      window.__engine = viewer;
+      const playBtn = $('#btnPlay'), speedBtn = $('#btnSpeed'), resetBtn = $('#btnReset');
+      playBtn.addEventListener('click', () => {
+        viewer.st.paused = !viewer.st.paused;
+        playBtn.classList.toggle('on', !viewer.st.paused);
+        playBtn.textContent = viewer.st.paused ? '▶ Run' : '❚❚ Pause';
+      });
+      speedBtn.addEventListener('click', () => {
+        viewer.st.speed = viewer.st.speed >= 2 ? 0.5 : +(viewer.st.speed + 0.5).toFixed(1);
+        speedBtn.classList.toggle('on', viewer.st.speed > 1);
+        speedBtn.textContent = `⚡ RPM ×${viewer.st.speed.toFixed(1)}`;
+      });
+      resetBtn.addEventListener('click', () => {
+        viewer.camera.position.set(180,120,220);
+        viewer.controls.target.set(0,40,0);
+        viewer.controls.update();
+      });
+    }).catch(() => {
+      loader.innerHTML = '<span class="lbl" style="bottom:auto;position:static">3D unavailable on this device</span>';
+    });
+  }
+
+  setTimeout(() => toast(`✨ ${CARS.length} cars · ${brands} marques · Black & White`), 900);
+}
+
+boot();
+</script>
+
+</body>
+</html>
