@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Car Station — Every Car. Every Bike. Every Ship. Every Engine. Understood.</title>
-<meta name="description" content="A living museum of cars, motorcycles, ships and engines. Source-linked specs, real photography, interactive 3D powertrains — in pure black and white." />
+<title>Motion Station — Every Car. Every Bike. Every Ship. Every Engine. Understood.</title>
+<meta name="description" content="A living museum of cars, motorcycles, ships, trucks, SUVs, helicopters and spacecraft. Source-linked specs, real photography, interactive 3D powertrains and synthesized engine sounds — in pure black and white." />
 <meta name="theme-color" content="#050505" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -197,17 +197,17 @@ section{position:relative}
   border-top:1px solid var(--border);
   padding:8px 6px calc(8px + env(safe-area-inset-bottom));
 }
-.bottom-nav-inner{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;max-width:640px;margin:0 auto}
+.bottom-nav-inner{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;max-width:780px;margin:0 auto}
 .bn-item{
   display:flex;flex-direction:column;align-items:center;gap:4px;
-  padding:8px 2px;border-radius:14px;color:var(--text-3);
-  font-size:9.5px;letter-spacing:.03em;font-weight:500;
+  padding:8px 1px;border-radius:14px;color:var(--text-3);
+  font-size:8.5px;letter-spacing:.03em;font-weight:500;
   transition:color .3s,background .3s;position:relative;
   -webkit-tap-highlight-color:transparent;
 }
-.bn-item svg{width:20px;height:20px}
+.bn-item svg{width:18px;height:18px}
 .bn-item.on{color:var(--text);background:var(--surface-2)}
-.bn-item.on::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:18px;height:2px;border-radius:2px;background:var(--text)}
+.bn-item.on::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:14px;height:2px;border-radius:2px;background:var(--text)}
 .bn-item .count{
   position:absolute;top:4px;right:calc(50% - 20px);min-width:16px;height:16px;padding:0 4px;
   border-radius:100px;background:var(--text);color:var(--bg);
@@ -602,6 +602,21 @@ section{position:relative}
 .dh-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
 .dh-chip{padding:6px 14px;border-radius:100px;border:1px solid var(--border);background:var(--surface-2);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-2)}
 
+/* HERO BACKGROUND IMAGE IN DETAIL MODAL */
+.detail-hero-img{
+  position:absolute;inset:0;z-index:0;
+  background-size:cover;background-position:center;
+  opacity:0;transition:opacity 1.2s var(--ease-out);
+  filter:brightness(.38) grayscale(1);
+}
+[data-theme="paper"] .detail-hero-img{filter:brightness(1.15) grayscale(1)}
+.detail-hero-img.loaded{opacity:1}
+.detail-hero::after{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to bottom,var(--bg) 0%,transparent 30%,transparent 70%,var(--bg) 100%);
+  pointer-events:none;
+}
+
 .stat-strip{
   display:grid;grid-template-columns:repeat(6,1fr);margin-top:44px;
   border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
@@ -809,6 +824,20 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 @media(min-width:901px){.toast{bottom:32px}}
 
+/* ============================================================ SOUND TOGGLE */
+.sound-toggle{
+  position:fixed;bottom:28px;left:28px;z-index:997;
+  width:46px;height:46px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--border);color:var(--text-2);
+  display:grid;place-items:center;backdrop-filter:blur(20px);
+  box-shadow:0 8px 32px rgba(0,0,0,.35);
+  transition:all .4s var(--ease-out);
+}
+.sound-toggle:hover{border-color:var(--text);color:var(--text)}
+.sound-toggle.on{color:var(--text);border-color:var(--text)}
+.sound-toggle svg{width:18px;height:18px}
+@media(max-width:900px){.sound-toggle{bottom:92px;left:68px;width:44px;height:44px}}
+
 /* ============================================================ A11Y / MOTION */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(prefers-reduced-motion:reduce){
@@ -824,7 +853,7 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
 <!-- ============================ NAV ============================ -->
 <header class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#top" class="brand" aria-label="Car Station home">
+    <a href="#top" class="brand" aria-label="Motion Station home">
       <span class="brand-mark">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 13l2-5.5A2 2 0 016.9 6h10.2a2 2 0 011.9 1.5L21 13v5a1 1 0 01-1 1h-1.5"/>
@@ -833,7 +862,7 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
           <path d="M9.3 18.5h5.4"/>
         </svg>
       </span>
-      <span class="brand-name">Car Station</span>
+      <span class="brand-name">Motion Station</span>
     </a>
 
     <nav class="nav-links" aria-label="Primary">
@@ -841,6 +870,10 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
       <a href="#cars" class="active" data-spy>Cars</a>
       <a href="#bikes" data-spy>Bikes</a>
       <a href="#ships" data-spy>Ships</a>
+      <a href="#trucks" data-spy>Trucks</a>
+      <a href="#suvs" data-spy>SUVs</a>
+      <a href="#helis" data-spy>Helicopters</a>
+      <a href="#space" data-spy>Spacecraft</a>
       <a href="#garage" data-spy>Garage</a>
       <a href="#engines" data-spy>Engines</a>
     </nav>
@@ -873,7 +906,7 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
         <div class="hero-badge">
           <span class="dot"></span>
           <b>Live</b> · Source-linked · Expert-reviewed
-          <span class="tag">v5.0</span>
+          <span class="tag">v6.0</span>
         </div>
 
         <h1>
@@ -884,9 +917,9 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
         </h1>
 
         <p class="lede">
-          A living museum of movement — cars, motorcycles, ships and the engines that drive them.
-          Source-linked specs, real photography, and interactive 3D powertrains in pure black and white.
-          From a 49cc Cub to a 180-metre superyacht — and every machine in between.
+          A living museum of movement — cars, motorcycles, ships, trucks, SUVs, helicopters and spacecraft.
+          Source-linked specs, real photography, synthesized engine sounds and interactive 3D powertrains
+          in pure black and white. From a 49cc Cub to a 458-metre supertanker — and every machine in between.
         </p>
 
         <div class="hero-cta">
@@ -956,13 +989,13 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
           <p class="eyebrow ink">Discover</p>
           <h2 class="sec-title" style="margin-top:14px">Find any machine<br>ever built.</h2>
         </div>
-        <p>Search across cars, motorcycles and ships by name, brand, engine or era. Filter by powertrain, country and type — then dive into a full engineering dossier.</p>
+        <p>Search across cars, motorcycles, ships, trucks, SUVs, helicopters and spacecraft by name, brand, engine or era. Filter by powertrain, country and type — then dive into a full engineering dossier.</p>
       </div>
 
       <div class="reveal d1">
         <div class="search-shell">
           <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          <input type="text" id="searchInput" placeholder="Search 'GT3 RS', '2JZ', 'Panigale', 'Icon of the Seas', 'V12'…" aria-label="Search all vehicles" />
+          <input type="text" id="searchInput" placeholder="Search 'GT3 RS', '2JZ', 'Panigale', 'Icon of the Seas', 'Falcon 9', 'Black Hawk'…" aria-label="Search all vehicles" />
           <button class="btn btn-ink btn-sm" type="button" id="searchBtn" style="height:46px;padding:0 22px" data-magnetic>Search</button>
         </div>
 
@@ -971,6 +1004,10 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
           <button class="chip" data-quick="Cars">Cars</button>
           <button class="chip" data-quick="Bikes">Bikes</button>
           <button class="chip" data-quick="Ships">Ships</button>
+          <button class="chip" data-quick="Trucks">Trucks</button>
+          <button class="chip" data-quick="SUVs">SUVs</button>
+          <button class="chip" data-quick="Helicopters">Helicopters</button>
+          <button class="chip" data-quick="Spacecraft">Spacecraft</button>
           <button class="chip" data-quick="ICE">Combustion</button>
           <button class="chip" data-quick="EV">Electric</button>
           <button class="chip" data-quick="Classic">Classics</button>
@@ -1028,6 +1065,7 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
           <button class="filter-opt" data-group="country" data-val="Sweden">Sweden</button>
           <button class="filter-opt" data-group="country" data-val="China">China</button>
           <button class="filter-opt" data-group="country" data-val="South Korea">S. Korea</button>
+          <button class="filter-opt" data-group="country" data-val="India">India</button>
         </div>
       </div>
 
@@ -1059,7 +1097,7 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
       <div class="reveal d1" style="margin-bottom:32px">
         <div class="search-shell">
           <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          <input type="text" id="bikeSearchInput" placeholder="Search 'Panigale', 'Hayabusa', '1290', 'cruiser'…" aria-label="Search motorcycles" />
+          <input type="text" id="bikeSearchInput" placeholder="Search 'Panigale', 'Hayabusa', '1290', 'Classic 350'…" aria-label="Search motorcycles" />
           <button class="btn btn-ink btn-sm" type="button" id="bikeSearchBtn" style="height:46px;padding:0 22px" data-magnetic>Search</button>
         </div>
         <div class="chips" id="bikeQuickChips">
@@ -1212,6 +1250,163 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
     </div>
   </section>
 
+  <!-- ============================ TRUCK INDEX ============================ -->
+  <section class="sec-pad" id="trucks">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow ink">The Index · Heavy Haulers</p>
+          <h2 class="sec-title" style="margin-top:14px">Browse the truck archive</h2>
+        </div>
+        <p>American conventionals, European cab-overs and heavy haulers. From a Peterbilt 389 to a Scania R730 — the machines that move the world.</p>
+      </div>
+
+      <div class="reveal d1" style="margin-bottom:32px">
+        <div class="search-shell">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input type="text" id="truckSearchInput" placeholder="Search 'Peterbilt', 'Volvo FH16', 'Scania'…" aria-label="Search trucks" />
+          <button class="btn btn-ink btn-sm" type="button" id="truckSearchBtn" style="height:46px;padding:0 22px" data-magnetic>Search</button>
+        </div>
+        <div class="chips" id="truckQuickChips">
+          <button class="chip on" data-quick="all">All Trucks</button>
+          <button class="chip" data-quick="American">American</button>
+          <button class="chip" data-quick="European">European</button>
+          <button class="chip" data-quick="Heavy">Heavy Haul</button>
+          <button class="chip" data-quick="Classic">Classics</button>
+        </div>
+      </div>
+
+      <div class="index-bar reveal">
+        <div class="index-count"><b id="truckResultCount">0</b> trucks in view</div>
+        <select class="select" id="truckSortSelect" aria-label="Sort trucks">
+          <option value="relevance">Sort · Curated</option>
+          <option value="power">Sort · Most powerful</option>
+          <option value="newest">Sort · Newest</option>
+          <option value="az">Sort · A → Z</option>
+        </select>
+      </div>
+      <div class="car-grid" id="truckGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============================ SUV INDEX ============================ -->
+  <section class="sec-pad" id="suvs" style="background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow ink">The Index · High Riders</p>
+          <h2 class="sec-title" style="margin-top:14px">Browse the SUV archive</h2>
+        </div>
+        <p>Luxury 4x4s, off-road legends, performance SUVs and electric SUVs. From a Land Cruiser to a Urus Performante — capability in every form.</p>
+      </div>
+
+      <div class="reveal d1" style="margin-bottom:32px">
+        <div class="search-shell">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input type="text" id="suvSearchInput" placeholder="Search 'Land Cruiser', 'Range Rover', 'Urus'…" aria-label="Search SUVs" />
+          <button class="btn btn-ink btn-sm" type="button" id="suvSearchBtn" style="height:46px;padding:0 22px" data-magnetic>Search</button>
+        </div>
+        <div class="chips" id="suvQuickChips">
+          <button class="chip on" data-quick="all">All SUVs</button>
+          <button class="chip" data-quick="Luxury">Luxury</button>
+          <button class="chip" data-quick="Off-road">Off-road</button>
+          <button class="chip" data-quick="Performance">Performance</button>
+          <button class="chip" data-quick="EV">Electric</button>
+        </div>
+      </div>
+
+      <div class="index-bar reveal">
+        <div class="index-count"><b id="suvResultCount">0</b> SUVs in view</div>
+        <select class="select" id="suvSortSelect" aria-label="Sort SUVs">
+          <option value="relevance">Sort · Curated</option>
+          <option value="power">Sort · Most powerful</option>
+          <option value="newest">Sort · Newest</option>
+          <option value="az">Sort · A → Z</option>
+        </select>
+      </div>
+      <div class="car-grid" id="suvGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============================ HELICOPTER INDEX ============================ -->
+  <section class="sec-pad" id="helis">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow ink">The Index · Rotary Wing</p>
+          <h2 class="sec-title" style="margin-top:14px">Browse the helicopter archive</h2>
+        </div>
+        <p>Utility, transport, attack and civilian rotorcraft. From a Bell 407 to a UH-60 Black Hawk — the machines that hover, lift and rescue.</p>
+      </div>
+
+      <div class="reveal d1" style="margin-bottom:32px">
+        <div class="search-shell">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input type="text" id="heliSearchInput" placeholder="Search 'Black Hawk', 'Bell 407', 'H145'…" aria-label="Search helicopters" />
+          <button class="btn btn-ink btn-sm" type="button" id="heliSearchBtn" style="height:46px;padding:0 22px" data-magnetic>Search</button>
+        </div>
+        <div class="chips" id="heliQuickChips">
+          <button class="chip on" data-quick="all">All Helicopters</button>
+          <button class="chip" data-quick="Utility">Utility</button>
+          <button class="chip" data-quick="Transport">Transport</button>
+          <button class="chip" data-quick="Attack">Attack</button>
+          <button class="chip" data-quick="Civilian">Civilian</button>
+        </div>
+      </div>
+
+      <div class="index-bar reveal">
+        <div class="index-count"><b id="heliResultCount">0</b> helicopters in view</div>
+        <select class="select" id="heliSortSelect" aria-label="Sort helicopters">
+          <option value="relevance">Sort · Curated</option>
+          <option value="speed">Sort · Fastest</option>
+          <option value="newest">Sort · Newest</option>
+          <option value="az">Sort · A → Z</option>
+        </select>
+      </div>
+      <div class="car-grid" id="heliGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============================ SPACECRAFT INDEX ============================ -->
+  <section class="sec-pad" id="space" style="background:var(--bg-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div>
+          <p class="eyebrow ink">The Index · Beyond Earth</p>
+          <h2 class="sec-title" style="margin-top:14px">Browse the spacecraft archive</h2>
+        </div>
+        <p>Rockets, orbiters, rovers, landers and interstellar probes. From the SLS to Voyager 1 — the machines that leave the planet.</p>
+      </div>
+
+      <div class="reveal d1" style="margin-bottom:32px">
+        <div class="search-shell">
+          <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input type="text" id="spaceSearchInput" placeholder="Search 'Falcon 9', 'SLS', 'Voyager', 'Curiosity'…" aria-label="Search spacecraft" />
+          <button class="btn btn-ink btn-sm" type="button" id="spaceSearchBtn" style="height:46px;padding:0 22px" data-magnetic>Search</button>
+        </div>
+        <div class="chips" id="spaceQuickChips">
+          <button class="chip on" data-quick="all">All Spacecraft</button>
+          <button class="chip" data-quick="Rocket">Rockets</button>
+          <button class="chip" data-quick="Probe">Probes</button>
+          <button class="chip" data-quick="Rover">Rovers</button>
+          <button class="chip" data-quick="Orbiter">Orbiters</button>
+          <button class="chip" data-quick="Human">Human Spaceflight</button>
+        </div>
+      </div>
+
+      <div class="index-bar reveal">
+        <div class="index-count"><b id="spaceResultCount">0</b> spacecraft in view</div>
+        <select class="select" id="spaceSortSelect" aria-label="Sort spacecraft">
+          <option value="relevance">Sort · Curated</option>
+          <option value="newest">Sort · Newest</option>
+          <option value="oldest">Sort · Oldest</option>
+          <option value="az">Sort · A → Z</option>
+        </select>
+      </div>
+      <div class="car-grid" id="spaceGrid"></div>
+    </div>
+  </section>
+
   <!-- ============================ GARAGE ============================ -->
   <section class="sec-pad" id="garage">
     <div class="wrap">
@@ -1220,7 +1415,7 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
           <p class="eyebrow ink">Your Collection</p>
           <h2 class="sec-title" style="margin-top:14px">Virtual Garage</h2>
         </div>
-        <p>Cars, bikes and ships you've hearted, saved locally on this device. Build your dream collection and compare any two side by side.</p>
+        <p>Cars, bikes, ships, trucks, SUVs, helicopters and spacecraft you've hearted, saved locally on this device. Build your dream collection and compare any two side by side.</p>
       </div>
       <div id="garageGrid" class="car-grid"></div>
     </div>
@@ -1234,7 +1429,7 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
           <p class="eyebrow ink">The Engine Lab</p>
           <h2 class="sec-title" style="margin-top:14px">Interactive 3D Engines</h2>
         </div>
-        <p>Ten engine architectures modelled in 3D — inline-four, V8, flat-six, V12, rotary, radial, V-twin, electric motor, turbofan and marine diesel. Rotate, zoom and watch them run live.</p>
+        <p>Twelve engine architectures modelled in 3D — inline-four, V8, flat-six, V12, rotary, radial, V-twin, electric motor, turbofan, marine diesel and rocket engine. Rotate, zoom and watch them run live.</p>
       </div>
 
       <div class="reveal d1">
@@ -1277,22 +1472,24 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
                 <circle cx="7.5" cy="18.5" r="1.8"/><circle cx="16.5" cy="18.5" r="1.8"/>
               </svg>
             </span>
-            <span class="brand-name">Car Station</span>
+            <span class="brand-name">Motion Station</span>
           </a>
-          <p>The world's machines — cars, motorcycles, ships and engines — catalogued and explained. Built for enthusiasts, engineers, designers and the simply curious.</p>
+          <p>The world's machines — cars, motorcycles, ships, trucks, SUVs, helicopters and spacecraft — catalogued and explained. Built for enthusiasts, engineers, designers and the simply curious.</p>
         </div>
         <div class="foot-col">
           <h5>Explore</h5>
           <a href="#cars">All Cars</a>
           <a href="#bikes">All Bikes</a>
           <a href="#ships">All Ships</a>
-          <a href="#garage">Virtual Garage</a>
+          <a href="#trucks">All Trucks</a>
+          <a href="#suvs">All SUVs</a>
         </div>
         <div class="foot-col">
           <h5>Reference</h5>
+          <a href="#helis">Helicopters</a>
+          <a href="#space">Spacecraft</a>
           <a href="#engines">3D Engine Lab</a>
-          <a href="#engines">Powertrain Basics</a>
-          <a href="#engines">Marine Propulsion</a>
+          <a href="#garage">Virtual Garage</a>
         </div>
         <div class="foot-col">
           <h5>Studio</h5>
@@ -1302,7 +1499,7 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
         </div>
       </div>
       <div class="foot-bottom">
-        <span>© 2025 Car Station. All specifications source-linked and expert-reviewed.</span>
+        <span>© 2025 Motion Station. All specifications source-linked and expert-reviewed.</span>
         <span>Designed for the curious.</span>
       </div>
     </div>
@@ -1327,6 +1524,18 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
     <a href="#ships" class="bn-item" data-bn="ships">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h18l-2 4H5zM5 17l1.5-6h11L19 17M12 11V4M8 7h8"/></svg>
       <span>Ships</span>
+    </a>
+    <a href="#trucks" class="bn-item" data-bn="trucks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="15" height="10" rx="1"/><path d="M16 10h4l3 4v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+      <span>Trucks</span>
+    </a>
+    <a href="#suvs" class="bn-item" data-bn="suvs">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-5.5A2 2 0 016.9 6h10.2a2 2 0 011.9 1.5L21 13v5a1 1 0 01-1 1h-1.5"/><path d="M3 13v5a1 1 0 001 1h1.5"/><circle cx="7.5" cy="18.5" r="1.8"/><circle cx="16.5" cy="18.5" r="1.8"/></svg>
+      <span>SUVs</span>
+    </a>
+    <a href="#helis" class="bn-item" data-bn="helis">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3"/><path d="M12 11v6M8 17h8M5 5h14M12 2v3"/></svg>
+      <span>Helis</span>
     </a>
     <a href="#garage" class="bn-item" data-bn="garage">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z"/></svg>
@@ -1404,6 +1613,14 @@ footer{border-top:1px solid var(--border);background:var(--bg-2);padding:80px 0 
 
 <button class="back-top" id="backTop" aria-label="Back to top">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</button>
+
+<!-- ============================ SOUND TOGGLE ============================ -->
+<button class="sound-toggle" id="soundToggle" aria-label="Toggle engine sound">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+    <path d="M15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14"/>
+  </svg>
 </button>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1520,7 +1737,29 @@ const RAW = [
 ["Mercedes-AMG","G 63","2018–Present","Germany","Modern","SUV","ICE","4.0L Twin-Turbo V8","Front-engine · AWD",577,850,"4.5 s","220 km/h","2,560 kg","$180,000","Mass production","The icon that refuses to change.","Three locking differentials, a ladder frame and a shape unchanged since 1979. The G 63 adds 577 hp and a soundtrack that echoes off buildings.","9-speed auto","5","Three fully locking differentials — still."],
 ["Genesis","GV60 Performance","2022–Present","South Korea","Modern","SUV","EV","Dual-Motor","Dual-motor · AWD",483,700,"4.0 s","235 km/h","2,160 kg","$69,000","Mass production","Luxury EV with a boost button.","A Boost Mode button unleashes full power for 10 seconds, and a crystal sphere gear selector flips over when you start the car.","1-speed","5","800V architecture with 18-minute 10–80% charging."],
 ["Li Auto","L9","2022–Present","China","Future","SUV","Hybrid","1.5T Range Extender + Dual-Motor","Dual-motor · AWD",449,620,"5.3 s","180 km/h","2,520 kg","$68,000","Mass production","The family SUV that thinks it's a lounge.","China's best-selling full-size luxury SUV. A range-extender hybrid system, a five-screen interior and a built-in fridge make it a living room on wheels.","1-speed","6","Five screens including a 15.7-inch rear entertainment display."],
-["XPeng","X9","2024–Present","China","Future","SUV","EV","Dual-Motor","Dual-motor · AWD",496,640,"4.9 s","200 km/h","2,560 kg","$80,000","Mass production","The electric MPV with rear-wheel steering.","A premium electric MPV that challenges conventional thinking about family transport, with rear-wheel steering, a 702 km range and a lounge-like interior.","1-speed","7","Rear-wheel steering gives a 10.8 m turning circle."]
+["XPeng","X9","2024–Present","China","Future","SUV","EV","Dual-Motor","Dual-motor · AWD",496,640,"4.9 s","200 km/h","2,560 kg","$80,000","Mass production","The electric MPV with rear-wheel steering.","A premium electric MPV that challenges conventional thinking about family transport, with rear-wheel steering, a 702 km range and a lounge-like interior.","1-speed","7","Rear-wheel steering gives a 10.8 m turning circle."],
+
+/* ===== INDIAN CARS ===== */
+["Tata","Nexon","2017–Present","India","Modern","SUV","ICE","1.2L Turbo Petrol / 1.5L Turbo Diesel","Front-engine · FWD",120,170,"9.5 s","180 km/h","1,275 kg","₹8.26–17.21 lakh","Mass production","India's best-selling compact SUV.","Tata's Nexon is a landmark for Indian engineering — a 5-star Global NCAP safety rating, bold design and a turbocharged engine. The facelifted 2024 model adds a dual-clutch transmission and a petrol engine option.","6-speed manual / 7-speed DCT","5","India's first car to achieve a 5-star Global NCAP rating."],
+["Tata","Punch","2021–Present","India","Modern","SUV","ICE","1.2L NA Petrol / 1.2L Turbo Petrol","Front-engine · FWD",86,113,"11.0 s","170 km/h","1,030 kg","₹5.59–10.67 lakh","Mass production","The micro SUV that redefined the segment.","A sub-4-metre SUV with genuinely tough styling and a 5-star Global NCAP rating. The 2026 facelift adds a 1.2L turbo petrol engine from the Nexon with 120 PS.","5-speed manual / 6-speed AMT","5","5-star Global NCAP rating — one of the safest cars in India."],
+["Tata","Tiago","2016–Present","India","Modern","Hatch","ICE","1.2L NA Petrol / 1.05L Diesel","Front-engine · FWD",86,113,"10.5 s","160 km/h","935 kg","₹5.60–8.20 lakh","Mass production","The hatchback that made Tata cool again.","Tata's design revolution started with the Tiago. A 3-cylinder petrol engine, 5-star safety and aggressive pricing made it a massive success in India's competitive hatchback market.","5-speed manual / AMT","5","Revamped Tata's entire design language and market position."],
+["Mahindra","Thar","2010–Present","India","Modern","SUV","ICE","2.0L Turbo Petrol / 2.2L Turbo Diesel","Front-engine · 4WD",150,300,"9.0 s","180 km/h","1,750 kg","₹9.99–17.60 lakh","Mass production","India's answer to the Jeep Wrangler.","A genuine off-road machine with a removable roof, solid axles and a low-range transfer case. The 2020-generation Thar added modern comfort and road manners without losing its rugged character.","6-speed manual / 6-speed AT","4","The only true off-road SUV built in India with a removable roof."],
+["Mahindra","XUV700","2021–Present","India","Modern","SUV","ICE","2.0L Turbo Petrol / 2.2L Turbo Diesel","Front-engine · FWD/AWD",200,380,"7.5 s","200 km/h","1,940 kg","₹11.99–25.49 lakh","Mass production","The flagship that embarrassed premium brands.","Mahindra's XUV700 brought Level 2 ADAS, a Sony 3D audio system and 200 hp to the Indian market at a shockingly low price. Its AX7 L variant rivals luxury SUVs twice its cost.","6-speed manual / 6-speed AT","7","First Indian SUV with Level 2 ADAS and 200 hp petrol engine."],
+["Mahindra","Scorpio-N","2022–Present","India","Modern","SUV","ICE","2.0L Turbo Petrol / 2.2L Turbo Diesel","Front-engine · RWD/4WD","Front-engine · RWD/4WD",200,380,"8.0 s","190 km/h","1,900 kg","₹13.69–25.49 lakh","Mass production","The Scorpio legend, reborn on a new platform.","The Scorpio-N moved to a monocoque chassis while keeping the tough, ladder-frame character that made the original a cult classic. A 4XPLOR terrain management system and 4WD option add real capability.","6-speed manual / 6-speed AT","7","India's most awarded SUV — 2023 Indian Car of the Year."],
+["Mahindra","XUV400 EV","2023–Present","India","Future","SUV","EV","Single Motor","Front-motor · FWD",150,310,"8.3 s","150 km/h","1,578 kg","₹15.99–19.39 lakh","Mass production","Mahindra's first serious electric SUV.","A 34.5 kWh battery delivers 456 km MIDC range and a 150 hp motor. The XUV400 proved that Mahindra could build a genuinely competitive EV at an accessible price.","1-speed","5","456 km MIDC range — one of the longest of any Indian EV."],
+["Maruti Suzuki","Swift","2005–Present","India","Modern","Hatch","ICE","1.2L Dual VVT Petrol","Front-engine · FWD",82,112,"11.0 s","170 km/h","920 kg","₹5.84–8.89 lakh","Mass production","India's favourite hatchback for two decades.","The Swift defined the premium hatchback segment in India. The 2024 fourth-generation model uses a new Z-series engine with improved fuel efficiency and a segment-leading 25.75 km/l.","5-speed manual / AMT","5","Over 30 lakh units sold in India across four generations."],
+["Maruti Suzuki","Baleno","2015–Present","India","Modern","Hatch","ICE","1.2L Dual VVT Petrol","Front-engine · FWD",90,113,"10.5 s","170 km/h","920 kg","₹6.66–9.88 lakh","Mass production","The premium hatch that sells on comfort.","Maruti's Baleno prioritises interior space, a 9-inch SmartPlay Pro+ infotainment system and class-leading fuel efficiency. It's the most spacious hatchback in its segment.","5-speed manual / AMT","5","India's most exported car for several consecutive years."],
+["Maruti Suzuki","Brezza","2016–Present","India","Modern","SUV","ICE","1.5L K15C Petrol / CNG","Front-engine · FWD",103,137,"11.0 s","170 km/h","1,150 kg","₹7.40–13.71 lakh","Mass production","India's most popular compact SUV.","The Brezza's boxy design and practical cabin have made it a consistent best-seller. The 2022 generation adds a sunroof, a heads-up display and Suzuki Connect telematics.","5-speed manual / 6-speed AT","5","India's best-selling compact SUV for multiple consecutive years."],
+["Maruti Suzuki","Fronx","2023–Present","India","Modern","SUV","ICE","1.0L Turbo Petrol / 1.2L NA Petrol","Front-engine · FWD",100,148,"10.0 s","180 km/h","1,065 kg","₹6.85–11.98 lakh","Mass production","The crossover that bridges hatch and SUV.","The Fronx combines a coupé-like roofline with SUV ground clearance. Its 1.0L Boosterjet turbo engine makes it genuinely fun to drive, and the 1.2L NA is the value option.","5-speed manual / 6-speed AT","5","1.0L Boosterjet turbo makes it India's quickest sub-₹15 lakh SUV."],
+["Hyundai","Creta","2015–Present","India","Modern","SUV","ICE","1.5L NA Petrol / 1.5L Turbo Diesel / 1.5L Turbo Petrol","Front-engine · FWD",115,253,"8.5 s","190 km/h","1,270 kg","₹11.00–20.30 lakh","Mass production","The SUV that dominates its segment.","The Creta has been India's best-selling mid-size SUV for years. The 2024 facelift adds Level 2 ADAS, dual 10.25-inch screens and a panoramic sunroof.","6-speed manual / CVT / 7-speed DCT","5","India's best-selling mid-size SUV — over 10 lakh units sold."],
+["Hyundai","i20","2008–Present","India","Modern","Hatch","ICE","1.2L NA Petrol / 1.0L Turbo Petrol","Front-engine · FWD",83,120,"9.5 s","180 km/h","1,040 kg","₹7.04–11.86 lakh","Mass production","The premium hatch that punches above its weight.","The i20 N Line brings genuine hot-hatch flavour to India with a 120 hp turbo engine, sport-tuned suspension and aggressive styling. The standard i20 is a comfortable, well-equipped city car.","5-speed manual / CVT / 7-speed DCT","5","i20 N Line brought genuine performance to India's hatchback market."],
+["Toyota","Fortuner","2009–Present","India","Modern","SUV","ICE","2.8L Turbo Diesel / 2.7L NA Petrol","Front-engine · 4WD",204,500,"10.0 s","180 km/h","2,100 kg","₹33.78–51.44 lakh","Mass production","The SUV that conquered India's toughest terrain.","Based on the Hilux pickup platform, the Fortuner is the vehicle of choice for Indian politicians, mining companies and adventurers. Body-on-frame construction, a 4WD system with low range and bulletproof reliability.","6-speed manual / 6-speed AT","7","India's most trusted body-on-frame SUV for off-road duty."],
+["Toyota","Innova Hycross","2022–Present","India","Modern","SUV","Hybrid","2.0L Petrol Hybrid","Front-engine · FWD",184,188,"9.5 s","170 km/h","1,810 kg","₹19.09–31.14 lakh","Mass production","The MPV that thinks it's a luxury car.","The Innova Hycross replaces the diesel engine with a strong-hybrid system producing 184 hp and 23.24 km/l. A 4-seat Ottoman variant with a foot massager redefines MPV luxury in India.","e-CVT","7","23.24 km/l from a 2.0L hybrid — astonishing for a large MPV."],
+["Kia","Seltos","2019–Present","India","Modern","SUV","ICE","1.5L NA Petrol / 1.5L Turbo Diesel / 1.5L Turbo Petrol","Front-engine · FWD/AWD",115,253,"8.5 s","190 km/h","1,300 kg","₹10.90–20.35 lakh","Mass production","The SUV that announced Kia in India.","Kia's debut product in India was an instant hit. The 2023 facelift adds dual 10.25-inch screens, Level 2 ADAS and a panoramic sunroof. It's one of the most feature-rich SUVs in its price range.","6-speed manual / CVT / 7-speed DCT","5","Kia's first Indian product — a sell-out success from day one."],
+["Kia","Sonet","2020–Present","India","Modern","SUV","ICE","1.0L Turbo Petrol / 1.2L NA Petrol / 1.5L Diesel","Front-engine · FWD",100,178,"10.0 s","180 km/h","1,110 kg","₹7.99–15.69 lakh","Mass production","The compact SUV that punches above its size.","The Sonet is one of the most feature-dense compact SUVs in India, with ventilated seats, a Bose audio system and a 10.25-inch display. Its 1.0L turbo engine delivers genuinely strong performance.","6-speed manual / 7-speed DCT","5","Brought ventilated seats and Bose audio to the sub-₹15 lakh SUV segment."],
+["MG Motor","Hector","2019–Present","India","Modern","SUV","ICE","1.5L Turbo Petrol / 2.0L Turbo Diesel","Front-engine · FWD",143,350,"9.0 s","190 km/h","1,520 kg","₹13.50–20.30 lakh","Mass production","The connected SUV that started a trend.","MG's Hector introduced India to the iSmart connected car platform with a 14-inch portrait touchscreen and voice commands for everything from the sunroof to the AC.","6-speed manual / CVT / 6-speed DCT","5","India's first connected car with a 14-inch portrait display."],
+["MG Motor","ZSEV","2020–Present","India","Future","SUV","EV","Single Motor","Front-motor · FWD",176,280,"8.0 s","180 km/h","1,570 kg","₹18.98–25.20 lakh","Mass production","India's first genuinely affordable electric SUV.","The MG ZS EV was a pioneer — a 461 km range, a panoramic sunroof and a 176 hp motor at a price that made EV ownership realistic for Indian families.","1-speed","5","India's first affordable electric SUV with over 400 km range."],
+["BYD","Atto 3","2022–Present","India","Future","SUV","EV","Single Motor","Front-motor · FWD",201,310,"7.3 s","160 km/h","1,750 kg","₹24.99–33.99 lakh","Mass production","The electric SUV that raised the bar.","BYD's Atto 3 uses the e-Platform 3.0 with a Blade Battery — arguably the safest EV battery chemistry. A 521 km range and a 0–100 time of 7.3 seconds make it a genuine premium proposition.","1-speed","5","Blade Battery — LFP chemistry with exceptional safety."]
 ];
 
 const CARS = RAW.map(r => {
@@ -1659,7 +1898,24 @@ const BIKE_RAW = [
 ["CFMoto","800NK","2022–Present","China","Naked","naked",799,"Parallel-Twin","799cc Parallel-Twin","ICE",100,80,"3.8 s","220 km/h","186 kg","$9,000","Mass production","China's answer to the middleweight naked.","CFMoto's 800NK uses a KTM-derived parallel twin (CFMoto builds KTMs in China) with a TFT display, quickshifter and 100 hp at a price that undercuts everyone.","6-speed + QS","2","KTM-derived engine — CFMoto manufactures KTMs in China."],
 ["QJMotor","SRK 900","2023–Present","China","Naked","naked",921,"Inline-4","921cc Inline-4","ICE",125,90,"3.6 s","230 km/h","215 kg","$9,500","Mass production","A Chinese inline-four at a bargain price.","QJMotor's SRK 900 offers an inline-four with 125 hp and a Brembo brake package for under $10,000 — a configuration no Japanese or European manufacturer can match.","6-speed + QS","2","125 hp inline-four with Brembo brakes under $10,000."],
 ["Benelli","502C","2019–Present","Italy","Cruiser","cruiser",500,"Parallel-Twin","500cc Parallel-Twin","ICE",47,46,"5.5 s","170 km/h","217 kg","$6,500","Mass production","Italian name, Chinese ownership, global reach.","Benelli, now owned by China's Qianjiang Group, sells the 502C as an affordable cruiser with an Italian-designed trellis frame and a 500cc parallel twin.","6-speed manual","2","Benelli has been owned by China's Qianjiang Group since 2005."],
-["Zontes","703F","2024–Present","China","Adventure","adventure",699,"Inline-3","699cc Inline-3","ICE",95,85,"4.2 s","200 km/h","220 kg","$7,500","Mass production","China's three-cylinder adventure bike.","Zontes' 703F uses a 699cc triple — almost unheard of at this price. With a 21-inch front wheel, radar cruise and a TFT display, it's remarkably well equipped.","6-speed + QS","2","699cc triple at this price point is unprecedented."]
+["Zontes","703F","2024–Present","China","Adventure","adventure",699,"Inline-3","699cc Inline-3","ICE",95,85,"4.2 s","200 km/h","220 kg","$7,500","Mass production","China's three-cylinder adventure bike.","Zontes' 703F uses a 699cc triple — almost unheard of at this price. With a 21-inch front wheel, radar cruise and a TFT display, it's remarkably well equipped.","6-speed + QS","2","699cc triple at this price point is unprecedented."],
+
+/* ===== INDIAN MOTORCYCLES ===== */
+["Royal Enfield","Classic 350","2009–Present","India","Retro","retro",349,"Single","349cc Air-Oil Cooled Single","ICE",20,27,"10.0 s","120 km/h","195 kg","₹1.93–2.25 lakh","Mass production","The motorcycle that made Royal Enfield a global phenomenon.","The Classic 350 is the bike that turned Royal Enfield from a niche British brand into the world's fastest-growing motorcycle manufacturer. A new J-series engine with a balancer shaft smooths the vibrations while preserving the thump.","5-speed manual","2","Royal Enfield sold over 10 lakh units of the Classic 350 in India."],
+["Royal Enfield","Interceptor 650","2018–Present","India","Retro","retro",648,"Parallel-Twin","648cc Parallel-Twin","ICE",47,52,"5.8 s","175 km/h","202 kg","₹3.03–3.31 lakh","Mass production","The most fun per rupee in motorcycling.","The Interceptor 650 brought a smooth parallel twin, classic 1960s styling and genuine character to India for under ₹3.5 lakh. It's been a runaway success worldwide for good reason.","6-speed manual","2","India's most exported motorcycle — sold in over 60 countries."],
+["Royal Enfield","Himalayan 450","2024–Present","India","Adventure","adventure",452,"Single","452cc Sherpa Single","ICE",40,40,"5.5 s","160 km/h","196 kg","₹2.85–2.98 lakh","Mass production","The most affordable real adventure bike.","Royal Enfield's Sherpa 450 engine is liquid-cooled and modern, and the bike has a 21-inch front wheel, switchable ABS and a 17-litre tank. A huge upgrade over the old air-cooled 411.","6-speed manual","2","Liquid-cooled 452cc single makes 40 hp — double the old 411."],
+["Royal Enfield","Bullet 350","1932–Present","India","Retro","retro",349,"Single","349cc J-Series Single","ICE",20,27,"10.5 s","115 km/h","195 kg","₹1.74–2.15 lakh","Mass production","The longest-running motorcycle name in history.","The Bullet has been in continuous production since 1932 — the longest run of any motorcycle model. The 2024 version uses the same J-series engine as the Classic 350 with classic Bullet styling.","5-speed manual","2","Continuous production since 1932 — the longest run of any motorcycle."],
+["Bajaj","Pulsar NS200","2012–Present","India","Sport","sport",199,"Single","199.5cc Liquid-Cooled Single","ICE",24,18,"7.5 s","136 km/h","145 kg","₹1.32–1.62 lakh","Mass production","The bike that made performance affordable in India.","The Pulsar NS200 introduced Indian riders to liquid cooling, 4-valve heads and perimeter frames. It's been the default choice for Indian enthusiasts for over a decade.","6-speed manual","1","Made liquid cooling and 4-valve engines accessible to Indian buyers."],
+["Bajaj","Dominar 400","2016–Present","India","Sport","sport",373,"Single","373cc Liquid-Cooled Single","ICE",40,35,"6.5 s","156 km/h","187 kg","₹2.30–2.45 lakh","Mass production","India's first genuine power cruiser.","The Dominar 400 shares its engine with the KTM 390 Duke but detunes it for touring. With a slipper clutch, LED headlamps and a 13-litre tank, it's India's best value performance tourer.","6-speed manual","2","Shares KTM 390 engine architecture but tuned for touring."],
+["TVS","Apache RTR 310","2023–Present","India","Sport","sport",312,"Single","312.12cc Liquid-Cooled Single","ICE",35,29,"5.5 s","150 km/h","169 kg","₹2.40–2.65 lakh","Mass production","The most technologically advanced Indian sportbike.","TVS's Apache RTR 310 uses the same engine as the BMW G 310 R (TVS builds BMWs in India) with a 5-inch TFT, cornering ABS and five ride modes. It's India's most feature-dense sportbike.","6-speed + quickshifter","1","Built on the same platform as the BMW G 310 R."],
+["TVS","Apache RR 310","2018–Present","India","Sport","sport",312,"Single","312.12cc Liquid-Cooled Single","ICE",34,27,"6.0 s","160 km/h","174 kg","₹2.75–3.11 lakh","Mass production","India's first proper supersport.","The RR 310 is a fully-faired sportbike developed with BMW Motorrad. Its reverse-inclined cylinder head and ride-by-wire throttle are genuinely advanced for an Indian motorcycle.","6-speed + QS","1","Fully faired version of the TVS-BMW 310 platform."],
+["Hero","Splendor Plus","1994–Present","India","Commuter","commuter",97,"Single","97.2cc Air-Cooled Single","ICE",8,8,"15.0 s","90 km/h","112 kg","₹75,000–80,000","Mass production","The world's best-selling motorcycle.","The Splendor has been the world's best-selling motorcycle for decades. Over 5 crore units have been sold. It's simple, reliable and incredibly fuel-efficient — the definitive Indian commuter.","4-speed manual","2","Over 5 crore units sold — the world's best-selling motorcycle."],
+["Hero","Xtreme 125R","2024–Present","India","Sport","sport",125,"Single","124.7cc Air-Cooled Single","ICE",12,11,"11.0 s","105 km/h","120 kg","₹95,000–1.05 lakh","Mass production","The 125cc that thinks it's a sportbike.","Hero's Xtreme 125R brings sporty styling and a 4-valve engine to the 125cc commuter segment. LED headlamps, a digital console and split seats make it aspirational for young Indian riders.","5-speed manual","1","4-valve engine in a 125cc commuter — unusual for the segment."],
+["Hero","Xpulse 200 4V","2021–Present","India","Adventure","adventure",199,"Single","199.6cc Air-Cooled Single","ICE",19,17,"9.0 s","125 km/h","158 kg","₹1.45–1.55 lakh","Mass production","The most affordable adventure bike in India.","The Xpulse 200 4V has a 21-inch front wheel, 190 mm of suspension travel and switchable ABS — genuine off-road capability at a commuter price. It's spawned a whole community of Indian ADV riders.","5-speed manual","2","21-inch front wheel and 190 mm travel at this price is unprecedented."],
+["Ola Electric","S1 Pro","2021–Present","India","Electric","scooter",0,"Mid-Drive IPM","5.2 kWh Mid-Drive IPM Motor","EV",14,58,"3.7 s","117 km/h","113 kg","₹1.25–1.75 lakh","Mass production","The scooter that electrified India.","Ola's S1 Pro was India's first truly mass-market electric scooter. A 5.2 kWh battery delivers 320 km range, and the 13 kW motor makes it quicker than most 250cc motorcycles off the line.","1-speed","2","13 kW motor makes it quicker than a 250cc motorcycle to 60 km/h."],
+["Ather","450X","2020–Present","India","Electric","scooter",0,"PMSM","3.7 kWh PMSM Motor","EV",9,26,"4.5 s","90 km/h","112 kg","₹1.53–1.58 lakh","Mass production","The premium electric scooter that set the benchmark.","Ather's 450X is India's most refined electric scooter. Its aluminium chassis, 7-inch touchscreen and OTA updates set the standard that every other Indian EV scooter follows.","1-speed","2","First Indian EV scooter with a touchscreen and OTA updates."],
+["Jawa","42","2019–Present","India","Retro","retro",295,"Single","294.72cc Liquid-Cooled Single","ICE",27,26,"7.0 s","140 km/h","175 kg","₹1.80–2.00 lakh","Mass production","The Czech legend reborn in India.","Jawa's revival under Classic Legends (Mahindra) brought back a beloved name. The 42 uses a 294.72cc DOHC engine with a 6-speed gearbox — genuinely modern underneath the retro styling.","6-speed manual","2","Over 60 updates on the 2024 All Stars edition alone."],
+["Yezdi","Adventure","2022–Present","India","Adventure","adventure",334,"Single","334cc Liquid-Cooled DOHC Single","ICE",30,30,"6.5 s","140 km/h","187 kg","₹2.15–2.35 lakh","Mass production","India's other adventure bike.","Yezdi, also owned by Classic Legends, offers the Adventure as a rugged, affordable ADV with a 334cc DOHC engine, a 21-inch front wheel and a 15.5-litre tank.","6-speed manual","2","A rugged alternative to the Royal Enfield Himalayan."]
 ];
 
 const BIKES = BIKE_RAW.map(r => {
@@ -1686,7 +1942,6 @@ const BIKES = BIKE_RAW.map(r => {
 const SHIP_COLS = ['builder','name','years','country','type','length','beam','displacement','speed','power','propulsion','crew','guests','price','tagline','blurb','notable'];
 
 const SHIP_RAW = [
-/* --- SUPERYACHTS --- */
 ["Lürssen","Azzam","2013","Germany","Superyacht","180.65 m","20.8 m","14,000 t","31.5 kn","94,000 hp","Diesel · 2 gas turbines + 2 diesels","60","36","$600,000,000","The longest private yacht ever built.","Azzam was completed in just three years — an astonishing feat for a 180-metre vessel. Gas turbines give it the speed to cross the Atlantic in days, while its shallow draft lets it enter harbours closed to ships of its size.","Built in only three years · gas turbine propulsion · 180.65 m LOA."],
 ["Blohm+Voss","Eclipse","2010","Germany","Superyacht","162.5 m","21.0 m","13,564 t","25 kn","—","Diesel-electric · azimuth pods","70","36","$600,000,000","The yacht that redefined privacy and security.","Eclipse was the world's largest yacht when launched. It carries a missile defence system, an anti-paparazzi laser shield, two helipads, a submarine and a mini-submarine, plus a 56-metre support vessel.","Anti-paparazzi laser shield · submarine · two helipads."],
 ["Oceanco","Jubilee","2017","Netherlands","Superyacht","110 m","16.4 m","4,500 t","18.5 kn","—","Diesel-electric · azimuth pods","45","30","$350,000,000","The largest yacht ever built in the Netherlands.","Jubilee's exterior by Igor Lobanov uses curved glass and layered decks to create a silhouette that shifts as it moves. A 300 m² owner's deck and a beach club with a swimming pool complete the picture.","Largest yacht ever built in the Netherlands · 300 m² owner's deck."],
@@ -1697,7 +1952,6 @@ const SHIP_RAW = [
 ["Royal Huisman","Sea Eagle II","2020","Netherlands","Sailing","81 m","12.6 m","1,100 t","21 kn","—","Dynarig sails + hybrid","18","10","$100,000,000","The largest aluminium sailing yacht ever built.","Sea Eagle II is the largest yacht Royal Huisman has built and the largest aluminium sailing yacht in the world. Its three 62 m masts carry a total of 2,600 m² of sail.","Largest aluminium sailing yacht ever built · 62 m masts."],
 ["Maltese Falcon","Perini Navi","2006","Italy","Sailing","88 m","12.6 m","1,240 t","24 kn","—","Dynarig sails + diesel","19","12","$120,000,000","The yacht that reinvented sail handling.","Maltese Falcon's Dynarig system uses three rotating masts with automated sail handling — a single crew member can set or furl 2,400 m² of sail in minutes using a joystick.","Dynarig joystick sail handling · 2,400 m² of sail."],
 
-/* --- CRUISE --- */
 ["Meyer Turku","Icon of the Seas","2024–Present","Finland","Cruise","365 m","65 m","248,663 GT","22 kn","—","LNG · diesel-electric","2,350","7,600","$2,000,000,000","The largest cruise ship in the world.","Icon of the Seas is a floating city: 20 decks, seven pools, a 17-metre waterfall, an ice-skating rink and a neighbourhood called Thrill Island with six record-breaking waterslides.","Largest cruise ship ever built · 7,600 passengers · 20 decks."],
 ["Chantiers de l'Atlantique","Wonder of the Seas","2022–Present","France","Cruise","362 m","64 m","236,857 GT","22 kn","—","Diesel-electric · LNG-ready","2,300","7,084","$1,400,000,000","The largest cruise ship ever built (before Icon).","Wonder of the Seas introduced the first Suite Neighbourhood and the largest Ultimate Family Suite — an 1,100 m² two-storey apartment with a slide.","First Suite Neighbourhood at sea · 1,100 m² Ultimate Family Suite."],
 ["Chantiers de l'Atlantique","MSC World Europa","2022–Present","France","Cruise","333 m","47 m","215,863 GT","22.7 kn","—","LNG · diesel-electric","2,138","6,762","$1,200,000,000","The largest LNG-powered cruise ship in the world.","MSC World Europa was the first cruise ship powered by LNG, cutting CO₂ by 25% and virtually eliminating sulphur oxides. Its Y-shaped aft opens onto a 100 m promenade.","First LNG-powered cruise ship · 25% lower CO₂ emissions."],
@@ -1705,7 +1959,6 @@ const SHIP_RAW = [
 ["Chantiers de l'Atlantique","Queen Mary 2","2004–Present","France","Cruise","345 m","41 m","149,215 GT","30 kn","—","Diesel + gas turbines · pods","1,253","2,691","$800,000,000","The last great ocean liner.","Queen Mary 2 is the only true ocean liner in service — built with a strengthened hull and 30-knot speed to cross the North Atlantic in winter. It still performs the Southampton–New York crossing.","The only true ocean liner still in service · 30 kn top speed."],
 ["Fincantieri","MSC Seascape","2022–Present","Italy","Cruise","339 m","41 m","170,400 GT","21.8 kn","—","LNG · diesel-electric","1,648","5,877","$1,000,000,000","Italian style at sea.","MSC Seascape's 13 dining venues, a 1,000-seat theatre and the longest zipline at sea make it one of the most feature-dense cruise ships afloat.","Longest zipline at sea (over 100 m)."],
 
-/* --- CARGO / TANKER --- */
 ["Samsung Heavy Industries","Ever Ace","2021–Present","South Korea","Cargo","399.9 m","61.5 m","235,579 GT","22.6 kn","—","Diesel · single shaft","28","—","$160,000,000","Among the largest container ships in the world.","Ever Ace can carry 23,992 TEU — enough containers to stretch 375 km if placed end to end. Its dual-fuel engines can run on LNG as well as conventional fuel.","23,992 TEU capacity · dual-fuel LNG capable."],
 ["Hyundai Heavy Industries","HMM Algeciras","2020–Present","South Korea","Cargo","399.9 m","61.5 m","228,283 GT","22.5 kn","—","Diesel · single shaft","23","—","$150,000,000","The first container ship to carry 24,000 TEU.","HMM Algeciras was the first container ship to break the 24,000 TEU barrier. It is 400 metres long — longer than the Empire State Building is tall.","First ship to carry 24,000 TEU · 400 m long."],
 ["CMA CGM","Jacques Saadé","2020–Present","France","Cargo","400 m","61 m","236,583 GT","22 kn","—","LNG · dual-fuel","27","—","$180,000,000","The first LNG-powered ultra-large container ship.","Jacques Saadé was the first ULCV to run on LNG, cutting CO₂ by 20%, sulphur oxides by 99% and nitrogen oxides by 85% compared to conventional fuel.","First LNG-powered ULCV · 23,112 TEU."],
@@ -1713,7 +1966,6 @@ const SHIP_RAW = [
 ["Sumitomo Heavy Industries","Seawise Giant","1979–2010","Japan","Tanker","458.45 m","68.8 m","564,763 DWT","16 kn","—","Steam turbine · single shaft","40","—","Scrapped","The longest ship ever built — and the largest.","Seawise Giant, later Knock Nevis, was the longest and heaviest ship ever built at 458 metres and 564,763 deadweight tonnes. Its turning circle was over 3 km and it could not transit the Suez Canal.","Longest ship ever built · 458.45 m · 564,763 DWT."],
 ["Samsung Heavy Industries","Front Altair","2016–Present","South Korea","Tanker","251 m","44 m","63,000 DWT","16 kn","—","Diesel · single shaft","27","—","$70,000,000","A modern ice-class crude oil tanker.","Front Altair is a suezmax crude oil tanker with a double hull and ice-class 1A notation. It can carry 800,000 barrels of crude oil and operates worldwide.","Ice-class 1A · 800,000 barrel capacity."],
 
-/* --- WARSHIPS --- */
 ["Huntington Ingalls","USS Gerald R. Ford (CVN-78)","2017–Present","USA","Warship","337 m","78 m","100,000 t","30 kn","—","Nuclear · 2 A1B reactors","4,500","—","$13,300,000,000","The most expensive warship ever built.","Gerald R. Ford is the first of a new class of nuclear-powered aircraft carriers. Its Electromagnetic Aircraft Launch System (EMALS) replaces steam catapults and can launch aircraft with less stress on the airframe.","EMALS electromagnetic catapults · 2 A1B nuclear reactors."],
 ["BAE Systems","HMS Queen Elizabeth","2017–Present","UK","Warship","280 m","73 m","65,000 t","25 kn","—","Diesel-electric · integrated electric propulsion","1,600","—","$4,000,000,000","The largest ship ever built for the Royal Navy.","HMS Queen Elizabeth and her sister Prince of Wales are the largest warships ever built in Britain. They operate the F-35B Lightning II and use an innovative twin-island design.","Twin-island design · largest ship ever built for the Royal Navy."],
 ["General Dynamics","USS Zumwalt (DDG-1000)","2016–Present","USA","Warship","183 m","24.6 m","15,995 t","30 kn","—","Integrated electric propulsion · gas turbines","147","—","$4,400,000,000","The most futuristic warship ever built.","Zumwalt's tumblehome hull and angular superstructure give it a radar cross-section of a fishing boat. Its Advanced Gun System was so expensive the Navy never bought ammunition for it.","Tumblehome hull · radar signature of a fishing boat."],
@@ -1724,17 +1976,14 @@ const SHIP_RAW = [
 ["BAE Systems","HMS Astute","2010–Present","UK","Submarine","97 m","11.3 m","7,800 t","29 kn","—","Nuclear · Rolls-Royce PWR2 reactor","98","—","$2,000,000,000","The most capable attack submarine in the Royal Navy.","Astute can circumnavigate the globe without surfacing. Its 2076 sonar array is so sensitive it can detect a ship leaving port from 3,000 miles away, and its Tomahawk missiles give it land-attack capability.","Can circumnavigate the globe without surfacing."],
 ["Sevmash","K-535 Yuri Dolgorukiy","2013–Present","Russia","Submarine","170 m","13.5 m","24,000 t","29 kn","—","Nuclear · OK-650 reactor","107","—","$1,000,000,000","The largest ballistic missile submarine in the world.","A Borei-class SSBN carrying 16 Bulava intercontinental ballistic missiles. At 24,000 tonnes submerged it is the largest submarine class built since the Typhoon class.","16 Bulava ICBMs · largest ballistic missile submarine in service."],
 
-/* --- SPEEDBOATS --- */
 ["Cigarette Racing","515 GTB","2020–Present","USA","Speedboat","15.6 m","3.6 m","8.2 t","140 kn","2,700 hp","Petrol · twin or quad sterndrive","2","8","$2,500,000","The Formula 1 car of the sea.","Cigarette Racing has built offshore racing boats since 1969. The 515 GTB carries up to 2,700 hp and can cross open ocean at 140 knots — faster than a helicopter.","Up to 2,700 hp · 140 knots · carbon fibre construction."],
 ["Fountain Powerboats","47 Lightning","2015–Present","USA","Speedboat","14.3 m","2.9 m","6.4 t","130 kn","2,400 hp","Petrol · twin or triple sterndrive","2","6","$1,200,000","The world's fastest production powerboat.","Fountain's 47 Lightning uses a stepped-hull design and up to 2,400 hp to reach 130 knots. It has won more offshore racing championships than any other production boat.","Stepped-hull design · more offshore racing wins than any rival."],
 ["Sunseeker","Predator 74","2015–Present","UK","Speedboat","22.6 m","5.1 m","45 t","34 kn","3,800 hp","Diesel · twin or triple shaft","3","8","$4,000,000","The ultimate performance day boat.","Sunseeker's Predator 74 combines a 34-knot top speed with a carbon fibre hardtop, a sunpad that converts to a dining area and a garage for a jet tender.","Carbon fibre hardtop · garage for jet tender."],
 
-/* --- ICEBREAKER / RESEARCH --- */
 ["Baltiysky Zavod","NS Yamal","1992–Present","Russia","Icebreaker","150 m","28 m","23,455 t","21 kn","75,000 hp","Nuclear · 2 OK-900 reactors","150","—","$300,000,000","The nuclear icebreaker with a shark mouth.","Yamal is a nuclear-powered Arktika-class icebreaker. Its 75,000 hp propulsion can break through 2.8 metres of ice at 5 knots, and its shark-mouth livery is a tribute to its first polar expedition.","75,000 hp · can break 2.8 m of ice at 5 knots."],
 ["Meyer Werft","Polarstern","1982–Present","Germany","Icebreaker","118 m","25 m","17,300 t","16 kn","20,000 hp","Diesel-electric · 4 azimuth thrusters","44","—","$100,000,000","Germany's polar research flagship.","Polarstern has spent more than 40 years in the Arctic and Antarctic. Its double hull can break ice 1.5 m thick continuously and it hosts up to 70 scientists on research expeditions.","Over 40 years of polar research · 70 scientists aboard."],
 ["Freire Shipyard","RV Calypso","1942–Present","France","Icebreaker","42 m","7.6 m","350 t","10 kn","—","Diesel · single shaft","—","—","Priceless","Cousteau's legendary research vessel.","Originally a British minesweeper, Calypso became Jacques Cousteau's floating laboratory. It carried the first aqualung, the first underwater television system and the first mini-submarine.","Cousteau's ship · first aqualung · first underwater TV."],
 
-/* --- FERRY --- */
 ["Aker Yards","Color Magic","2007–Present","Norway","Ferry","223 m","35 m","75,100 GT","22 kn","—","Diesel-electric · pods","—","2,700","$400,000,000","The largest ferry in the world.","Color Magic crosses the Oslo–Kiel route in 19.5 hours. Its promenade deck runs the length of the ship, and it has a 1,000-seat conference centre, four restaurants and a spa.","Largest ferry in the world · 2,700 passengers · 75,100 GT."],
 ["Damen Shipyards","Stena Hollandica","2010–Present","Netherlands","Ferry","240 m","32 m","64,000 GT","22 kn","—","Diesel-electric · pods","—","1,200","$350,000,000","The largest ferry on the North Sea.","Stena Hollandica is the largest ferry on the Hook of Holland–Harwich route. Its two-tier loading system can load and unload 300 cars in 20 minutes.","Largest ferry on the North Sea · 300 cars in 20 minutes."]
 ];
@@ -1765,9 +2014,171 @@ const SHIPS = SHIP_RAW.map(r => {
 });
 
 /* ============================================================
-   4 · UNIFIED LOOKUP + ART
+   4 · TRUCK DATABASE
    ============================================================ */
-const ALL = [...CARS, ...BIKES, ...SHIPS];
+const TRUCK_COLS = ['brand','name','years','country','type','engine','hp','torque','gearbox','weight','price','tagline','blurb','notable'];
+
+const TRUCK_RAW = [
+["Peterbilt","389","2007–Present","USA","Conventional","PACCAR MX-13 / Cummins X15","510","2500","Eaton Fuller 10/13/18-speed","8,500 kg","$180,000","The most iconic American conventional truck ever built.","The Peterbilt 389 has a long hood, twin chrome exhaust stacks and a shape that hasn't fundamentally changed in decades. It's the truck every American child draws — and it's still one of the most capable class 8 tractors available.","PACCAR MX-13 engine rated up to 510 hp and 1,850 lb-ft."],
+["Kenworth","W900","1961–Present","USA","Conventional","Cummins X15 / PACCAR MX-13","565","2508","Eaton Fuller 18-speed","8,200 kg","$175,000","The long-nose legend of American trucking.","The W900 has been in continuous production since 1961 — the longest run of any American truck. Its 12.9-litre Cummins engine and classic styling make it the default choice for owner-operators and heavy haul.","Cummins X15 rated at 565 hp and 2,508 Nm in top spec."],
+["Volvo","FH16","1987–Present","Sweden","Cab-over","Volvo D17 17.3L Inline-6","780","3800","I-Shift 12-speed AMT","9,000 kg","$200,000","The most powerful production truck in the world.","Volvo's FH16 is the flagship of European trucking. The 17.3-litre D17 engine produces 780 hp and 3,800 Nm — more than any other production truck. It's used for heavy haul, timber and mining.","780 hp and 3,800 Nm from a 17.3-litre inline-6."],
+["Scania","R730","2010–Present","Sweden","Cab-over","Scania DC16 16.4L V8","730","3500","Opticruise 12-speed AMT","9,500 kg","$190,000","The King of the Road.","Scania's R730 uses a 16.4-litre V8 producing 730 hp and 3,500 Nm. Its 3.9-metre-high cab is one of the tallest in Europe, giving drivers a commanding view and a comfortable living space.","16.4-litre V8 · 730 hp · 3,500 Nm · cab height 3.9 m."],
+["Freightliner","Cascadia","2007–Present","USA","Conventional","Detroit DD15 14.8L Inline-6","505","2400","Detroit DT12 12-speed AMT","8,000 kg","$150,000","The most aerodynamic American truck.","The Cascadia's slippery shape and integrated powertrain have made it the best-selling class 8 truck in North America. Its Detroit Assurance safety suite includes adaptive cruise, lane keeping and collision mitigation.","Best-selling class 8 truck in North America."],
+["MAN","TGX","2007–Present","Germany","Cab-over","MAN D26 12.4L Inline-6","640","3000","MAN TipMatic 12-speed AMT","9,000 kg","$170,000","German engineering for long-haul Europe.","The MAN TGX's D26 engine produces up to 640 hp, and its cab is one of the most ergonomic in the industry. It's a favourite for cross-continental haulage and heavy distribution.","D26 engine rated up to 640 hp and 3,000 Nm."],
+["Mercedes-Benz","Actros","1996–Present","Germany","Cab-over","Mercedes OM 473 15.6L Inline-6","625","3000","Mercedes PowerShift 12-speed AMT","9,200 kg","$175,000","The safest truck in Europe.","The Actros was the first truck to offer Active Brake Assist with pedestrian detection, and the first to achieve Level 2 automation. Its MirrorCam system replaces mirrors with cameras.","First truck with Level 2 automation and MirrorCam."],
+["DAF","XG+","2022–Present","Netherlands","Cab-over","PACCAR MX-13 12.9L Inline-6","530","2600","ZF TraXon 12-speed AMT","8,800 kg","$165,000","The most aerodynamic truck in the world.","The DAF XG+ was designed from a clean sheet to meet new European length and weight rules. Its drag coefficient is the lowest of any production truck, and its cab is the largest in the industry.","Lowest drag coefficient of any production truck · largest cab."],
+["Tesla","Semi","2022–Present","USA","Cab-over","Tri-Motor Electric","1100","—","1-speed","—","$180,000","The electric truck that changed the game.","The Tesla Semi uses three carbon-sleeved motors and a 900 kWh battery for up to 800 km of range. It can accelerate from 0–100 km/h in 5 seconds without a trailer, and maintains highway speeds fully loaded.","0–100 km/h in 5 s without a trailer · 900 kWh battery."],
+["Nikola","Tre FCEV","2023–Present","USA","Cab-over","Fuel Cell Electric","645","—","1-speed","—","$250,000","The hydrogen fuel cell truck.","Nikola's Tre FCEV uses a hydrogen fuel cell to generate electricity on board, giving it a 800 km range and a 20-minute refuel time — far quicker than battery electric charging.","800 km range · 20-minute hydrogen refuel."]
+];
+
+const TRUCKS = TRUCK_RAW.map(r => {
+  const o = {};
+  TRUCK_COLS.forEach((c,i) => o[c] = r[i]);
+  o.kind = 'truck';
+  o.id = (o.brand + ' ' + o.name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  o.hp = Number(o.hp) || 0;
+  o.torque = Number(o.torque) || 0;
+  o.zero = '—';
+  o.top = '—';
+  o.weight = o.weight;
+  o.engine = o.engine;
+  o.layout = o.engine;
+  o.seats = 2;
+  o.production = o.years.includes('Present') ? 'In production' : 'Discontinued';
+  o.body = o.type;
+  o.power = 'ICE';
+  o.era = 'Modern';
+  o.sil = 'coupe';
+  return o;
+});
+
+/* ============================================================
+   5 · SUV DATABASE (dedicated — separate from cars)
+   ============================================================ */
+const SUV_COLS = ['brand','name','years','country','type','engine','hp','torque','zero','top','weight','price','tagline','blurb','seats','notable'];
+
+const SUV_RAW = [
+["Toyota","Land Cruiser 300","2021–Present","Japan","Off-road","3.3L Twin-Turbo V6 Diesel / 3.5L Twin-Turbo V6 Petrol","415","700","6.7 s","210 km/h","2,600 kg","$90,000","The most trusted off-road vehicle in the world.","The Land Cruiser has been the go-anywhere vehicle of choice for UN agencies, mining companies and adventurers for over 70 years. The 300 series uses a new TNGA-F platform with improved rigidity and a twin-turbo V6.","Over 10 million Land Cruisers sold since 1951."],
+["Land Rover","Range Rover","2021–Present","UK","Luxury","4.4L Twin-Turbo V8 / 3.0L Inline-6 PHEV","606","750","4.4 s","250 km/h","2,510 kg","$120,000","The original luxury SUV.","The Range Rover invented the luxury 4x4 segment in 1970. The fifth generation uses a new MLA-Flex platform with active anti-roll bars, all-wheel steering and a 160 mm longer wheelbase.","Invented the luxury SUV segment in 1970."],
+["Mercedes-Benz","G-Class","1979–Present","Germany","Luxury","4.0L Twin-Turbo V8 / 3.0L Inline-6","577","850","4.5 s","220 km/h","2,560 kg","$180,000","The icon that refuses to change.","The G-Class has been in production since 1979 with a shape that has barely evolved. Three locking differentials, a ladder frame and a 70% off-road capability make it unstoppable.","Three fully locking differentials — still."],
+["Jeep","Wrangler Rubicon 392","2021–Present","USA","Off-road","6.4L V8","470","637","4.5 s","180 km/h","2,300 kg","$85,000","The most capable factory off-roader.","The Wrangler Rubicon 392 is the first V8-powered Wrangler in 40 years. With locking differentials, a disconnecting sway bar and 33-inch tyres, it's ready for any trail straight from the dealer.","First V8 Wrangler since 1981."],
+["Ford","Bronco Raptor","2022–Present","USA","Off-road","3.0L Twin-Turbo V6","418","596","5.9 s","180 km/h","2,500 kg","$90,000","The desert runner.","The Bronco Raptor was built for high-speed desert running. Fox Live Valve internal bypass shocks, 37-inch tyres and a 3.0L EcoBoost V6 make it capable of sustained high-speed off-road driving.","37-inch tyres · Fox Live Valve shocks."],
+["Porsche","Cayenne Turbo GT","2021–Present","Germany","Performance","4.0L Twin-Turbo V8","640","850","3.3 s","300 km/h","2,220 kg","$200,000","The SUV that thinks it's a sports car.","The most powerful and fastest Cayenne ever. Its chassis was honed at the Nürburgring, where it holds the SUV lap record at 7:38.925.","Held the Nürburgring SUV record at 7:38.925."],
+["Lamborghini","Urus Performante","2022–Present","Italy","Performance","4.0L Twin-Turbo V8","666","850","3.3 s","306 km/h","2,150 kg","$260,000","The super SUV that started a revolution.","The most extreme Urus: 666 hp, lowered suspension, a rally mode for gravel and a 47 kg weight saving. As capable on a dirt road as on the autobahn.","Held the Pikes Peak production SUV record at 10:32.064."],
+["Rolls-Royce","Cullinan","2018–Present","UK","Luxury","6.75L Twin-Turbo V12","563","850","5.2 s","250 km/h","2,660 kg","$400,000","The most luxurious SUV in the world.","Rolls-Royce's first SUV. It uses the same 'Magic Carpet Ride' suspension as the Phantom, and can be ordered with a Viewing Suite that folds out of the tailgate.","Optional Viewing Suite seats fold out of the rear tailgate."],
+["BMW","XM Label Red","2023–Present","Germany","Performance","4.4L Twin-Turbo V8 PHEV","738","1000","3.8 s","290 km/h","2,750 kg","$185,000","The most powerful BMW M car ever.","BMW's XM Label Red is the most powerful M car ever made, with a plug-in hybrid V8 producing 738 hp. It's controversial, divisive and utterly unapologetic.","Most powerful BMW M car ever — 738 hp."],
+["Hyundai","Ioniq 5 N","2024–Present","South Korea","Performance EV","Dual-Motor Electric","641","770","3.4 s","260 km/h","2,235 kg","$67,000","The electric hot hatch that sounds like a rally car.","Simulated gear shifts, a synthesized engine note and a drift mode make the Ioniq 5 N feel as engaging as combustion — and it genuinely succeeds.","N e-Shift simulates an 8-speed DCT with real torque interrupts."]
+];
+
+const SUVS = SUV_RAW.map(r => {
+  const o = {};
+  SUV_COLS.forEach((c,i) => o[c] = r[i]);
+  o.kind = 'suv';
+  o.id = (o.brand + ' ' + o.name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  o.hp = Number(o.hp) || 0;
+  o.torque = Number(o.torque) || 0;
+  o.zero = o.zero;
+  o.top = o.top;
+  o.weight = o.weight;
+  o.engine = o.engine;
+  o.layout = o.engine;
+  o.seats = o.seats || 5;
+  o.production = o.years.includes('Present') ? 'In production' : 'Discontinued';
+  o.body = o.type;
+  o.power = o.engine.includes('Electric') ? 'EV' : (o.engine.includes('PHEV') ? 'Hybrid' : 'ICE');
+  o.era = 'Modern';
+  o.sil = 'suv';
+  return o;
+});
+
+/* ============================================================
+   6 · HELICOPTER DATABASE
+   ============================================================ */
+const HELI_COLS = ['brand','name','years','country','type','engine','hp','rotorDia','length','weight','speed','range','crew','capacity','price','tagline','blurb','notable'];
+
+const HELI_RAW = [
+["Bell","407","1996–Present","USA","Utility","Rolls-Royce 250-C47E/4 Turboshaft","862","10.7 m","12.7 m","1,224 kg","246 km/h","624 km","1-2","6","$3,100,000","The modern light helicopter benchmark.","The Bell 407 is one of the most successful light helicopters ever built. Its Rolls-Royce turboshaft with dual FADEC delivers exceptional hot-and-high performance, and its four-blade rotor gives a smooth ride.","Over six million flight hours logged worldwide."],
+["Sikorsky","UH-60 Black Hawk","1979–Present","USA","Utility","2 × General Electric T700-GE-701C","3,880","16.4 m","19.8 m","10,658 kg","300 km/h","2,200 km","3-4","12 troops","$21,000,000","The most versatile military helicopter ever built.","The Black Hawk has been the backbone of US Army aviation since 1979. Its reconfigurable cabin can carry troops, cargo, medevac litters or rescue hoists — and it can be armed with machine guns and rocket pods.","Over 4,000 built · used by 30+ countries."],
+["Airbus","H145","2010–Present","Europe","Utility","2 × Turbomeca Arriel 2E","1,600","10.8 m","13.6 m","1,780 kg","246 km/h","680 km","1-2","8","$9,500,000","The most advanced light twin helicopter.","The H145's Fenestron tail rotor reduces noise and improves safety, and its Helionix avionics suite with a 4-axis autopilot makes it one of the easiest helicopters to fly. Its five-blade version has a 150 kg higher payload.","Five-blade version increases payload by 150 kg."],
+["Sikorsky","S-76","1977–Present","USA","Transport","2 × Turbomeca Arriel 2S2","1,800","13.4 m","16.0 m","3,177 kg","287 km/h","833 km","2","12","$13,000,000","The offshore oil industry's workhorse.","The S-76 was Sikorsky's first purely commercial helicopter. It's been the standard for offshore oil transport for decades, and its VIP version is used by heads of state and corporations worldwide.","The Queen used an S-76 for royal travel."],
+["Leonardo","AW139","2003–Present","Italy","Transport","2 × Pratt & Whitney PT6C-67C","3,000","13.8 m","16.7 m","3,622 kg","306 km/h","1,250 km","2","15","$15,000,000","The best-selling medium twin helicopter.","The AW139 created the medium twin market and remains the benchmark. It's used for offshore transport, search and rescue, VIP travel, law enforcement and military missions worldwide.","Over 1,100 units sold · market leader in its class."],
+["Bell","AH-1Z Viper","2010–Present","USA","Attack","2 × General Electric T700-GE-401C","3,600","14.6 m","17.8 m","8,200 kg","370 km/h","685 km","2","—","$31,000,000","The most advanced attack helicopter in the US Marine Corps.","The AH-1Z Viper is a dedicated attack helicopter with a 20 mm cannon, Hellfire missiles and Sidewinder air-to-air missiles. Its composite rotor and upgraded engines give it exceptional hot-and-high performance.","Dedicated attack helicopter · 20 mm cannon + Hellfire missiles."],
+["Boeing","AH-64 Apache","1986–Present","USA","Attack","2 × General Electric T700-GE-701D","3,800","14.6 m","17.7 m","10,433 kg","293 km/h","1,900 km","2","—","$35,000,000","The most feared attack helicopter in the world.","The Apache's Longbow radar can track 128 targets simultaneously and its Hellfire missiles have destroyed more tanks than any other weapon system. Its 30 mm chain gun is devastating against ground targets.","Longbow radar tracks 128 targets at once."],
+["Mil","Mi-26","1983–Present","Russia","Heavy Lift","2 × D-136 Turboshaft","22,800","32.0 m","40.0 m","28,200 kg","295 km/h","1,920 km","5","90","$30,000,000","The largest and most powerful helicopter in the world.","The Mi-26's eight-blade rotor system and 22,800 hp engines give it a 20-tonne payload capacity — more than a C-130 Hercules. It's used for heavy construction, disaster relief and military logistics.","20-tonne payload — more than a C-130 Hercules."],
+["Robinson","R66","2010–Present","USA","Civilian","Rolls-Royce RR300 Turboshaft","300","10.1 m","11.7 m","580 kg","200 km/h","600 km","1","4","$1,400,000","The most affordable turbine helicopter.","The R66 brought turbine power to the personal helicopter market. Its Rolls-Royce RR300 engine is reliable and efficient, and its five-seat cabin makes it practical for family travel.","Brought turbine power to the personal helicopter market."],
+["Airbus","H160","2021–Present","Europe","Transport","2 × Turbomeca Arrano 1A","2,600","13.4 m","14.0 m","3,570 kg","280 km/h","880 km","2","12","$18,000,000","The most technologically advanced civil helicopter.","The H160's Blue Edge rotor blades reduce noise by 50%, and its Helionix avionics with a 4-axis autopilot make it exceptionally safe. It's the first helicopter with a full glass cockpit and touchscreen controls.","Blue Edge blades cut noise by 50%."]
+];
+
+const HELIS = HELI_RAW.map(r => {
+  const o = {};
+  HELI_COLS.forEach((c,i) => o[c] = r[i]);
+  o.kind = 'heli';
+  o.id = (o.brand + ' ' + o.name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  o.hp = Number(o.hp) || 0;
+  o.torque = 0;
+  o.zero = '—';
+  o.top = o.speed;
+  o.weight = o.weight;
+  o.engine = o.engine;
+  o.layout = o.engine;
+  o.gearbox = '—';
+  o.seats = o.capacity;
+  o.production = o.years.includes('Present') ? 'In production' : 'Discontinued';
+  o.body = o.type;
+  o.power = 'ICE';
+  o.era = 'Modern';
+  o.sil = 'suv';
+  return o;
+});
+
+/* ============================================================
+   7 · SPACECRAFT DATABASE
+   ============================================================ */
+const SPACE_COLS = ['agency','name','years','country','type','engine','thrust','height','weight','payload','crew','price','tagline','blurb','mission','notable'];
+
+const SPACE_RAW = [
+["NASA","Space Launch System (SLS)","2022–Present","USA","Rocket","4 × RS-25 + 2 × 5-segment SRB","39,100 kN","98.3 m","2,608 t","27 t to TLI","—","$2,000,000,000","The most powerful rocket ever to reach orbit.","The Space Launch System is NASA's super heavy-lift rocket for the Artemis programme. It produces 15% more thrust than the Saturn V and will carry astronauts to the Moon for the first time since 1972.","8.8 million lbf of thrust — 15% more than Saturn V."],
+["SpaceX","Falcon 9","2010–Present","USA","Rocket","9 × Merlin 1D + 1 × Merlin Vacuum","7,607 kN","70 m","549 t","22.8 t to LEO","—","$67,000,000","The most flown orbital rocket in history.","Falcon 9 revolutionised spaceflight with its reusable first stage. Its booster lands on a drone ship or on land, and has been reflown over 20 times. It's the only rocket certified for NASA crew missions.","First orbital rocket to land its first stage — now over 300 flights."],
+["Blue Origin","New Shepard","2015–Present","USA","Rocket","1 × BE-3","490 kN","18.3 m","75 t","—","6","$0","The rocket that opened space tourism.","New Shepard is a fully reusable suborbital rocket. Its crew capsule has the largest windows ever flown in space, and the booster lands vertically on a pad. It's taken dozens of tourists above the Kármán line.","Largest windows ever flown in space · fully reusable."],
+["NASA","Voyager 1","1977–Present","USA","Probe","—","—","—","721 kg","—","—","—","The most distant human-made object.","Voyager 1 was launched in 1977 and crossed into interstellar space in 2012. It's now over 24 billion kilometres from Earth, still transmitting data with a radio signal that takes over 22 hours to reach us.","Most distant human-made object · over 24 billion km from Earth."],
+["NASA","Curiosity Rover","2012–Present","USA","Rover","—","—","2.2 m","899 kg","—","—","$2,500,000,000","The rover that proved Mars was once habitable.","Curiosity landed in Gale Crater in 2012 using a revolutionary sky crane. It has drilled into Martian rock, detected organic molecules and proven that Mars had the conditions for microbial life billions of years ago.","Sky-crane landing · detected organic molecules on Mars."],
+["NASA","Perseverance Rover","2021–Present","USA","Rover","—","—","2.2 m","1,025 kg","—","—","$2,700,000,000","The rover that will bring samples back to Earth.","Perseverance is collecting rock core samples in Jezero Crater and leaving them for a future mission to retrieve. It also carried Ingenuity, the first helicopter to fly on another planet.","Collecting samples for return to Earth."],
+["NASA","Ingenuity Helicopter","2021–2024","USA","Helicopter","—","—","0.5 m","1.8 kg","—","—","$80,000,000","The first aircraft to fly on another planet.","Ingenuity was a technology demonstration that became a record-breaker. It flew 72 times on Mars — far beyond its planned five — and proved that powered flight is possible in the thin Martian atmosphere.","First powered flight on another planet · 72 flights."],
+["NASA","Hubble Space Telescope","1990–Present","USA","Telescope","—","—","13.2 m","11,110 kg","—","—","$1,500,000,000","The telescope that changed our understanding of the universe.","Hubble has made over 1.5 million observations and its data has been used in over 21,000 scientific papers. It helped determine the age of the universe and discovered that dark energy is accelerating its expansion.","Over 1.5 million observations · 21,000+ papers."],
+["NASA/ESA/CSA","James Webb Space Telescope","2022–Present","USA/Europe","Telescope","—","—","—","6,200 kg","—","—","$10,000,000,000","The most powerful space telescope ever built.","JWST observes in infrared, allowing it to see through dust clouds and detect the light of the earliest galaxies. Its 6.5-metre gold-coated mirror and tennis-court-sized sunshield are engineering marvels.","6.5 m gold mirror · sees the first galaxies after the Big Bang."],
+["SpaceX","Starship","2023–Present","USA","Rocket","33 × Raptor + 6 × Raptor","74,000 kN","121 m","5,000 t","100–150 t to LEO","—","—","The largest and most powerful rocket ever built.","Starship is designed to be fully reusable — both the booster and the ship. Its 33 Raptor engines produce 74 MN of thrust, more than double the Saturn V. It will carry humans to the Moon and Mars.","33 Raptor engines · 74 MN thrust · fully reusable."],
+["NASA","Orion","2022–Present","USA","Capsule","—","—","—","10,400 kg","—","4","$20,000,000,000","The spacecraft that will carry humans back to the Moon.","Orion is NASA's crew vehicle for deep space. Its heat shield is the largest of its kind, designed to withstand re-entry at 40,000 km/h — fast enough to return from the Moon.","Largest heat shield ever built · re-entry at 40,000 km/h."],
+["NASA","Juno","2011–Present","USA","Orbiter","—","—","—","3,625 kg","—","—","$1,100,000,000","The spacecraft that revealed Jupiter's secrets.","Juno has been orbiting Jupiter since 2016, studying its gravity, magnetic field and composition. It discovered that Jupiter's core is more complex than expected and that its auroras are powered by different processes than Earth's.","First spacecraft to fly over Jupiter's poles."],
+["NASA","Cassini-Huygens","1997–2017","USA/Europe","Orbiter","—","—","—","5,712 kg","—","—","$3,260,000,000","The mission that revealed Saturn in all its glory.","Cassini spent 13 years orbiting Saturn and its moons. It discovered geysers on Enceladus, liquid methane lakes on Titan and the true nature of Saturn's rings. It ended with a deliberate plunge into Saturn's atmosphere.","13 years at Saturn · discovered geysers on Enceladus."]
+];
+
+const SPACECRAFT = SPACE_RAW.map(r => {
+  const o = {};
+  SPACE_COLS.forEach((c,i) => o[c] = r[i]);
+  o.brand = o.agency;
+  o.kind = 'space';
+  o.id = (o.agency + ' ' + o.name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  o.hp = 0;
+  o.torque = 0;
+  o.zero = '—';
+  o.top = '—';
+  o.weight = o.weight;
+  o.engine = o.engine;
+  o.layout = o.engine;
+  o.gearbox = '—';
+  o.seats = o.crew;
+  o.production = o.years.includes('Present') ? 'In service' : 'Retired';
+  o.body = o.type;
+  o.power = '—';
+  o.era = 'Modern';
+  o.sil = 'coupe';
+  return o;
+});
+
+/* ============================================================
+   8 · UNIFIED LOOKUP + ART
+   ============================================================ */
+const ALL = [...CARS, ...BIKES, ...SHIPS, ...TRUCKS, ...SUVS, ...HELIS, ...SPACECRAFT];
 const BY_ID = new Map(ALL.map(v => [v.id, v]));
 
 /* ---------- CAR BLUEPRINT ART ---------- */
@@ -1876,7 +2287,12 @@ const BIKE_STYLES = {
     tail:"M392 88 L452 82 L494 94 L498 116 L450 128 L398 114 Z",
     engine:"M272 116 L394 114 L400 162 L280 166 Z",swing:[[402,154],[468,182]],
     pannier:"M472 96 L524 96 L528 150 L476 150 Z",
-    exhaust:"M340 164 C400 176 452 180 500 178"}
+    exhaust:"M340 164 C400 176 452 180 500 178"},
+  commuter:{w:[[152,52],[466,52]],fork:[[182,64],[152,180]],bar:[[186,60],[214,50]],
+    tank:"M248 90 C280 76 336 74 376 84 L390 94 L374 110 L302 116 L254 104 Z",
+    tail:"M376 90 L442 88 L478 98 L480 116 L436 124 L386 112 Z",
+    engine:"M270 114 L390 112 L396 158 L278 160 Z",swing:[[400,152],[466,180]],
+    exhaust:"M340 156 C400 168 446 172 492 170"}
 };
 
 function bikeArt(bike, opts = {}){
@@ -1960,21 +2376,70 @@ function shipArt(ship, opts = {}){
   </svg>`;
 }
 
+/* ---------- GENERIC ART for trucks / suvs / helis / spacecraft ---------- */
+function genericArt(v, opts = {}){
+  const uid = 'g' + Math.random().toString(36).slice(2,8);
+  const showLabel = opts.label !== false;
+  const fs = opts.fontSize || 13;
+  const kind = v.kind;
+  let paths = '';
+  if (kind === 'truck'){
+    paths = `
+      <rect x="60" y="80" width="380" height="120" rx="8" fill="currentColor" fill-opacity=".06" stroke="currentColor" stroke-opacity=".55" stroke-width="2"/>
+      <path d="M440 100 L520 100 L570 160 L570 200 L440 200 Z" fill="currentColor" fill-opacity=".07" stroke="currentColor" stroke-opacity=".55" stroke-width="2"/>
+      <circle cx="140" cy="210" r="32" fill="var(--bg-2)" stroke="currentColor" stroke-opacity=".6" stroke-width="2.2"/>
+      <circle cx="140" cy="210" r="14" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="1.5"/>
+      <circle cx="480" cy="210" r="32" fill="var(--bg-2)" stroke="currentColor" stroke-opacity=".6" stroke-width="2.2"/>
+      <circle cx="480" cy="210" r="14" fill="none" stroke="currentColor" stroke-opacity=".35" stroke-width="1.5"/>`;
+  } else if (kind === 'heli'){
+    paths = `
+      <ellipse cx="310" cy="130" rx="110" ry="45" fill="currentColor" fill-opacity=".06" stroke="currentColor" stroke-opacity=".55" stroke-width="2"/>
+      <path d="M180 120 L140 100 M180 140 L140 160" stroke="currentColor" stroke-opacity=".6" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="310" cy="80" r="55" fill="none" stroke="currentColor" stroke-opacity=".6" stroke-width="2.5" stroke-dasharray="8 6"/>
+      <line x1="400" y1="150" x2="500" y2="150" stroke="currentColor" stroke-opacity=".6" stroke-width="4"/>
+      <circle cx="500" cy="140" r="14" fill="none" stroke="currentColor" stroke-opacity=".4" stroke-width="2"/>
+      <rect x="260" y="160" width="100" height="10" rx="3" fill="currentColor" fill-opacity=".2"/>`;
+  } else if (kind === 'space'){
+    paths = `
+      <path d="M310 40 L340 140 L310 280 L280 140 Z" fill="currentColor" fill-opacity=".06" stroke="currentColor" stroke-opacity=".55" stroke-width="2"/>
+      <path d="M280 140 L220 220 L280 200" fill="currentColor" fill-opacity=".07" stroke="currentColor" stroke-opacity=".5" stroke-width="1.8"/>
+      <path d="M340 140 L400 220 L340 200" fill="currentColor" fill-opacity=".07" stroke="currentColor" stroke-opacity=".5" stroke-width="1.8"/>
+      <circle cx="310" cy="100" r="14" fill="none" stroke="currentColor" stroke-opacity=".4" stroke-width="1.5"/>
+      <line x1="310" y1="20" x2="310" y2="40" stroke="currentColor" stroke-opacity=".3" stroke-width="2"/>`;
+  } else {
+    // suv fallback
+    paths = carArt(v, {label:false});
+    return paths;
+  }
+  return `
+  <svg viewBox="0 0 620 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${v.brand} ${v.name} blueprint">
+    <defs>
+      <pattern id="gg-${uid}" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="currentColor" stroke-opacity=".09" stroke-width="1"/></pattern>
+    </defs>
+    <rect width="620" height="300" fill="url(#gg-${uid})"/>
+    <line x1="0" y1="232" x2="620" y2="232" stroke="currentColor" stroke-opacity=".18" stroke-width="1" stroke-dasharray="4 6"/>
+    <ellipse cx="310" cy="240" rx="252" ry="16" fill="currentColor" opacity=".06"/>
+    ${paths}
+    ${showLabel ? `<text x="310" y="278" text-anchor="middle" fill="currentColor" fill-opacity=".42" font-family="Sora, sans-serif" font-size="${fs}" letter-spacing="4" style="text-transform:uppercase">${v.brand.toUpperCase()} · ${v.name.toUpperCase()}</text>` : ''}
+  </svg>`;
+}
+
 function vehicleArt(v, opts){
   if (v.kind === 'bike') return bikeArt(v, opts);
   if (v.kind === 'ship') return shipArt(v, opts);
+  if (v.kind === 'truck' || v.kind === 'heli' || v.kind === 'space') return genericArt(v, opts);
   return carArt(v, opts);
 }
 
 /* ============================================================
-   5 · IMAGE LOADER (rate-limited, cached, lazy)
+   9 · IMAGE LOADER (rate-limited, cached, lazy)
    ============================================================ */
-const IMG_TTL = 1000 * 60 * 60 * 24 * 3; // 3 days
+const IMG_TTL = 1000 * 60 * 60 * 24 * 3;
 const ImgCache = new Map();
 
 function readSessionCache(key){
   try{
-    const raw = sessionStorage.getItem('cs-img:' + key);
+    const raw = sessionStorage.getItem('ms-img:' + key);
     if (!raw) return null;
     const o = JSON.parse(raw);
     if (Date.now() - o.t > IMG_TTL) return null;
@@ -1982,10 +2447,9 @@ function readSessionCache(key){
   }catch(e){ return null; }
 }
 function writeSessionCache(key, val){
-  try{ sessionStorage.setItem('cs-img:' + key, JSON.stringify({ t: Date.now(), v: val })); }catch(e){}
+  try{ sessionStorage.setItem('ms-img:' + key, JSON.stringify({ t: Date.now(), v: val })); }catch(e){}
 }
 
-/* Simple concurrency-limited queue so we never slam the API */
 const NetQueue = {
   active: 0, max: 4, q: [],
   push(fn){ this.q.push(fn); this.next(); },
@@ -2001,6 +2465,9 @@ const NetQueue = {
 function searchTermFor(v){
   if (v.kind === 'bike') return `${v.brand} ${v.name} motorcycle`;
   if (v.kind === 'ship') return `${v.brand} ${v.name} ship`;
+  if (v.kind === 'truck') return `${v.brand} ${v.name} truck`;
+  if (v.kind === 'heli') return `${v.brand} ${v.name} helicopter`;
+  if (v.kind === 'space') return `${v.brand} ${v.name} spacecraft`;
   return `${v.brand} ${v.name}`;
 }
 
@@ -2019,7 +2486,7 @@ async function fetchVehicleImage(v, minWidth = 900){
           '?action=query&generator=search' +
           '&gsrsearch=' + encodeURIComponent(term) +
           '&gsrnamespace=6&gsrlimit=8' +
-          '&prop=imageinfo&iiprop=url|size&iiurlwidth=1000' +
+          '&prop=imageinfo&iiprop=url|size&iiurlwidth=1400' +
           '&format=json&origin=*';
         const res = await fetch(url, { signal: AbortSignal.timeout(6000) });
         const data = await res.json();
@@ -2043,7 +2510,6 @@ async function fetchVehicleImage(v, minWidth = 900){
   return promise;
 }
 
-/* Lazy image loader — only loads when card enters viewport */
 let lazyIO = null;
 function getLazyIO(){
   if (lazyIO) return lazyIO;
@@ -2084,10 +2550,163 @@ async function loadCardImage(card, v){
 }
 
 /* ============================================================
-   6 · THEME
+   10 · SOUND ENGINE — Web Audio API synthesized engine sounds
+   ============================================================ */
+const SoundEngine = (() => {
+  let ctx = null;
+  let masterGain = null;
+  let currentSource = null;
+  let currentGain = null;
+  let isEnabled = false;
+  let filterNode = null;
+
+  function ensureContext(){
+    if (ctx) return true;
+    try{
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      masterGain = ctx.createGain();
+      masterGain.gain.value = 0.0;
+      masterGain.connect(ctx.destination);
+      filterNode = ctx.createBiquadFilter();
+      filterNode.type = 'lowpass';
+      filterNode.frequency.value = 8000;
+      filterNode.connect(masterGain);
+      return true;
+    }catch(e){ return false; }
+  }
+
+  function startSound(v){
+    if (!isEnabled) return;
+    stopSound();
+    if (!ensureContext()) return;
+    if (ctx.state === 'suspended') ctx.resume();
+
+    const hp = v.hp || 100;
+    const cc = v.cc || 2000;
+    const kind = v.kind;
+    const isEV = v.power === 'EV' || (v.engine && String(v.engine).toLowerCase().includes('electric'));
+
+    // Base frequency: lower for bigger engines, higher for smaller
+    let baseFreq = 40;
+    if (cc > 0) baseFreq = Math.max(30, 120 - cc / 20);
+    else if (hp > 0) baseFreq = Math.max(30, 150 - hp / 15);
+    if (kind === 'ship') baseFreq = Math.max(20, baseFreq * 0.4);
+    if (kind === 'truck') baseFreq = Math.max(25, baseFreq * 0.6);
+    if (kind === 'heli') baseFreq = 60;
+    if (kind === 'space') baseFreq = 25;
+
+    // Create oscillator bank
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    const osc3 = ctx.createOscillator();
+    const noise = ctx.createBufferSource();
+
+    osc1.type = isEV ? 'sine' : 'sawtooth';
+    osc2.type = isEV ? 'sine' : 'square';
+    osc3.type = 'triangle';
+
+    osc1.frequency.value = baseFreq;
+    osc2.frequency.value = baseFreq * 1.5;
+    osc3.frequency.value = baseFreq * 0.5;
+
+    // FM modulation for mechanical character
+    const lfo = ctx.createOscillator();
+    const lfoGain = ctx.createGain();
+    lfo.frequency.value = 3 + Math.random() * 5;
+    lfoGain.gain.value = isEV ? 2 : baseFreq * 0.08;
+    lfo.connect(lfoGain);
+    lfoGain.connect(osc1.frequency);
+    lfoGain.connect(osc2.frequency);
+    lfo.start();
+
+    // Noise buffer for combustion / turbo
+    const bufferSize = ctx.sampleRate * 2;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+    noise.buffer = buffer;
+    noise.loop = true;
+
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.value = isEV ? 0.01 : 0.04;
+    noise.connect(noiseGain);
+
+    const oscGain = ctx.createGain();
+    oscGain.gain.value = 0.12;
+
+    osc1.connect(oscGain);
+    osc2.connect(oscGain);
+    osc3.connect(oscGain);
+    oscGain.connect(filterNode);
+    noiseGain.connect(filterNode);
+
+    osc1.start(); osc2.start(); osc3.start(); noise.start();
+
+    // Fade in
+    masterGain.gain.cancelScheduledValues(ctx.currentTime);
+    masterGain.gain.setValueAtTime(0, ctx.currentTime);
+    masterGain.gain.linearRampToValueAtTime(0.35, ctx.currentTime + 0.4);
+
+    // Store for cleanup
+    currentSource = { osc1, osc2, osc3, noise, lfo, oscGain, noiseGain, lfoGain };
+    currentGain = masterGain;
+
+    // Schedule pitch modulation for realism
+    let t = ctx.currentTime;
+    const interval = setInterval(() => {
+      if (!currentSource || !isEnabled) { clearInterval(interval); return; }
+      const now = ctx.currentTime;
+      const rev = Math.sin(now * 0.5) * 0.5 + 0.5;
+      const targetFreq = baseFreq * (0.8 + rev * 0.6);
+      osc1.frequency.linearRampToValueAtTime(targetFreq, now + 0.3);
+      osc2.frequency.linearRampToValueAtTime(targetFreq * 1.5, now + 0.3);
+      osc3.frequency.linearRampToValueAtTime(targetFreq * 0.5, now + 0.3);
+      const targetFilter = 2000 + rev * 6000;
+      filterNode.frequency.linearRampToValueAtTime(targetFilter, now + 0.3);
+    }, 800);
+    currentSource._interval = interval;
+  }
+
+  function stopSound(){
+    if (currentSource){
+      if (currentSource._interval) clearInterval(currentSource._interval);
+      try{
+        currentSource.osc1.stop();
+        currentSource.osc2.stop();
+        currentSource.osc3.stop();
+        currentSource.noise.stop();
+        currentSource.lfo.stop();
+      }catch(e){}
+      currentSource = null;
+    }
+    if (masterGain){
+      masterGain.gain.cancelScheduledValues(ctx.currentTime);
+      masterGain.gain.setValueAtTime(masterGain.gain.value, ctx.currentTime);
+      masterGain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.2);
+    }
+  }
+
+  function toggle(){
+    isEnabled = !isEnabled;
+    if (!isEnabled){ stopSound(); }
+    return isEnabled;
+  }
+
+  function play(v){
+    if (!isEnabled) return;
+    startSound(v);
+  }
+
+  function getEnabled(){ return isEnabled; }
+
+  return { toggle, play, stop: stopSound, getEnabled, ensureContext };
+})();
+
+/* ============================================================
+   11 · THEME
    ============================================================ */
 const Theme = {
-  cur: localStorage.getItem('cs-theme') || 'obsidian',
+  cur: localStorage.getItem('ms-theme') || 'obsidian',
   init(){
     if (this.cur !== 'paper') this.cur = 'obsidian';
     document.documentElement.setAttribute('data-theme', this.cur);
@@ -2117,7 +2736,7 @@ const Theme = {
     document.documentElement.setAttribute('data-theme', t);
     document.querySelector('meta[name="theme-color"]').setAttribute('content', t === 'paper' ? '#FFFFFF' : '#050505');
     this.cur = t;
-    localStorage.setItem('cs-theme', t);
+    localStorage.setItem('ms-theme', t);
     document.querySelectorAll('.theme-opt').forEach(b => b.classList.toggle('active', b.dataset.theme === t));
     setTimeout(() => document.documentElement.classList.remove('theme-transitioning'), 760);
     if (window.__engine) window.__engine.onThemeChange();
@@ -2126,7 +2745,7 @@ const Theme = {
 Theme.init();
 
 /* ============================================================
-   7 · HELPERS
+   12 · HELPERS
    ============================================================ */
 const $  = (s, c=document) => c.querySelector(s);
 const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
@@ -2140,13 +2759,13 @@ function toast(msg){
 const nf = n => Number(n).toLocaleString('en-US');
 
 /* ============================================================
-   8 · GARAGE + COMPARE STATE
+   13 · GARAGE + COMPARE STATE
    ============================================================ */
 const Store = {
-  garage: new Set(JSON.parse(localStorage.getItem('cs-garage') || '[]')),
-  compare: JSON.parse(localStorage.getItem('cs-compare') || '[]'),
-  saveGarage(){ localStorage.setItem('cs-garage', JSON.stringify([...this.garage])); },
-  saveCompare(){ localStorage.setItem('cs-compare', JSON.stringify(this.compare)); }
+  garage: new Set(JSON.parse(localStorage.getItem('ms-garage') || '[]')),
+  compare: JSON.parse(localStorage.getItem('ms-compare') || '[]'),
+  saveGarage(){ localStorage.setItem('ms-garage', JSON.stringify([...this.garage])); },
+  saveCompare(){ localStorage.setItem('ms-compare', JSON.stringify(this.compare)); }
 };
 
 function updateGarageUI(){
@@ -2178,12 +2797,16 @@ function toggleGarage(id){
 }
 
 /* ============================================================
-   9 · GRID STATE + RENDER
+   14 · GRID STATE + RENDER
    ============================================================ */
 const PAGE_SIZE = 12;
 const state      = { power:'all', era:'all', body:'all', country:'all', sort:'relevance', q:'', kind:'all', page:1 };
 const bikeState  = { cat:'all', power:'all', country:'all', sort:'relevance', q:'', page:1 };
 const shipState  = { type:'all', propulsion:'all', country:'all', sort:'relevance', q:'', page:1 };
+const truckState = { sort:'relevance', q:'', page:1 };
+const suvState   = { sort:'relevance', q:'', page:1 };
+const heliState  = { sort:'relevance', q:'', page:1 };
+const spaceState = { sort:'relevance', q:'', page:1 };
 
 function matchQuery(v, q){
   if (!q) return true;
@@ -2237,6 +2860,34 @@ function filteredShips(){
   if (shipState.sort === 'oldest') list.sort((a,b) => parseInt(a.years) - parseInt(b.years));
   return list;
 }
+function filteredTrucks(){
+  let list = TRUCKS.filter(t => matchQuery(t, truckState.q));
+  if (truckState.sort === 'power') list.sort((a,b) => b.hp - a.hp);
+  if (truckState.sort === 'az') list.sort((a,b) => a.name.localeCompare(b.name));
+  if (truckState.sort === 'newest') list.sort((a,b) => parseInt(b.years) - parseInt(a.years));
+  return list;
+}
+function filteredSUVs(){
+  let list = SUVS.filter(s => matchQuery(s, suvState.q));
+  if (suvState.sort === 'power') list.sort((a,b) => b.hp - a.hp);
+  if (suvState.sort === 'az') list.sort((a,b) => a.name.localeCompare(b.name));
+  if (suvState.sort === 'newest') list.sort((a,b) => parseInt(b.years) - parseInt(a.years));
+  return list;
+}
+function filteredHelis(){
+  let list = HELIS.filter(h => matchQuery(h, heliState.q));
+  if (heliState.sort === 'speed') list.sort((a,b) => parseFloat(b.speed) - parseFloat(a.speed));
+  if (heliState.sort === 'az') list.sort((a,b) => a.name.localeCompare(b.name));
+  if (heliState.sort === 'newest') list.sort((a,b) => parseInt(b.years) - parseInt(a.years));
+  return list;
+}
+function filteredSpace(){
+  let list = SPACECRAFT.filter(s => matchQuery(s, spaceState.q));
+  if (spaceState.sort === 'az') list.sort((a,b) => a.name.localeCompare(b.name));
+  if (spaceState.sort === 'newest') list.sort((a,b) => parseInt(b.years) - parseInt(a.years));
+  if (spaceState.sort === 'oldest') list.sort((a,b) => parseInt(a.years) - parseInt(b.years));
+  return list;
+}
 
 function renderGrid(grid, list, countEl, st){
   countEl.textContent = list.length;
@@ -2270,12 +2921,13 @@ function renderGrid(grid, list, countEl, st){
 function renderCars(){  state.page = 1;  renderGrid($('#carGrid'),  filteredCars(),  $('#resultCount'), state); }
 function renderBikes(){ bikeState.page = 1; renderGrid($('#bikeGrid'), filteredBikes(), $('#bikeResultCount'), bikeState); }
 function renderShips(){ shipState.page = 1; renderGrid($('#shipGrid'), filteredShips(), $('#shipResultCount'), shipState); }
-
-/* Keep page counter when clicking "load more" without losing existing cards */
-const _origRenderGrid = renderGrid;
+function renderTrucks(){ truckState.page = 1; renderGrid($('#truckGrid'), filteredTrucks(), $('#truckResultCount'), truckState); }
+function renderSUVs(){ suvState.page = 1; renderGrid($('#suvGrid'), filteredSUVs(), $('#suvResultCount'), suvState); }
+function renderHelis(){ heliState.page = 1; renderGrid($('#heliGrid'), filteredHelis(), $('#heliResultCount'), heliState); }
+function renderSpace(){ spaceState.page = 1; renderGrid($('#spaceGrid'), filteredSpace(), $('#spaceResultCount'), spaceState); }
 
 /* ============================================================
-   10 · VEHICLE CARD
+   15 · VEHICLE CARD
    ============================================================ */
 function createVehicleCard(v, i){
   const kind = v.kind;
@@ -2297,13 +2949,24 @@ function createVehicleCard(v, i){
   } else if (kind === 'ship'){
     thirdSpec = { value: String(v.length).replace(' m',''), label: 'm LOA' };
     badge = v.type;
+  } else if (kind === 'truck'){
+    thirdSpec = { value: nf(v.torque), label: 'Nm' };
+    badge = v.type || 'Truck';
+  } else if (kind === 'heli'){
+    thirdSpec = { value: v.speed, label: 'km/h' };
+    badge = v.type;
+  } else if (kind === 'space'){
+    thirdSpec = { value: v.height || '—', label: 'Height' };
+    badge = v.type;
   } else {
     thirdSpec = { value: String(v.top).split(' ')[0], label: 'km/h' };
     badge = v.power;
   }
 
-  const zeroLabel = kind === 'ship' ? 'Speed' : '0–100';
-  const zeroValue = kind === 'ship' ? String(v.speed).replace(' kn','') : String(v.zero).replace(' s','');
+  const zeroLabel = kind === 'ship' ? 'Speed' : (kind === 'truck' || kind === 'heli' || kind === 'space') ? 'Top' : '0–100';
+  const zeroValue = kind === 'ship' ? String(v.speed).replace(' kn','') : (kind === 'truck') ? v.hp : (kind === 'heli' || kind === 'space') ? v.speed : String(v.zero).replace(' s','');
+
+  const engineDisplay = v.engine || v.propulsion || '—';
 
   card.innerHTML = `
     <div class="pcc-media">
@@ -2336,12 +2999,12 @@ function createVehicleCard(v, i){
       <h3 class="pcc-name">${v.name}</h3>
       <p class="pcc-tagline">${v.tagline}</p>
       <div class="pcc-specs">
-        <div class="pcc-spec"><span class="pcc-spec-value">${kind === 'ship' ? nf(v.hp) : v.hp}</span><span class="pcc-spec-label">${kind === 'ship' ? 'HP' : 'HP'}</span></div>
+        <div class="pcc-spec"><span class="pcc-spec-value">${v.hp || '—'}</span><span class="pcc-spec-label">HP</span></div>
         <div class="pcc-spec"><span class="pcc-spec-value">${zeroValue}</span><span class="pcc-spec-label">${zeroLabel}</span></div>
         <div class="pcc-spec"><span class="pcc-spec-value">${thirdSpec.value}</span><span class="pcc-spec-label">${thirdSpec.label}</span></div>
       </div>
       <div class="pcc-footer">
-        <span class="pcc-engine">${v.engine}</span>
+        <span class="pcc-engine">${engineDisplay}</span>
         <span class="pcc-cta">View
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </span>
@@ -2383,7 +3046,7 @@ function syncCardStates(){
 }
 
 /* ============================================================
-   11 · GARAGE
+   16 · GARAGE
    ============================================================ */
 function renderGarage(){
   const grid = $('#garageGrid');
@@ -2395,7 +3058,7 @@ function renderGarage(){
         <path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z"/>
       </svg>
       <h3>Your garage is empty.</h3>
-      <p>Tap the heart on any car, bike or ship to save it here. Your collection lives on this device.</p>
+      <p>Tap the heart on any vehicle to save it here. Your collection lives on this device.</p>
       <a href="#cars" class="btn btn-primary" data-magnetic>Browse the archive</a>
     </div>`;
     wireMagnetic(grid);
@@ -2408,7 +3071,7 @@ function renderGarage(){
 }
 
 /* ============================================================
-   12 · COMPARE
+   17 · COMPARE
    ============================================================ */
 function toggleCompare(id){
   const idx = Store.compare.indexOf(id);
@@ -2489,7 +3152,7 @@ function openCompare(){
           <div class="cmp-car-body">
             <div class="cb-brand">${a.brand}</div>
             <h3>${a.name}</h3>
-            <div class="cb-sub">${a.years} · ${a.country} · ${a.kind === 'bike' ? a.cat : a.kind === 'ship' ? a.type : a.power}</div>
+            <div class="cb-sub">${a.years} · ${a.country} · ${a.kind === 'bike' ? a.cat : a.kind === 'ship' ? a.type : a.kind === 'truck' ? a.type : a.kind === 'heli' ? a.type : a.kind === 'space' ? a.type : a.power}</div>
           </div>
         </div>
       </div>
@@ -2500,7 +3163,7 @@ function openCompare(){
           <div class="cmp-car-body">
             <div class="cb-brand">${b.brand}</div>
             <h3>${b.name}</h3>
-            <div class="cb-sub">${b.years} · ${b.country} · ${b.kind === 'bike' ? b.cat : b.kind === 'ship' ? b.type : b.power}</div>
+            <div class="cb-sub">${b.years} · ${b.country} · ${b.kind === 'bike' ? b.cat : b.kind === 'ship' ? b.type : b.kind === 'truck' ? b.type : b.kind === 'heli' ? b.type : b.kind === 'space' ? b.type : b.power}</div>
           </div>
         </div>
       </div>
@@ -2536,8 +3199,8 @@ function openCompare(){
     ['Engine / Propulsion', a.engine, b.engine],
     ['Layout', a.layout, b.layout],
     ['Gearbox', a.gearbox, b.gearbox],
-    ['Type', a.kind === 'bike' ? a.cat + ' · Motorcycle' : a.kind === 'ship' ? a.type + ' · Ship' : a.body + ' · Car',
-             b.kind === 'bike' ? b.cat + ' · Motorcycle' : b.kind === 'ship' ? b.type + ' · Ship' : b.body + ' · Car'],
+    ['Type', a.kind === 'bike' ? a.cat + ' · Motorcycle' : a.kind === 'ship' ? a.type + ' · Ship' : a.kind === 'truck' ? a.type + ' · Truck' : a.kind === 'heli' ? a.type + ' · Helicopter' : a.kind === 'space' ? a.type + ' · Spacecraft' : a.body + ' · Car',
+             b.kind === 'bike' ? b.cat + ' · Motorcycle' : b.kind === 'ship' ? b.type + ' · Ship' : b.kind === 'truck' ? b.type + ' · Truck' : b.kind === 'heli' ? b.type + ' · Helicopter' : b.kind === 'space' ? b.type + ' · Spacecraft' : b.body + ' · Car'],
     ['Capacity', a.seats, b.seats],
     ['Price (new)', a.price, b.price],
     ['Status', a.production, b.production],
@@ -2581,7 +3244,7 @@ function closeCompare(){
 }
 
 /* ============================================================
-   13 · DETAIL MODAL
+   18 · DETAIL MODAL
    ============================================================ */
 const carModal = $('#carModal');
 const carPanel = $('#carPanel');
@@ -2594,6 +3257,9 @@ function openVehicle(id){
   const kind = v.kind;
   const isBike = kind === 'bike';
   const isShip = kind === 'ship';
+  const isTruck = kind === 'truck';
+  const isHeli = kind === 'heli';
+  const isSpace = kind === 'space';
   const saved = Store.garage.has(v.id);
   const comparing = Store.compare.includes(v.id);
 
@@ -2622,6 +3288,39 @@ function openVehicle(id){
       <tr><td>Propulsion</td><td>${v.propulsion}</td></tr>`;
     eyebrow = `${v.brand} · ${v.country} · ${v.type}`;
     typeLabel = v.type;
+  } else if (isTruck){
+    stats = [
+      [nf(v.hp), 'Horsepower'], [nf(v.torque), 'Torque Nm'], ['—', '0–100 km/h'],
+      ['—', 'Top speed'], [v.weight, 'Kerb weight'], ['—', 'HP / tonne']
+    ];
+    extraSpecs = `
+      <tr><td>Type</td><td>${v.type}</td></tr>
+      <tr><td>Engine</td><td>${v.engine}</td></tr>
+      <tr><td>Gearbox</td><td>${v.gearbox}</td></tr>`;
+    eyebrow = `${v.brand} · ${v.country} · ${v.type}`;
+    typeLabel = v.type;
+  } else if (isHeli){
+    stats = [
+      [nf(v.hp), 'Shaft horsepower'], ['—', 'Torque Nm'], ['—', '0–100 km/h'],
+      [v.speed, 'Cruise speed'], [v.weight, 'Empty weight'], [v.range, 'Range']
+    ];
+    extraSpecs = `
+      <tr><td>Type</td><td>${v.type}</td></tr>
+      <tr><td>Engine</td><td>${v.engine}</td></tr>
+      <tr><td>Rotor diameter</td><td>${v.rotorDia}</td></tr>`;
+    eyebrow = `${v.brand} · ${v.country} · ${v.type}`;
+    typeLabel = v.type;
+  } else if (isSpace){
+    stats = [
+      [v.thrust || '—', 'Thrust'], [v.height || '—', 'Height'], [v.payload || '—', 'Payload'],
+      [v.crew || '—', 'Crew'], [v.weight || '—', 'Mass'], ['—', 'Max speed']
+    ];
+    extraSpecs = `
+      <tr><td>Type</td><td>${v.type}</td></tr>
+      <tr><td>Agency</td><td>${v.brand}</td></tr>
+      <tr><td>Mission</td><td>${v.mission}</td></tr>`;
+    eyebrow = `${v.brand} · ${v.country} · ${v.type}`;
+    typeLabel = v.type;
   } else {
     stats = [
       [v.hp, 'Horsepower'], [v.torque, 'Torque Nm'], [v.zero, '0–100 km/h'],
@@ -2636,10 +3335,13 @@ function openVehicle(id){
 
   const powertrainCopy = isShip
     ? `Rotate the 3D assembly below. This is a live animation of a marine diesel inline-six — the workhorse architecture of modern shipping, from ferries to container ships.`
+    : isSpace
+    ? `Rotate the 3D assembly below. This is a live animation of a rocket engine — the fundamental architecture of all chemical propulsion.`
     : `Rotate the 3D assembly below. This is a live animation of an inline-4 cylinder engine — the same fundamental architecture used in everything from a 125cc commuter to a 1,300cc hypersport.`;
 
   carPanel.innerHTML = `
     <div class="detail-hero">
+      <div class="detail-hero-img" id="detailHeroImg"></div>
       <div class="dh-art">${vehicleArt(v,{label:false})}</div>
       <div class="dh-inner">
         <p class="eyebrow ink">${eyebrow}</p>
@@ -2647,13 +3349,14 @@ function openVehicle(id){
         <p class="dh-tag">${v.tagline}</p>
         <div class="dh-chips">
           <span class="dh-chip">${typeLabel}</span>
-          <span class="dh-chip">${isBike ? (v.cc ? v.cc + 'cc' : 'Electric') : isShip ? v.length : v.body}</span>
+          <span class="dh-chip">${isBike ? (v.cc ? v.cc + 'cc' : 'Electric') : isShip ? v.length : isSpace ? (v.height || '—') : isHeli ? v.speed : isTruck ? v.hp + ' hp' : v.body}</span>
           <span class="dh-chip">${v.years}</span>
           <span class="dh-chip">${v.layout}</span>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:26px">
           <button class="btn btn-primary btn-sm" data-modal-heart data-magnetic>${saved ? '♥ Saved to garage' : '♡ Save to garage'}</button>
           <button class="btn btn-ghost btn-sm" data-modal-compare data-magnetic>${comparing ? '✓ In comparison' : '⚖ Add to compare'}</button>
+          <button class="btn btn-ghost btn-sm" data-modal-sound data-magnetic>▶ Play engine sound</button>
         </div>
         <div class="stat-strip">
           ${stats.map(([val,l]) => `<div class="stat-cell"><b>${val}</b><span>${l}</span></div>`).join('')}
@@ -2670,7 +3373,7 @@ function openVehicle(id){
 
     <section class="tab-panel on" data-panel="overview">
       <p class="detail-h4">The story</p>
-      <h3 class="detail-h3">What makes this ${isShip ? 'vessel' : isBike ? 'bike' : 'car'} matter</h3>
+      <h3 class="detail-h3">What makes this ${isShip ? 'vessel' : isBike ? 'bike' : isSpace ? 'spacecraft' : isHeli ? 'helicopter' : isTruck ? 'truck' : 'car'} matter</h3>
       <p class="detail-p">${v.blurb}</p>
       <p class="detail-p" style="color:var(--text-3);font-size:14.5px">
         <strong style="color:var(--text);font-weight:600">Notable:</strong> ${v.notable}
@@ -2680,19 +3383,19 @@ function openVehicle(id){
       <div class="info-grid">
         <div class="info-tile">
           <b>Powertrain</b>
-          <p>${v.engine}</p>
+          <p>${v.engine || v.propulsion || '—'}</p>
           <table class="spec-table">
-            <tr><td>Type</td><td>${isShip ? v.type : isBike ? (v.cat === 'Electric' ? 'EV' : 'ICE') : v.power}</td></tr>
-            <tr><td>Layout</td><td>${v.layout}</td></tr>
-            <tr><td>Gearbox</td><td>${v.gearbox}</td></tr>
+            <tr><td>Type</td><td>${isShip ? v.type : isBike ? (v.cat === 'Electric' ? 'EV' : 'ICE') : isSpace ? v.type : v.power || '—'}</td></tr>
+            <tr><td>Layout</td><td>${v.layout || '—'}</td></tr>
+            <tr><td>Gearbox</td><td>${v.gearbox || '—'}</td></tr>
           </table>
         </div>
         <div class="info-tile">
           <b>Performance</b>
           <p>Manufacturer test conditions.</p>
           <table class="spec-table">
-            <tr><td>${isShip ? 'Top speed' : '0–100 km/h'}</td><td>${isShip ? v.speed : v.zero}</td></tr>
-            <tr><td>${isShip ? 'Power' : 'Top speed'}</td><td>${isShip ? nf(v.hp) + ' hp' : v.top}</td></tr>
+            <tr><td>${isShip ? 'Top speed' : isSpace ? 'Thrust' : isHeli ? 'Cruise speed' : '0–100 km/h'}</td><td>${isShip ? v.speed : isSpace ? (v.thrust || '—') : isHeli ? v.speed : isTruck ? '—' : v.zero}</td></tr>
+            <tr><td>${isShip ? 'Power' : isSpace ? 'Payload' : isHeli ? 'Range' : 'Top speed'}</td><td>${isShip ? nf(v.hp) + ' hp' : isSpace ? (v.payload || '—') : isHeli ? v.range : isTruck ? '—' : v.top}</td></tr>
             <tr><td>Power / tonne</td><td>${v.ptw || '—'} hp/t</td></tr>
           </table>
         </div>
@@ -2710,7 +3413,7 @@ function openVehicle(id){
 
     <section class="tab-panel" data-panel="powertrain">
       <p class="detail-h4">Interactive powertrain</p>
-      <h3 class="detail-h3">${v.engine}</h3>
+      <h3 class="detail-h3">${v.engine || v.propulsion || 'Powertrain'}</h3>
       <p class="detail-p">${powertrainCopy}</p>
       <div style="margin-top:34px">
         <div class="ev" style="height:520px">
@@ -2743,18 +3446,18 @@ function openVehicle(id){
         <tr><td>Years</td><td>${v.years}</td></tr>
         <tr><td>Country</td><td>${v.country}</td></tr>
         ${extraSpecs}
-        <tr><td>${isShip ? 'Guests' : 'Seats'}</td><td>${v.seats || v.guests || '—'}</td></tr>
-        <tr><td>Propulsion type</td><td>${isShip ? v.propulsion : isBike ? (v.cat === 'Electric' ? 'EV' : 'ICE') : v.power}</td></tr>
-        <tr><td>Engine / Power</td><td>${v.engine}</td></tr>
-        <tr><td>Layout</td><td>${v.layout}</td></tr>
-        <tr><td>Gearbox</td><td>${v.gearbox}</td></tr>
+        <tr><td>${isShip ? 'Guests' : isSpace ? 'Crew' : 'Seats'}</td><td>${v.seats || v.guests || '—'}</td></tr>
+        <tr><td>Propulsion type</td><td>${isShip ? v.propulsion : isBike ? (v.cat === 'Electric' ? 'EV' : 'ICE') : v.power || '—'}</td></tr>
+        <tr><td>Engine / Power</td><td>${v.engine || v.propulsion || '—'}</td></tr>
+        <tr><td>Layout</td><td>${v.layout || '—'}</td></tr>
+        <tr><td>Gearbox</td><td>${v.gearbox || '—'}</td></tr>
         <tr><td>Horsepower</td><td>${v.hp ? nf(v.hp) + ' hp' : '—'}</td></tr>
         <tr><td>Torque</td><td>${v.torque ? nf(v.torque) + ' Nm' : '—'}</td></tr>
         <tr><td>Power / tonne</td><td>${v.ptw || '—'} hp/t</td></tr>
-        <tr><td>${isShip ? 'Top speed' : '0–100 km/h'}</td><td>${isShip ? v.speed : v.zero}</td></tr>
-        <tr><td>${isShip ? 'Length LOA' : 'Top speed'}</td><td>${isShip ? v.length : v.top}</td></tr>
-        <tr><td>Weight / Displacement</td><td>${v.weight}</td></tr>
-        <tr><td>Price (new)</td><td>${v.price}</td></tr>
+        <tr><td>${isShip ? 'Top speed' : isSpace ? 'Thrust' : isHeli ? 'Cruise speed' : '0–100 km/h'}</td><td>${isShip ? v.speed : isSpace ? (v.thrust || '—') : isHeli ? v.speed : isTruck ? '—' : v.zero}</td></tr>
+        <tr><td>${isShip ? 'Length LOA' : isSpace ? 'Height' : isHeli ? 'Range' : 'Top speed'}</td><td>${isShip ? v.length : isSpace ? (v.height || '—') : isHeli ? v.range : isTruck ? '—' : v.top}</td></tr>
+        <tr><td>Weight / Displacement</td><td>${v.weight || '—'}</td></tr>
+        <tr><td>Price (new)</td><td>${v.price || '—'}</td></tr>
         <tr><td>Production</td><td>${v.production}</td></tr>
         <tr><td>Notable</td><td>${v.notable}</td></tr>
       </table>
@@ -2763,7 +3466,7 @@ function openVehicle(id){
     <section class="tab-panel" data-panel="gallery">
       <p class="detail-h4">Gallery</p>
       <h3 class="detail-h3">Real photography</h3>
-      <p class="detail-p" style="margin-bottom:32px">Loaded live from Wikimedia Commons — actual photographs of this ${isShip ? 'vessel' : isBike ? 'motorcycle' : 'model'}.</p>
+      <p class="detail-p" style="margin-bottom:32px">Loaded live from Wikimedia Commons — actual photographs of this ${isShip ? 'vessel' : isBike ? 'motorcycle' : isSpace ? 'spacecraft' : isHeli ? 'helicopter' : isTruck ? 'truck' : 'model'}.</p>
       <div class="gallery-grid" id="galleryGrid"></div>
     </section>`;
 
@@ -2772,9 +3475,21 @@ function openVehicle(id){
   carModal.classList.add('open');
   document.body.classList.add('locked');
   $('.modal-scroll', carModal).scrollTop = 0;
+
+  // Load hero background image
+  loadHeroImage(v);
 }
 
-/* Keep an alias so older calls still work */
+async function loadHeroImage(v){
+  const heroImg = carPanel.querySelector('#detailHeroImg');
+  if (!heroImg) return;
+  const img = await fetchVehicleImage(v, 1200);
+  if (img){
+    heroImg.style.backgroundImage = `url(${img.url})`;
+    heroImg.classList.add('loaded');
+  }
+}
+
 const openCar = openVehicle;
 
 function wireCarModal(v){
@@ -2810,6 +3525,17 @@ function wireCarModal(v){
     toggleCompare(v.id);
     const on = Store.compare.includes(v.id);
     cmpBtn.textContent = on ? '✓ In comparison' : '⚖ Add to compare';
+  });
+
+  const soundBtn = carPanel.querySelector('[data-modal-sound]');
+  soundBtn.addEventListener('click', () => {
+    if (!SoundEngine.getEnabled()){
+      SoundEngine.toggle();
+      $('#soundToggle').classList.add('on');
+    }
+    SoundEngine.play(v);
+    soundBtn.textContent = '♪ Playing…';
+    setTimeout(() => { soundBtn.textContent = '▶ Play engine sound'; }, 3000);
   });
 
   const canvas = carPanel.querySelector('[data-engine-canvas]');
@@ -2859,6 +3585,7 @@ async function loadGallery(v){
 function closeCar(){
   if (!carModal.classList.contains('open')) return;
   carModal.classList.add('closing');
+  SoundEngine.stop();
   setTimeout(() => {
     carModal.classList.remove('open','closing');
     carPanel.innerHTML = '';
@@ -2867,7 +3594,7 @@ function closeCar(){
 }
 
 /* ============================================================
-   14 · LIGHTBOX
+   19 · LIGHTBOX
    ============================================================ */
 const lightbox = $('#lightbox');
 const lbImg = $('#lbImg');
@@ -2905,7 +3632,7 @@ document.addEventListener('keydown', e => {
 });
 
 /* ============================================================
-   15 · 3D ENGINE LAB — parametric engines
+   20 · 3D ENGINE LAB
    ============================================================ */
 const CRANK_R = 12, ROD_L = 36;
 function pistonOffset(theta){
@@ -2927,14 +3654,12 @@ const EngineBuilder = {
     };
   },
 
-  /* ---- INLINE-4 ---- */
   inline4(m){
     const g = new THREE.Group();
     const positions = [-60,-20,20,60];
     const pistons = [], rods = [], pins = [];
     const block = new THREE.Mesh(new THREE.BoxGeometry(180,120,100), m.dark);
     block.position.y = 40; g.add(block);
-
     positions.forEach(x => {
       const bore = new THREE.Mesh(new THREE.CylinderGeometry(14,14,90,24,1,true), m.glass);
       bore.position.set(x,60,0); g.add(bore);
@@ -2947,7 +3672,6 @@ const EngineBuilder = {
       const pin = new THREE.Mesh(new THREE.SphereGeometry(6,14,14), m.accent);
       pin.position.set(x,5,0); g.add(pin); pins.push(pin);
     });
-
     const crank = new THREE.Mesh(new THREE.CylinderGeometry(8,8,170,24), m.metal);
     crank.rotation.z = Math.PI/2; g.add(crank);
     positions.forEach(x => {
@@ -2962,7 +3686,6 @@ const EngineBuilder = {
     });
     const flywheel = new THREE.Mesh(new THREE.CylinderGeometry(30,30,8,24), m.metal);
     flywheel.rotation.z = Math.PI/2; flywheel.position.set(95,0,0); g.add(flywheel);
-
     return {
       group: g,
       animate(t){
@@ -2978,14 +3701,12 @@ const EngineBuilder = {
     };
   },
 
-  /* ---- V8 (crossplane) ---- */
   v8(m){
     const g = new THREE.Group();
     const pistons = [], rods = [];
     const angle = Math.PI/4;
     const block = new THREE.Mesh(new THREE.BoxGeometry(200,100,160), m.dark);
     block.position.y = 30; g.add(block);
-
     const makeBank = (side) => {
       for (let i=0;i<4;i++){
         const x = (i - 1.5) * 42;
@@ -3005,19 +3726,18 @@ const EngineBuilder = {
     crank.rotation.z = Math.PI/2; g.add(crank);
     const cover = new THREE.Mesh(new THREE.BoxGeometry(200,16,80), m.accent);
     cover.position.y = 100; g.add(cover);
-
     return {
       group: g,
       animate(t){
         pistons.forEach((p,i) => {
           const theta = t + (i%4) * Math.PI/2 + (i>=4 ? Math.PI/2 : 0);
           const y = pistonOffset(theta);
-          p.mesh.position.set(p.mesh.position.x, 40 + y - 20, 0);
+          p.mesh.position.y = 40 + y - 20;
         });
         rods.forEach((r,i) => {
           const theta = t + (i%4) * Math.PI/2 + (i>=4 ? Math.PI/2 : 0);
           const y = 40 + pistonOffset(theta) - 20;
-          r.mesh.position.set(r.mesh.position.x, y/2, 0);
+          r.mesh.position.y = y/2;
           r.mesh.scale.y = y/50;
         });
         crank.rotation.x = t * 2;
@@ -3025,7 +3745,6 @@ const EngineBuilder = {
     };
   },
 
-  /* ---- FLAT-6 (boxer) ---- */
   flat6(m){
     const g = new THREE.Group();
     const pistons = [], rods = [];
@@ -3052,7 +3771,6 @@ const EngineBuilder = {
     crank.rotation.x = Math.PI/2; crank.position.y = 20; g.add(crank);
     const crankcase = new THREE.Mesh(new THREE.BoxGeometry(60,60,180), m.dark);
     crankcase.position.y = 20; g.add(crankcase);
-
     return {
       group: g,
       animate(t){
@@ -3072,7 +3790,6 @@ const EngineBuilder = {
     };
   },
 
-  /* ---- V12 ---- */
   v12(m){
     const g = new THREE.Group();
     const pistons = [];
@@ -3097,7 +3814,6 @@ const EngineBuilder = {
     crank.rotation.z = Math.PI/2; g.add(crank);
     const cover = new THREE.Mesh(new THREE.BoxGeometry(280,14,60), m.accent);
     cover.position.y = 95; g.add(cover);
-
     return {
       group: g,
       animate(t){
@@ -3111,7 +3827,6 @@ const EngineBuilder = {
     };
   },
 
-  /* ---- ROTARY (Wankel) ---- */
   rotary(m){
     const g = new THREE.Group();
     const housing = new THREE.Mesh(new THREE.CylinderGeometry(70,70,80,6,1,true), m.glass);
@@ -3119,8 +3834,6 @@ const EngineBuilder = {
     const housingEdge = new THREE.Mesh(new THREE.TorusGeometry(70,2,8,48), m.accent);
     housingEdge.rotation.x = Math.PI/2; housingEdge.position.z = 42; g.add(housingEdge);
     const housingEdge2 = housingEdge.clone(); housingEdge2.position.z = -42; g.add(housingEdge2);
-
-    const rotorGeo = new THREE.CylinderGeometry(0,0,0);
     const rotorShape = new THREE.Shape();
     rotorShape.moveTo(50, 0);
     rotorShape.lineTo(-25, 43);
@@ -3128,19 +3841,14 @@ const EngineBuilder = {
     rotorShape.closePath();
     const rotor = new THREE.Mesh(new THREE.ExtrudeGeometry(rotorShape, { depth: 60, bevelEnabled: false }), m.piston);
     rotor.position.z = -30; rotor.rotation.x = Math.PI/2; rotor.rotation.z = Math.PI/2; g.add(rotor);
-
     const shaft = new THREE.Mesh(new THREE.CylinderGeometry(8,8,180,20), m.metal);
     shaft.rotation.x = Math.PI/2; g.add(shaft);
-
     return {
       group: g,
-      animate(t){
-        rotor.rotation.z = t * 1.0;
-      }
+      animate(t){ rotor.rotation.z = t * 1.0; }
     };
   },
 
-  /* ---- ELECTRIC MOTOR ---- */
   electric(m){
     const g = new THREE.Group();
     const stator = new THREE.Mesh(new THREE.CylinderGeometry(70,70,90,40,1,true), m.dark);
@@ -3165,7 +3873,6 @@ const EngineBuilder = {
     };
   },
 
-  /* ---- JET TURBOFAN ---- */
   turbine(m){
     const g = new THREE.Group();
     const nacelle = new THREE.Mesh(new THREE.CylinderGeometry(75,75,140,40,1,true), m.glass);
@@ -3182,8 +3889,7 @@ const EngineBuilder = {
       const a = (i/18) * Math.PI * 2;
       const blade = new THREE.Mesh(new THREE.BoxGeometry(2,52,16), m.piston);
       blade.position.set(Math.cos(a) * 42, Math.sin(a) * 42, 60);
-      blade.rotation.z = a;
-      blade.rotation.x = 0.5;
+      blade.rotation.z = a; blade.rotation.x = 0.5;
       fanGroup.add(blade);
     }
     const compGroup = new THREE.Group(); g.add(compGroup);
@@ -3214,7 +3920,6 @@ const EngineBuilder = {
     };
   },
 
-  /* ---- MARINE DIESEL INLINE-6 ---- */
   marineDiesel(m){
     const g = new THREE.Group();
     const pistons = [];
@@ -3249,7 +3954,6 @@ const EngineBuilder = {
     };
   },
 
-  /* ---- V-TWIN MOTORCYCLE ---- */
   vtwin(m){
     const g = new THREE.Group();
     const pistons = [];
@@ -3283,7 +3987,6 @@ const EngineBuilder = {
     };
   },
 
-  /* ---- RADIAL AERO ENGINE ---- */
   radial(m){
     const g = new THREE.Group();
     const pistons = [];
@@ -3323,24 +4026,20 @@ const EngineBuilder = {
 };
 
 /* ============================================================
-   16 · 3D ENGINE VIEWER (singleton in the Lab)
+   21 · 3D ENGINE VIEWER
    ============================================================ */
 const EngineViewer = (() => {
-  let active = null;
-
   function buildScene(canvasEl, stage){
     const w = stage.clientWidth || 640;
     const h = stage.clientHeight || 420;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(38, w/h, 0.1, 2000);
     camera.position.set(220, 140, 260);
-
     const renderer = new THREE.WebGLRenderer({ canvas: canvasEl, antialias:true, alpha:true, powerPreference:'high-performance' });
     renderer.setSize(w, h, false);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.15;
-
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.06;
@@ -3349,16 +4048,13 @@ const EngineViewer = (() => {
     controls.maxPolarAngle = Math.PI / 1.8;
     controls.target.set(0, 40, 0);
     controls.enablePan = false;
-
     scene.add(new THREE.AmbientLight(0x404050, 1.4));
     const key = new THREE.DirectionalLight(0xFFFFFF, 2.6); key.position.set(200,300,200); scene.add(key);
     const fill = new THREE.DirectionalLight(0x8899AA, 1.0); fill.position.set(-200,100,-150); scene.add(fill);
     const rim = new THREE.PointLight(0xFFFFFF, 3, 900); rim.position.set(-100,200,-250); scene.add(rim);
     const accent = new THREE.PointLight(0x99AACC, 2, 700); accent.position.set(150,50,-200); scene.add(accent);
-
     const grid = new THREE.GridHelper(700, 40, 0x333333, 0x1A1A1A);
     grid.position.y = -4; scene.add(grid);
-
     return { scene, camera, renderer, controls };
   }
 
@@ -3368,9 +4064,7 @@ const EngineViewer = (() => {
         const stage = canvasEl.parentElement;
         const { scene, camera, renderer, controls } = buildScene(canvasEl, stage);
         const m = EngineBuilder.materials();
-
         const state = { paused:false, speed:1, t:0, visible:true, exploded:false, type:'inline4', current:null, explodedAmount:0 };
-
         function loadType(type){
           if (state.current) scene.remove(state.current.group);
           const builder = EngineBuilder[type] || EngineBuilder.inline4;
@@ -3379,7 +4073,6 @@ const EngineViewer = (() => {
           state.type = type;
         }
         loadType('inline4');
-
         let raf = null;
         let last = performance.now();
         function loop(now){
@@ -3401,34 +4094,24 @@ const EngineViewer = (() => {
           renderer.render(scene, camera);
         }
         raf = requestAnimationFrame(loop);
-
         const ro = new ResizeObserver(() => {
           const w2 = stage.clientWidth, h2 = stage.clientHeight;
           if (w2 && h2){ camera.aspect = w2/h2; camera.updateProjectionMatrix(); renderer.setSize(w2, h2, false); }
         });
         ro.observe(stage);
-
         const io = new IntersectionObserver(es => { es.forEach(e => state.visible = e.isIntersecting); }, { threshold: 0 });
         io.observe(stage);
-
-        const viewer = {
-          state,
-          load: loadType,
-          controls, camera, renderer,
-          onThemeChange(){ /* lights are neutral already */ }
-        };
-
+        const viewer = { state, load: loadType, controls, camera, renderer, onThemeChange(){} };
         if (loaderEl) loaderEl.classList.add('hide');
         resolve(viewer);
       });
     });
   }
-
   return { create };
 })();
 
 /* ============================================================
-   17 · ENGINE LAB UI
+   22 · ENGINE LAB UI
    ============================================================ */
 const ENGINES = [
   { id:'inline4',     name:'Inline-4 Turbo',       sub:'1.6–2.0 L · 4 cylinders', icon:'I4',
@@ -3463,7 +4146,6 @@ function renderEngineList(){
         <span class="ei-sub">${e.sub}</span>
       </span>
     </button>`).join('');
-
   list.querySelectorAll('[data-engine]').forEach(btn => {
     btn.addEventListener('click', () => {
       list.querySelectorAll('.engine-item').forEach(b => { b.classList.remove('on'); b.setAttribute('aria-selected','false'); });
@@ -3482,7 +4164,7 @@ function updateEngineSpecs(id){
 }
 
 /* ============================================================
-   18 · REVEALS · COUNT-UP · MAGNETIC · SCROLLSPY · PROGRESS
+   23 · REVEALS · COUNT-UP · MAGNETIC · SCROLLSPY · PROGRESS
    ============================================================ */
 let revealIO;
 function observeReveals(){
@@ -3574,7 +4256,7 @@ function initScrollProgress(){
 }
 
 /* ============================================================
-   19 · HERO FEATURED CAROUSEL
+   24 · HERO FEATURED CAROUSEL
    ============================================================ */
 const FEATURED_IDS = ['rimac-nevera','porsche-918-spyder','bugatti-chiron-super-sport-300','ferrari-laferrari','koenigsegg-jesko-absolut','tesla-model-s-plaid'];
 let heroIndex = 0, heroTimer = null;
@@ -3586,21 +4268,17 @@ async function showFeatured(i){
   const car = cars[heroIndex];
   const frame = $('#heroFrame');
   const img = $('#heroImg');
-
   $('#heroArt').innerHTML = vehicleArt(car, { label:false });
   $('#hfBrand').textContent = `${car.brand} · ${car.country}`;
   $('#hfName').textContent = car.name;
   $('#hfHp').textContent = car.hp;
   $('#hfHpLabel').textContent = 'Horsepower';
-
   frame.classList.remove('has-photo');
   img.classList.remove('loaded');
   img.removeAttribute('src');
   img.alt = `${car.brand} ${car.name}`;
-
   const dots = $('#hfDots');
   dots.innerHTML = cars.map((_,k) => `<i class="${k===heroIndex?'on':''}"></i>`).join('');
-
   const photo = await fetchVehicleImage(car, 1200);
   if (photo && heroIndex === cars.indexOf(car)){
     img.onload = () => { img.classList.add('loaded'); frame.classList.add('has-photo'); };
@@ -3619,7 +4297,7 @@ function initHero(){
 }
 
 /* ============================================================
-   20 · FILTERS · SEARCH · SORT
+   25 · FILTERS · SEARCH · SORT
    ============================================================ */
 $$('#filters .filter-opt').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -3654,6 +4332,11 @@ $$('#shipFilters .filter-opt').forEach(btn => {
 });
 $('#shipSortSelect').addEventListener('change', e => { shipState.sort = e.target.value; renderShips(); });
 
+$('#truckSortSelect').addEventListener('change', e => { truckState.sort = e.target.value; renderTrucks(); });
+$('#suvSortSelect').addEventListener('change', e => { suvState.sort = e.target.value; renderSUVs(); });
+$('#heliSortSelect').addEventListener('change', e => { heliState.sort = e.target.value; renderHelis(); });
+$('#spaceSortSelect').addEventListener('change', e => { spaceState.sort = e.target.value; renderSpace(); });
+
 /* Global search */
 const searchInput = $('#searchInput');
 let searchDebounce;
@@ -3662,13 +4345,17 @@ searchInput.addEventListener('input', e => {
   searchDebounce = setTimeout(() => {
     const q = e.target.value.trim();
     state.q = q; bikeState.q = q; shipState.q = q;
+    truckState.q = q; suvState.q = q; heliState.q = q; spaceState.q = q;
     renderCars(); renderBikes(); renderShips();
+    renderTrucks(); renderSUVs(); renderHelis(); renderSpace();
   }, 200);
 });
 $('#searchBtn').addEventListener('click', () => {
   const q = searchInput.value.trim();
   state.q = q; bikeState.q = q; shipState.q = q;
+  truckState.q = q; suvState.q = q; heliState.q = q; spaceState.q = q;
   renderCars(); renderBikes(); renderShips();
+  renderTrucks(); renderSUVs(); renderHelis(); renderSpace();
   $('#cars').scrollIntoView({ behavior:'smooth' });
 });
 
@@ -3677,22 +4364,23 @@ $$('#quickChips .chip').forEach(chip => {
     $$('#quickChips .chip').forEach(c => c.classList.remove('on'));
     chip.classList.add('on');
     const q = chip.dataset.quick;
-    // reset all
     state.power = 'all'; state.era = 'all'; state.body = 'all'; state.country = 'all'; state.q = '';
     bikeState.cat = 'all'; bikeState.power = 'all'; bikeState.country = 'all'; bikeState.q = '';
     shipState.type = 'all'; shipState.propulsion = 'all'; shipState.country = 'all'; shipState.q = '';
+    truckState.q = ''; suvState.q = ''; heliState.q = ''; spaceState.q = '';
     searchInput.value = '';
-
     if (q === 'Cars'){ $('#cars').scrollIntoView({behavior:'smooth'}); }
     else if (q === 'Bikes'){ $('#bikes').scrollIntoView({behavior:'smooth'}); }
     else if (q === 'Ships'){ $('#ships').scrollIntoView({behavior:'smooth'}); }
+    else if (q === 'Trucks'){ $('#trucks').scrollIntoView({behavior:'smooth'}); }
+    else if (q === 'SUVs'){ $('#suvs').scrollIntoView({behavior:'smooth'}); }
+    else if (q === 'Helicopters'){ $('#helis').scrollIntoView({behavior:'smooth'}); }
+    else if (q === 'Spacecraft'){ $('#space').scrollIntoView({behavior:'smooth'}); }
     else if (q === 'Classic'){ state.era = 'Classic'; }
     else if (q === 'Hypercar'){ state.q = 'hypercar'; }
     else if (q === 'Superyacht'){ shipState.type = 'Superyacht'; }
     else if (q === 'EV'){ state.power = 'EV'; bikeState.power = 'EV'; }
     else if (q === 'ICE'){ state.power = 'ICE'; bikeState.power = 'ICE'; }
-
-    // sync car filters
     $$('#filters .filter-opt').forEach(b => {
       const g = b.dataset.group;
       b.classList.toggle('on', b.dataset.val === state[g] || (b.dataset.val === 'all' && state[g] === 'all'));
@@ -3705,9 +4393,9 @@ $$('#quickChips .chip').forEach(chip => {
       const g = b.dataset.group;
       b.classList.toggle('on', b.dataset.val === shipState[g] || (b.dataset.val === 'all' && shipState[g] === 'all'));
     });
-
     renderCars(); renderBikes(); renderShips();
-    if (q !== 'Bikes' && q !== 'Ships') $('#cars').scrollIntoView({ behavior:'smooth' });
+    renderTrucks(); renderSUVs(); renderHelis(); renderSpace();
+    if (q !== 'Bikes' && q !== 'Ships' && q !== 'Trucks' && q !== 'SUVs' && q !== 'Helicopters' && q !== 'Spacecraft') $('#cars').scrollIntoView({ behavior:'smooth' });
   });
 });
 
@@ -3723,7 +4411,6 @@ $('#bikeSearchBtn').addEventListener('click', () => {
   renderBikes();
   $('#bikes').scrollIntoView({ behavior:'smooth' });
 });
-
 $$('#bikeQuickChips .chip').forEach(chip => {
   chip.addEventListener('click', () => {
     $$('#bikeQuickChips .chip').forEach(c => c.classList.remove('on'));
@@ -3754,7 +4441,6 @@ $('#shipSearchBtn').addEventListener('click', () => {
   renderShips();
   $('#ships').scrollIntoView({ behavior:'smooth' });
 });
-
 $$('#shipQuickChips .chip').forEach(chip => {
   chip.addEventListener('click', () => {
     $$('#shipQuickChips .chip').forEach(c => c.classList.remove('on'));
@@ -3772,8 +4458,70 @@ $$('#shipQuickChips .chip').forEach(chip => {
   });
 });
 
+/* Truck search */
+const truckSearchInput = $('#truckSearchInput');
+let truckSearchDebounce;
+truckSearchInput.addEventListener('input', e => {
+  clearTimeout(truckSearchDebounce);
+  truckSearchDebounce = setTimeout(() => { truckState.q = e.target.value.trim(); renderTrucks(); }, 180);
+});
+$('#truckSearchBtn').addEventListener('click', () => {
+  truckState.q = truckSearchInput.value.trim();
+  renderTrucks();
+  $('#trucks').scrollIntoView({ behavior:'smooth' });
+});
+$$('#truckQuickChips .chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    $$('#truckQuickChips .chip').forEach(c => c.classList.remove('on'));
+    chip.classList.add('on');
+    truckState.q = chip.dataset.quick === 'all' ? '' : chip.dataset.quick;
+    truckSearchInput.value = truckState.q;
+    renderTrucks();
+    $('#trucks').scrollIntoView({ behavior:'smooth' });
+  });
+});
+
+/* SUV search */
+const suvSearchInput = $('#suvSearchInput');
+let suvSearchDebounce;
+suvSearchInput.addEventListener('input', e => {
+  clearTimeout(suvSearchDebounce);
+  suvSearchDebounce = setTimeout(() => { suvState.q = e.target.value.trim(); renderSUVs(); }, 180);
+});
+$('#suvSearchBtn').addEventListener('click', () => {
+  suvState.q = suvSearchInput.value.trim();
+  renderSUVs();
+  $('#suvs').scrollIntoView({ behavior:'smooth' });
+});
+
+/* Heli search */
+const heliSearchInput = $('#heliSearchInput');
+let heliSearchDebounce;
+heliSearchInput.addEventListener('input', e => {
+  clearTimeout(heliSearchDebounce);
+  heliSearchDebounce = setTimeout(() => { heliState.q = e.target.value.trim(); renderHelis(); }, 180);
+});
+$('#heliSearchBtn').addEventListener('click', () => {
+  heliState.q = heliSearchInput.value.trim();
+  renderHelis();
+  $('#helis').scrollIntoView({ behavior:'smooth' });
+});
+
+/* Space search */
+const spaceSearchInput = $('#spaceSearchInput');
+let spaceSearchDebounce;
+spaceSearchInput.addEventListener('input', e => {
+  clearTimeout(spaceSearchDebounce);
+  spaceSearchDebounce = setTimeout(() => { spaceState.q = e.target.value.trim(); renderSpace(); }, 180);
+});
+$('#spaceSearchBtn').addEventListener('click', () => {
+  spaceState.q = spaceSearchInput.value.trim();
+  renderSpace();
+  $('#space').scrollIntoView({ behavior:'smooth' });
+});
+
 /* ============================================================
-   21 · NAV BINDINGS
+   26 · NAV BINDINGS
    ============================================================ */
 const nav = $('#nav');
 function onNavScroll(){ nav.classList.toggle('scrolled', window.scrollY > 24); }
@@ -3791,8 +4539,15 @@ carModal.addEventListener('click', e => { if (e.target === carModal) closeCar();
 $('#cmpOverlay').addEventListener('click', e => { if (e.target === $('#cmpOverlay')) closeCompare(); });
 $$('[data-close]').forEach(b => b.addEventListener('click', closeCar));
 
+/* Sound toggle */
+$('#soundToggle').addEventListener('click', () => {
+  const on = SoundEngine.toggle();
+  $('#soundToggle').classList.toggle('on', on);
+  if (!on) SoundEngine.stop();
+});
+
 /* ============================================================
-   22 · BOOT
+   27 · BOOT
    ============================================================ */
 function boot(){
   const brands = new Set(ALL.map(v => v.brand)).size;
@@ -3810,6 +4565,10 @@ function boot(){
   renderCars();
   renderBikes();
   renderShips();
+  renderTrucks();
+  renderSUVs();
+  renderHelis();
+  renderSpace();
   renderGarage();
   updateGarageUI();
   updateCompareBar();
@@ -3826,7 +4585,6 @@ function boot(){
   const canvas = $('#engineCanvas');
   const loader = $('#evLoader');
   if (canvas){
-    // Defer 3D until the section is close to viewport
     const io = new IntersectionObserver(entries => {
       if (!entries[0].isIntersecting) return;
       io.disconnect();
